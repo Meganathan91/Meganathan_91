@@ -3,23 +3,39 @@ package com.example.Constructor;
 public class Example_Constructor
 {
     int i;
+    String name;
 
-    Example_Constructor(int i)
+     private Example_Constructor(int i)
     {
         this.i=i;
-        System.out.println("Constructor with no argument :"+i);
+        System.out.println("Constructor with argument :"+i);
     }
 
-    public Example_Constructor()
+   protected Example_Constructor(String name)
     {
-
-        System.out.println("No Argument Constructor :"+i);
-
+        this.name=name;
+        System.out.println("No Argument Constructor :"+name);
     }
+     Example_Constructor()
+    {
+        this.i=i;
+        System.out.println("Constructor with argument :"+i);
+    }
+    /*static void display()
+    {
+        System.out.println(name);
+    }*/
+    /*Example_Constructor()
+    {
+        this(30);
+        System.out.println(" constructor :"+i);
+    }*/
+
+
     public static void main(String[] args)
     {
+        //display();
         Example_Constructor exampleConstruct=new Example_Constructor();
         Example_Constructor exampleConstructor=new Example_Constructor(19);
-
     }
 }

@@ -16,12 +16,18 @@ public class Example_Static
     {
         System.out.println("I am first");
     }
+    void staticExample()
+    {
+        System.out.println(count);
+
+    }
     public static void main(String[] args)
     {
         Example_Static example=new Example_Static();
         Example_Static exampl=new Example_Static();
         Example_Static examp=new Example_Static();
         System.out.println(count);
+        example.staticExample();
         display();
     }
 }

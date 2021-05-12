@@ -1,12 +1,16 @@
 package com.example.ExampleKeywords;
 
-import com.example.Exception.EligibleForVote;
-
+class EligibleForVote extends Exception
+{
+    EligibleForVote(String desc)
+    {
+        super(desc);
+    }
+}
 public class Example_Final
 {
-   final int voterAge=18;
-
-     final void display(int age)throws EligibleForVote
+    final int voterAge=18;
+    final void display(int age)throws EligibleForVote
     {
         System.out.println("This is FINAL method can't override but can access");
         //i=20;
@@ -14,7 +18,7 @@ public class Example_Final
             throw new EligibleForVote(" Eligible For Vot");
         else
             throw new EligibleForVote(" Not Eligible For Vot");
-   }
+    }
     final void displayFinal()
     {
         System.out.println("Final");

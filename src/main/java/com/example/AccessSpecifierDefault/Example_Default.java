@@ -6,5 +6,9 @@ public class Example_Default
    {
        System.out.println("Default");
    }
+
+    public static void main(String[] args) {
+
+    }
 }
 

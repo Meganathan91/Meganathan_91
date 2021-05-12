@@ -1,10 +1,10 @@
 package com.example.ExampleKeywords;
-class Demo
+ class Demo
 {
     int j;
     Demo() //In constructor body at the first line super or this only allowed
     {
-        System.out.println("I am from PARENT class constructor using child class super keyword :"+j);
+        //System.out.println("I am from PARENT class constructor using child class super keyword :"+j);
     }
 
     void parentMethod()
@@ -19,6 +19,10 @@ class Demo
 
 class Example_Super extends Demo
 {
+    Example_Super()
+    {
+
+    }
     Example_Super(int a)
     {
         //System.out.println();
@@ -26,15 +30,21 @@ class Example_Super extends Demo
         System.out.println("I am from local :"+a);
         System.out.println("Am from PARENT class as method :"+super.j);
     }
+    void parentMethod()
+    {
+
+    }
     void childMethod()
     {
-        super.parentMethod();
+        parentMethod();
         System.out.println("I am from Child class method :"+super.j);
     }
 
     public static void main(String[] args)
     {
-        Example_Super example_super=new Example_Super(5);
-        example_super.childMethod();
+        Example_Super example_super=new Example_Super();
+
+        Example_Super example_supe=new Example_Super(5);
+        example_supe.childMethod();
     }
 }

@@ -6,4 +6,9 @@ public class Example_Protect
     {
         System.out.println("Protect");
     }
+
+    public static void main(String[] args)
+    {
+
+    }
 }

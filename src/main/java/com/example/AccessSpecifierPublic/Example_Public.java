@@ -6,4 +6,9 @@ public class Example_Public
     {
         System.out.println("Public");
     }
+
+    public static void main(String[] args)
+    {
+
+    }
 }

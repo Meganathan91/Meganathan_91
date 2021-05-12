@@ -5,7 +5,7 @@ public class Example_Private
     private int b=10;
     private void displayPrivate()
     {
-        System.out.println("Example ");
+        System.out.println("Example :"+b);
     }
 
     public static void main(String[] args)

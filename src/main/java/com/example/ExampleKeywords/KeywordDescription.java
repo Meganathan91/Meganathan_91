@@ -12,5 +12,6 @@ public class KeywordDescription extends Example_Final
     {
         KeywordDescription description=new KeywordDescription();
         description.displayFinal();
+        System.out.println(description.voterAge);
     }
 }

@@ -10,6 +10,7 @@ public class Example_PrivateDesc extends Example_Private
     {
         Example_PrivateDesc privateDesc=new Example_PrivateDesc();
         //privateDesc.displayPrivate();
+        //System.out.println(privateDesc.b);
 
     }
 }
