@@ -9,7 +9,6 @@ public class DataTypeExamples
     float f;
     boolean bl;
 
-
 void display(){
     a=20;
     System.out.println("int value :"+a);

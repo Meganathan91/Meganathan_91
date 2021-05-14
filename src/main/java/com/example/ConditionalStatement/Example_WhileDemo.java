@@ -1,40 +1,29 @@
 package com.example.ConditionalStatement;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Example_WhileDemo
 {
-    void looping()
-    {
-        int i=0,j=5;
-        while(j>i)
-        {
-            i++;
-            System.out.println(i);
-        }
-        System.out.println("Condition is false");
-    }
+
 
     public static void main(String[] args)
     {
         Example_WhileDemo demo=new Example_WhileDemo();
-        //demo.looping();
-        int i=0;
-        int total=0;
         Scanner scanner=new Scanner(System.in);
-        int mark=scanner.nextInt();
-
-        for(i=1;i<5;i++)
-        {
-             total=total+mark;
-            i++;
-        }
+        System.out.println("Give the number");
+        int number=scanner.nextInt();
+        int[] n=new int[number];
+        System.out.println("Length of the array :"+n.length);
+        int total=0;
+            while( number<=n.length)
+            {
+                total=total+number;
+                System.out.println("Give the number");
+                number=scanner.nextInt();
+                number++;
+            }
         System.out.println(total);
-        /*int i=0,j=5;
-        do
-        {
-            i++;
-            System.out.println(i);
-        }while(j>i);*/
-    }
+            scanner.close();
+        }
 }

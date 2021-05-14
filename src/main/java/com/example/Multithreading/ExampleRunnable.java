@@ -1,15 +1,13 @@
 package com.example.Multithreading;
-import java.util.Scanner;
 public class ExampleRunnable implements Runnable
 {
     int count=0;
     @Override
     public void run()
     {
-        count++;
-
         try
         {
+            count++;
             Thread.sleep(1000);
         }
         catch (InterruptedException e)

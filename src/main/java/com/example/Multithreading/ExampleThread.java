@@ -19,7 +19,7 @@ public class ExampleThread extends Thread
         ExampleThread t1=new ExampleThread();
         ExampleThread t2=new ExampleThread();
         ExampleThread t3=new ExampleThread();
-        //System.out.println("Thread name :"+thread.currentThread());
+        System.out.println("Thread name :"+Thread.currentThread());
         t1.start();
         t2.start();
         t3.start();

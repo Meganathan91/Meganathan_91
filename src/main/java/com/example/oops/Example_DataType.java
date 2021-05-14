@@ -1,5 +1,7 @@
 package com.example.oops;
 
+import java.util.Scanner;
+
 public class Example_DataType
 {
     void display()
@@ -18,6 +20,19 @@ public class Example_DataType
     public static void main(String[] args)
     {
         Example_DataType dataType=new Example_DataType();
-        dataType.display();
-    }
-}
+        //dataType.display();
+        int no;
+        int i=1;
+        int total=0;
+        System.out.print("Enter the no :");
+        Scanner scanner=new Scanner(System.in);
+        no=scanner.nextInt();
+        while(i<=5){
+            total=total+no;
+            i++;
+        }
+        System.out.println("Total :"+total);
+
+
+
+}}
