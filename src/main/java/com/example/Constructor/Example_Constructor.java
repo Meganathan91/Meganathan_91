@@ -4,6 +4,7 @@ public class Example_Constructor
 {
     int i;
     String name;
+    String hi;
 
      private Example_Constructor(int i)
     {
@@ -16,11 +17,13 @@ public class Example_Constructor
         this.name=name;
         System.out.println("No Argument Constructor :"+name);
     }
-     Example_Constructor()
+     public Example_Constructor()
     {
         this.i=i;
         System.out.println("Constructor with argument :"+i);
     }
+
+
     /*static void display()
     {
         System.out.println(name);

@@ -23,10 +23,17 @@ public class ExampleRunnable implements Runnable
         Thread t2=new Thread(multithreading);
         Thread t3=new Thread(multithreading);
         t1.start();
-        try{
-        t1.join();
-        }catch (InterruptedException e){e.printStackTrace();}
         t2.start();
         t3.start();
+        try
+        {
+        t1.join();
+        t2.join();
+        t3.join();
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

@@ -25,8 +25,7 @@ class MyThreadtwo extends Thread
 }
 
 class Sample{
-    public void compute(int n){
-        synchronized (this){
+    public synchronized void compute(int n){
         for(int i=1;i<=5;i++){
             System.out.println(n*i);
             try{
@@ -37,14 +36,21 @@ class Sample{
             }
         }
     }
-}}
+}
 public class Example_SynchronizedMethod {
 
-    public synchronized static void main(String[] args) {
+    public static void main(String[] args) {
         Sample s=new Sample();
         MyThreadone one = new MyThreadone(s);
         MyThreadtwo two=new MyThreadtwo(s);
         one.start();
         two.start();
+        try{
+            one.join();
+            two.join();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
     }
 }

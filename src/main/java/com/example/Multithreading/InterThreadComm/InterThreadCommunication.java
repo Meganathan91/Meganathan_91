@@ -32,8 +32,9 @@ public class InterThreadCommunication {
     public static void main(String[] args)  throws InterruptedException
     {
         ThreadJoinOne t1 = new ThreadJoinOne();
-        ThreadJoinOne t2 = new ThreadJoinOne();
-        ThreadJoinOne t3 = new ThreadJoinOne();
+        ThreadJoinTwo t2 = new ThreadJoinTwo();
+        ThreadJoinThree t3 = new ThreadJoinThree();
+        t1.start();
         t1.join();
         System.out.println(t1.getName()+""+t1.isAlive());
         t2.start();

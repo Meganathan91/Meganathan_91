@@ -44,7 +44,7 @@ public class WithdrawDeposit
 /* With out synchronization here am going to write all method and must need to give description.
 And also need to write lot of join method in side run with synchronization. And it's not good practice
 to write synchronization in run method.Here am going to define thread method and out side of run method.
- And achieve this using synchronization method. This is from Inter thread communication Mutual exclusive topic. */
+ And achieve this using synchronization method. This is from Inter thread communication Mutual exclusive topic.*/
         Thread withdraw=new Thread(new Runnable() {
             @Override
             public void run() {

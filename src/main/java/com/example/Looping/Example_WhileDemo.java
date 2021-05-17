@@ -11,17 +11,19 @@ public class Example_WhileDemo
     {
         Example_WhileDemo demo=new Example_WhileDemo();
         Scanner scanner=new Scanner(System.in);
-        System.out.println("Give the number");
+        System.out.print("Give the number");
         int number=scanner.nextInt();
         int[] n=new int[number];
+        int k=n.length;
         System.out.println("Length of the array :"+n.length);
         int total=0;
-            while( number<=n.length)
+        int m=0;
+            while( m<=k)
             {
-                total=total+number;
-                System.out.println("Give the number");
-                number=scanner.nextInt();
-                number++;
+                int num=scanner.nextInt();
+                System.out.println("Give the number :"+num);
+                total=total+num;
+                m++;
             }
         System.out.println(total);
             scanner.close();

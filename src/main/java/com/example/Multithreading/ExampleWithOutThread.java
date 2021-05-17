@@ -15,7 +15,7 @@ public class ExampleWithOutThread extends Thread
         ExampleWithOutThread threa=new ExampleWithOutThread();
         //Here showing thread exception same thread started twice.
         thread.start();
-        thread.start();
+        //thread.start();
         //Here not showing thread exception reason we using normal run method not start method.
         //threa.run();//Compiler create separate stack.
         //threa.run();

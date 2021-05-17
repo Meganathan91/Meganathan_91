@@ -1,0 +1,29 @@
+[33mcommit 2c189be375f00190971bdce6160743fe55f1754f[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: meganathan <mega91raja@gmail.com>
+Date:   Fri May 14 07:14:50 2021 +0530
+
+    Week 1 Completed. We covered Introduction of java, datatype and variables, keywords, Oops concepts, Exception handling and multithreading with seperate programs.
+
+[33mcommit e48b23c6648a803a6a57577088a6db298f1f83ad[m
+Author: meganathan <mega91raja@gmail.com>
+Date:   Thu May 13 08:41:10 2021 +0530
+
+    Interthread Communication Synchronization Deadlock
+
+[33mcommit 6998f059258140741f9488edf760a9fcff007702[m
+Author: meganathan <mega91raja@gmail.com>
+Date:   Wed May 12 07:45:36 2021 +0530
+
+    Multithreading, Thread Creation, Thread Methods
+
+[33mcommit b55d984749368945909c5b7aeec4c280487861a6[m
+Author: meganathan <mega91raja@gmail.com>
+Date:   Tue May 11 01:38:37 2021 +0530
+
+    Modified
+
+[33mcommit 8dd5ac69ea4b604bcc9eb191409b00ee92422ca3[m
+Author: meganathan <mega91raja@gmail.com>
+Date:   Mon May 10 20:26:07 2021 +0530
+
+    initial commit
