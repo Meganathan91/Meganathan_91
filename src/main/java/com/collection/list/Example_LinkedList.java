@@ -47,5 +47,9 @@ public class Example_LinkedList
         linkedList.clear();
         System.out.println(l1);
         linkedList.removeAll(ll);
+        ListIterator iterator=linkedList.listIterator();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
     }
 }

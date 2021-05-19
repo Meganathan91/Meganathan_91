@@ -17,6 +17,7 @@ public class Example_ArrayList
         System.out.println();
         List list=new ArrayList();
         list.add(10);
+        list.add(20);
         list.add('s');
         list.add("Raja");
         list.add(false);
@@ -61,8 +62,8 @@ public class Example_ArrayList
         List list1=list.subList(1,9);
         System.out.println(list1);
         list1.add("Mumbai");
-        System.out.println(list1.indexOf("Mumbai"));
-        System.out.println(list1.lastIndexOf("Mumbai"));
+        System.out.println("indexOf :"+list1.indexOf("Mumbai"));
+        System.out.println("lastIndexOf :"+list1.lastIndexOf("Mumbai"));
         System.out.print(list1+" ");
         list.remove(9);
         list.remove(list1);
@@ -72,14 +73,14 @@ public class Example_ArrayList
         list4.add("Pencil");
         list4.add("Paper");
         list4.add("Book");
-
         List list5=new ArrayList();
         list5.add("Pen");
         list5.add("Book");
         list5.add("Box");
         System.out.print("Retain all elements :"+list5.retainAll(list4));
 
-        System.out.print("Retails :"+list.retainAll(list3));
+        System.out.println("Retails :"+list.retainAll(list3));
+        System.out.print("To string method :"+list.toArray());
         ListIterator iterator1=list.listIterator();
         while (iterator1.hasNext()){
             System.out.print(iterator1.next()+" ");
