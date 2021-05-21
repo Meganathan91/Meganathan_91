@@ -34,6 +34,5 @@ public class Example_SortedMap
         naturalSortingOrderString();
         //Default natural Sorting Order: Integer Ascending order.
         naturalSortingOrderInteger();
-        //SortingUsingComparator
     }
 }
