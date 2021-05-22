@@ -1,11 +1,13 @@
 package com.example.VariablesDemo;
 
-public class ScopeOfVarible {
-    int i = 0;
+public class ScopeOfVarible
+{
+    int i=100;
 
-    void run() {
-        System.out.println("This is block :" + i); //Here we can't able to access instance variable to local(with in method)
+     void run() {
+        System.out.println("This is class level :" + i); //Here we can't able to access instance variable to local(with in method)
         int i = 10;
+        System.out.println("This is block :" + i);
         System.out.println("This is block @ reassigned value to i :" + i);
     }
 
@@ -32,15 +34,19 @@ public class ScopeOfVarible {
 
     public static void main(String[] args)
     {
+
         ScopeOfVarible scope=new ScopeOfVarible();
+        System.out.println(scope.i);
+
         scope.run();
         scope.dis();
 
         for(int k=0;k<10;k++)
         {
-            System.out.println(k);
+            System.out.print(k);
         }
         int k;
         //System.out.println(k); // Here must need to be initialize the variable in static area.
     }
+
 }
