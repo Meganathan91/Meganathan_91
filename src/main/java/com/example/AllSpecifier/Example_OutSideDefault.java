@@ -2,11 +2,11 @@ package com.example.AllSpecifier;
 
 import com.example.AccessSpecifierDefault.Example_Default;
 
-public class Example_OutSideDefault extends Example_Default
+public class Example_OutSideDefault
 {
     public static void main(String[] args)
     {
-        Example_OutSideDefault aDefault=new Example_OutSideDefault();
+        Example_Default aDefault=new Example_Default();
         //aDefault.defaultDemo();
     }
 }

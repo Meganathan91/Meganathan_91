@@ -7,10 +7,19 @@ public class Example_ArrayCompare
         //Array compare == for reference compare.
         int[] a={1,2,3};
         int[] b={1,2,3};
-        if(a==b)
-            System.out.println("Same");
+
+        if(Arrays.equals(a,b))
+            System.out.println(" Using .equal method in array compare Same");
         else
-            System.out.println("Not Same");
+            System.out.println("Using .equal method in array compare Not Same");
+
+        int c1=10;
+        int d1=10;
+        if(c1==d1){
+            System.out.println("This is for reference compare same");
+        }
+        //Normal compare for
+
 
 
     //Array compare  .equal content compare.

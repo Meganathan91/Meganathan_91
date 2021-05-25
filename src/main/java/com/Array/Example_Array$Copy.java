@@ -8,7 +8,7 @@ public class Example_Array$Copy {
         int sum = 0;
         for (int i = 0; i < b.length; i++) {
             sum += b[i];
-            //System.out.println(" " + b[i]);
+            System.out.println(" " + sum);
         }
     }
     void multiArray()
@@ -31,7 +31,8 @@ public class Example_Array$Copy {
         Example_Array$Copy demo=new Example_Array$Copy();
         demo.multiArray();
         int sum=0;
-        display();
+        int[] a={1,2,3,4,5};
+        display(a);
         int arr[] = {1, 2, 3, 4, 5};
         display(arr); // Passing array to methods.
         int arrs[] = m1();// Returning array to method.
@@ -50,34 +51,7 @@ public class Example_Array$Copy {
 
     static int[] m1() {
         return new int[]{0,1,2,3,4,5};
-    }
+    }}
 
     //Cloning of on array.
-    static void display()
-    {
-        int max[] = new int[5];
-        int min[] = max.clone();
-        //System.out.println("Cloned array :"+min.length);
 
-        //Array copy. Method
-        int a[]={1,2,3};
-        int b[]=new int[a.length];
-        for(int k=0;k<a.length;k++){
-            b[k]=a[k];
-            System.out.println("Array copy :"+b[k]);
-        }
-
-        //Array copy. Method arraycopy
-        int x[]={1,2,3};
-        int z[]=x.clone(); //using clone method.
-        int y[]=new int[a.length];
-            System.arraycopy(x,0,y,0,3);
-        }
-
-        //method copyOf
-        int m[]={1,2,3};
-        int n[]=Arrays.copyOf(m,3);
-
-    int m1[]={1,2,3,4,5,6,7,8,9};
-    int n1[]=Arrays.copyOfRange(m1,3,8);
-    }

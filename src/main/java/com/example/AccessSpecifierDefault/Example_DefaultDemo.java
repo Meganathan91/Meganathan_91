@@ -1,11 +1,11 @@
 package com.example.AccessSpecifierDefault;
 
-public class Example_DefaultDemo extends Example_Default
+public class Example_DefaultDemo
 {
 
     public static void main(String[] args)
     {
-        Example_DefaultDemo specifier=new Example_DefaultDemo();
+        Example_Default specifier=new Example_Default();
         specifier.defaultDemo();
     }
 }
