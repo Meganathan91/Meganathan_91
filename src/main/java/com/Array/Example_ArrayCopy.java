@@ -9,18 +9,6 @@ public class Example_ArrayCopy
         int min[] = max.clone();
         System.out.println("Cloned array :" + min.length);
 
-        //Array copy. Method
-        /*int k = 0;
-        int a[] = {1, 2, 3};
-        int b[] = new int[a.length];
-        for (k = 0; k < b.length; k++)
-            b[k] = a[k];
-        b[0]++;
-        System.out.println("Normal copy method :" + b[k]);
-        for (int a1 = 1; a1 < b.length; a1++) {
-            System.out.println(" " + b[a1]);
-        }*/
-
         //Array copy. Method arraycopy
         int[] x = {1, 2, 3};
         //int[] z=x.clone(); //using clone method.

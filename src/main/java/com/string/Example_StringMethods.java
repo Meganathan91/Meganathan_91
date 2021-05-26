@@ -6,7 +6,6 @@ public class Example_StringMethods
 {
     public static void main(String[] args)
     {
-        String s1=new String(" Welcome ");
         String[] s2={"How","Are","You",};
         String words="";
         StringBuffer buffer=new StringBuffer();
@@ -26,22 +25,25 @@ public class Example_StringMethods
         String s3="hi";
         String s6="a";
         String s5="s";
-        String s4=new String(" Welcome ");
+        String s4=new String(" Welcome oh");
+        String s1=new String(" Welcome back we ");
         System.out.println("String length :"+s1.length());//9 including space.
         System.out.println("String Char :"+s1.charAt(6));//m
         System.out.println("String concat :"+s1.concat("You"));
         System.out.println("String UpperCase :"+s1.toUpperCase());//WELCOME
         System.out.println("String LowerCase :"+s1.toLowerCase());//welcome
-        System.out.println("String substring :"+s1.substring(3));//lcome
+        System.out.println("String substring :"+s1.substring(4));//come
         System.out.println("String substring :"+s1.substring(4,8));//com
         System.out.println("String trim :"+s1.trim());//"Welcome"
-        System.out.println("String equals :"+s.equals(s3));//
-        System.out.println("String concat :"+s1.concat("You"));
-        System.out.println("String equalsIgnoreCase :"+s.equalsIgnoreCase(s3));
+        System.out.println("String equals :"+s.equals(s3));//false
+        System.out.println("String concat :"+s1.concat(" You"));
+        System.out.println("String equalsIgnoreCase :"+s.equalsIgnoreCase(s3));//true
         System.out.println("String indexOf :"+s1.indexOf("e"));
         System.out.println("String lastIndexOf :"+s1.lastIndexOf("e"));
         //int i=s6.compareTo(s5);
         System.out.println("String compareTo :"+s5.compareTo(s6));
-        System.out.println("String replace :"+s4.replace("o","a"));
+        System.out.println("String replace :"+s4.replace('o','a'));
+        System.out.println("String replace :"+s4.replaceAll("o","a"));
+
     }
 }

@@ -3,13 +3,15 @@ package com.example.Constructor;
 public class Example_Constructor
 {
     int i;
+    Integer j;
+    String name1=null;
     String name;
     String hi;
 
-     private Example_Constructor(int i)
+     private Example_Constructor(int j)
     {
-        this.i=i;
-        System.out.println("Constructor with argument :"+i);
+        this.i=j;
+        System.out.println("Constructor initial argument :"+i);
     }
 
    protected Example_Constructor(String name)
@@ -20,7 +22,9 @@ public class Example_Constructor
      public Example_Constructor()
     {
         this.i=i;
-        System.out.println("Constructor with argument :"+i);
+        System.out.println("Constructor after passing value with argument :"+i);
+        System.out.println("Constructor after passing value with argument :"+j);
+
     }
 
 
@@ -39,6 +43,6 @@ public class Example_Constructor
     {
         //display();
         Example_Constructor exampleConstruct=new Example_Constructor();
-        Example_Constructor exampleConstructor=new Example_Constructor(19);
+        Example_Constructor exampleConstructor=new Example_Constructor(10);
     }
 }

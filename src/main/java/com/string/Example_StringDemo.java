@@ -4,10 +4,12 @@ public class Example_StringDemo
 {
     public static void main(String[] args)
     {
-        char[] ch={'a','e','i','o','u'};
+        char c='a';
+        char[] ch={'w','e','l','c','o','m','e'};
         System.out.println(ch);
         String sentence="";
         String names[]={"Hi","Welcome","Dude"};
+        String s=new String();
         StringBuffer sb=new StringBuffer();
         StringBuilder sbul=new StringBuilder();
         for(String name:names) {
