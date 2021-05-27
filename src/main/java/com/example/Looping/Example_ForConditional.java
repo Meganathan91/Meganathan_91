@@ -1,7 +1,5 @@
-package com.example.ConditionalStatement;
-
+package com.example.Looping;
 import java.util.Scanner;
-
 public class Example_ForConditional
 {
     public static void main(String[] args) {

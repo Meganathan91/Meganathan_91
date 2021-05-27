@@ -1,12 +1,7 @@
-package com.example.ConditionalStatement;
-
-import java.util.Arrays;
+package com.example.Looping;
 import java.util.Scanner;
-
 public class Example_WhileDemo
 {
-
-
     public static void main(String[] args)
     {
         Example_WhileDemo demo=new Example_WhileDemo();

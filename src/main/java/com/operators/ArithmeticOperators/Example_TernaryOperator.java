@@ -13,4 +13,4 @@ public class Example_TernaryOperator
         boolean result=(user.equals("Mega") && pass.equals("user") ? user.equalsIgnoreCase("Mega") || pass.equals("user") :  !(10>5));
         System.out.println(result);
     }
-}
+} 

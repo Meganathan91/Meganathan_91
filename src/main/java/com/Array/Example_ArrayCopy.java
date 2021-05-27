@@ -29,9 +29,10 @@ public class Example_ArrayCopy
 
 
         int m1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-        int n1[] = Arrays.copyOfRange(m1, 3, 7);// Here not taking 3 but 4,5,6.
+        int n1[] = Arrays.copyOfRange(m1, 3, 7);// Here taking 3,4,5,6.  (7 exclusive).
         System.out.println("using copyOfRange :" + n1.length);//length 3.
-        for (int i = 0; i < n1.length; i++) {
+        for (int i = 0; i < n1.length; i++)
+        {
             System.out.println(" "+n1[i]);
         }
     }

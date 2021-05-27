@@ -3,11 +3,11 @@ class CallByRefference
 {
     int x,y;
 
-    public CallByRefference() {
-
+    CallByRefference()
+    {
+        System.out.println("Am empty constructor");
     }
-
-    public CallByRefference(int i, int j)
+    CallByRefference(int i, int j)
     {
         this();
         this.x=i;
@@ -15,18 +15,22 @@ class CallByRefference
     }
    void display()
     {
-        this.x=50;
-        this.y=100;
+        x=50;
+        y=100;
+        System.out.println("Call by value :"+x+" "+y);
     }
-    void dis(CallByRefference call){
+    void dis(CallByRefference call)
+    {
         this.display();
-     call.x+=50;
-    call.y+=100;
-}
+        call.x+=50;
+        call.y+=100;
+        System.out.println("Call by reference :"+x+" "+y);
+    }
 }
 public class ParameterPassing
 {
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         CallByRefference call=new CallByRefference(5,10);
         System.out.println(call.x+"  "+ call.y);
         call.display();

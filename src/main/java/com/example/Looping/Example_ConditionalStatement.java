@@ -1,12 +1,6 @@
-package com.example.ConditionalStatement;
-
-import org.springframework.http.converter.json.GsonBuilderUtils;
-
-import java.io.BufferedReader;
+package com.example.Looping;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
-
 public class Example_ConditionalStatement
 {
    public static void main(String[] args)throws IOException

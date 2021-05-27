@@ -37,21 +37,20 @@ public class Example_Array$Copy {
         display(arr); // Passing array to methods.
         int arrs[] = m1();// Returning array to method.
         for (int i = 0; i < arrs.length; i++)
-            //System.out.println("Returning array :" + arrs[i]);
+            System.out.println("Returning array :" + arrs[i]);
         sum = add(5, 6);
-        //System.out.println("two number :" + sum);
+        System.out.println("two number :" + sum);
 
     }
 
     static int add(int a, int b) {
         int sum = a + b;
-        //System.out.println(sum);
+        System.out.println(sum);
         return sum;
     }
 
-    static int[] m1() {
+    static int[] m1()
+    {
         return new int[]{0,1,2,3,4,5};
-    }}
-
-    //Cloning of on array.
-
+    }
+}

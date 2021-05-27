@@ -12,12 +12,10 @@ public class Example_StringMethods
         for (String word:s2){
             words+=word;
             buffer.append(s2);
-
             /* String immutable, by any changes in string new string will be created.
               In string don't have such method like replace and append and more method.
               StringBuffer have such method so, this is mutable.
                How we differentiate that string and StringBuffer using memory using hashcode method. */
-
             System.out.println("Using String class :"+words.hashCode());
             System.out.println("Using StringBuffer class :"+buffer.hashCode());
         }
@@ -27,13 +25,13 @@ public class Example_StringMethods
         String s5="s";
         String s4=new String(" Welcome oh");
         String s1=new String(" Welcome back we ");
-        System.out.println("String length :"+s1.length());//9 including space.
+        System.out.println("String length :"+s1.length());//17 including space.
         System.out.println("String Char :"+s1.charAt(6));//m
         System.out.println("String concat :"+s1.concat("You"));
         System.out.println("String UpperCase :"+s1.toUpperCase());//WELCOME
         System.out.println("String LowerCase :"+s1.toLowerCase());//welcome
-        System.out.println("String substring :"+s1.substring(4));//come
-        System.out.println("String substring :"+s1.substring(4,8));//com
+        System.out.println("String substring :"+s1.substring(4));//come back we
+        System.out.println("String substring :"+s1.substring(4,8));//come
         System.out.println("String trim :"+s1.trim());//"Welcome"
         System.out.println("String equals :"+s.equals(s3));//false
         System.out.println("String concat :"+s1.concat(" You"));

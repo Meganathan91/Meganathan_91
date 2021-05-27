@@ -8,7 +8,7 @@ public class Example_StringBuilder
         System.out.println(builder.indexOf("Welcome"));
         System.out.println(builder.lastIndexOf("Welcome"));
         System.out.println(builder.insert(0,"Hi"));
-        System.out.println(builder.replace(13,14,"We"));
+        System.out.println(builder.replace(13,16,"We Are Back"));
         System.out.println(builder.delete(0,6));
         System.out.println(builder.deleteCharAt(0));
         System.out.println(builder.replace(13,14,"Hi"));

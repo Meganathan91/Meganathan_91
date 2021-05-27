@@ -31,13 +31,5 @@ public class Example_HashMap
             System.out.print(" " +e.getKey()+" " +e.getValue());
         }
         System.out.println();
-
-        if(hashMap.containsKey("Tamil")){
-            Set set=hashMap.entrySet();
-                    Iterator it=set.iterator();
-                    if(it.hasNext()){
-                        System.out.println(" Single :"+it.next());
-                    }
-        }
      }
 }
