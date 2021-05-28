@@ -1,5 +1,4 @@
 package com.example.Constructor;
-
 public class Example_Constructor
 {
     int i;
@@ -14,32 +13,21 @@ public class Example_Constructor
         System.out.println("Constructor initial argument :"+i);
     }
 
-   protected Example_Constructor(String name)
+        protected Example_Constructor(String name)
     {
+        this(10);
         this.name=name;
         System.out.println("No Argument Constructor :"+name);
     }
      public Example_Constructor()
     {
+        this("welcome");
         this.i=i;
         System.out.println("Constructor after passing value with argument :"+i);
         System.out.println("Constructor after passing value with argument :"+j);
 
     }
-
-
-    /*static void display()
-    {
-        System.out.println(name);
-    }*/
-    /*Example_Constructor()
-    {
-        this(30);
-        System.out.println(" constructor :"+i);
-    }*/
-
-
-    public static void main(String[] args)
+        public static void main(String[] args)
     {
         //display();
         Example_Constructor exampleConstruct=new Example_Constructor();

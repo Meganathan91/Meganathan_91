@@ -7,16 +7,12 @@ public class Example_OutSide extends Example_Constructor
     {
         //System.out.println(super.i);
         super("hi");
-        System.out.println(super.i);
+        System.out.println(super.i);    
         //this.name=welcome;
     }
     Example_OutSide()
     {
         super();
-    }
-
-    void Examplesupercon()
-    {
     }
     public static void main(String[] args)
     {

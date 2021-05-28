@@ -1,7 +1,5 @@
 package com.filehandling;
-
 import java.io.*;
-
 public class Example_BufferReaderWriter
 {
     public static void main(String[] args)throws IOException  {

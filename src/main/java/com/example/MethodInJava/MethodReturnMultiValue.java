@@ -18,13 +18,12 @@ class ArithmeticOperation
 
     return opera;
     }
-
     public static void main(String[] args)
     {
-        ArithmeticOperation arithmetic=operation(100,20);
-        System.out.println(arithmetic.addition);
-        System.out.println(arithmetic.subtraction);
-        System.out.println(arithmetic.multiply);
-        System.out.println(arithmetic.division);
+        ArithmeticOperation demo=operation(100,20);
+        System.out.println(demo.addition);
+        System.out.println(demo.subtraction);
+        System.out.println(demo.multiply);
+        System.out.println(demo.division);
     }
 }

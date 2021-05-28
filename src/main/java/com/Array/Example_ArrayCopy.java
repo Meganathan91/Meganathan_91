@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Example_ArrayCopy
 {
     static void display() {
-        int max[] = new int[5];
+       /* int max[] = new int[5];
         int min[] = max.clone();
         System.out.println("Cloned array :" + min.length);
 
@@ -27,13 +27,13 @@ public class Example_ArrayCopy
             System.out.println("using Arrays.copyOf method :" + n[m1]);
         }
 
-
+*/
         int m1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-        int n1[] = Arrays.copyOfRange(m1, 3, 7);// Here taking 3,4,5,6.  (7 exclusive).
+        int n1[] = Arrays.copyOfRange(m1, 3, 11);// Here taking 3,4,5,6.  (7 exclusive).
         System.out.println("using copyOfRange :" + n1.length);//length 3.
         for (int i = 0; i < n1.length; i++)
         {
-            System.out.println(" "+n1[i]);
+            System.out.println(n1[i]);
         }
     }
     public static void main(String[] args) {
