@@ -6,7 +6,6 @@ public class Example_Constructor
     String name1=null;
     String name;
     String hi;
-
      private Example_Constructor(int j)
     {
         this.i=j;

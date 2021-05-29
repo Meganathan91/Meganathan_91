@@ -18,19 +18,14 @@ public class ConstructorCopyDemo
     }
     ConstructorCopyDemo(ConstructorCopyDemo demo)
     {
-        x=demo.x;
-        word=demo.word;
         y=demo.x;
         word1=demo.word;
-        System.out.println("Copy Constructor :"+x+" "+word);
+        System.out.println("Copy Constructor :"+demo.x+" "+demo.word);
         System.out.println("Copy Constructor :"+y+" "+word1);
     }
     public static void main(String[] args) {
         ConstructorCopyDemo demo=new ConstructorCopyDemo();
         ConstructorCopyDemo demo1=new ConstructorCopyDemo(1,"Mega");
         ConstructorCopyDemo demo2=new ConstructorCopyDemo(demo1);
-
-
-
     }
 }

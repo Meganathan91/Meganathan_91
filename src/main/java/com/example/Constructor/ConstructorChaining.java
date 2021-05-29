@@ -1,22 +1,39 @@
 package com.example.Constructor;
 class SuperDemo
 {
-public SuperDemo()
-{
-    System.out.println("Parent class constructor");
-}
-}
-public class ConstructorChaining
-{
-    public ConstructorChaining()
+    String name;
+    SuperDemo(String name)
     {
-        //super();
+    this.name=name;
+    System.out.println("Parent class parameterized constructor");
+    }
+    SuperDemo()
+    {
+    this("hi");
+    System.out.println("Parent class no-arg constructor"+this.name);
+    }
+    {
+        System.out.println("Parent class init");
+    }
+}
+public class ConstructorChaining extends SuperDemo
+{
+    ConstructorChaining()
+    {
+        this(15);
         System.out.println("no-arg constructor");
+    }
+    ConstructorChaining(int i)
+    {
+        super();
+
+        System.out.println("parameterized arg constructor"+i+" Super class name :"+super.name);
+    }
+    {
+        System.out.println("child class init");
     }
     public static void main(String[] args)
     {
-        SuperDemo demo=new SuperDemo();
         ConstructorChaining chaining = new ConstructorChaining();
     }
-
 }

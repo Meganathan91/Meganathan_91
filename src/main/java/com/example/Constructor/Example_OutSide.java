@@ -14,7 +14,7 @@ public class Example_OutSide extends Example_Constructor
     {
         super();
     }
-    public static void main(String[] args)
+   public static void main(String[] args)
     {
         Example_OutSide outSide=new Example_OutSide("hi");
     }
