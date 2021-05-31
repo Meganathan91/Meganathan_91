@@ -23,7 +23,7 @@ public class Example_StringMethods
         String s3="hi";
         String s6="a";
         String s5="s";
-        String s4=new String(" Welcome oh");
+        String s4=new String(" !2Wel#4come&^ oh()");
         String s1=new String(" Welcome back we ");
         System.out.println("String length :"+s1.length());//17 including space.
         System.out.println("String Char :"+s1.charAt(6));//m
@@ -41,7 +41,14 @@ public class Example_StringMethods
         //int i=s6.compareTo(s5);
         System.out.println("String compareTo :"+s5.compareTo(s6));
         System.out.println("String replace :"+s4.replace('o','a'));
+        System.out.println("String replace :"+s4.concat("hi"));
+        // replaceAll method This is used to remove special character in given string
         System.out.println("String replace :"+s4.replaceAll("o","a"));
+        System.out.println("String replace :"+s4.replaceAll("[^a-zA-Z0-9]",""));
+        System.out.println("String replace :"+s4.replaceAll("[^a-zA-Z]",""));
+
+
+
 
     }
 }

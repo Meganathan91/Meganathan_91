@@ -6,7 +6,7 @@ class Multi
     {
 
     }
-   static Multi getInstance()
+   static public Multi getInstance()
    {
        Multi m=new Multi();
        if(mul==null)
@@ -25,3 +25,21 @@ public class Demo
     //Multi mm=new Multi();
     }
 }
+
+
+ class demo
+{
+    void get()
+    {
+
+    }
+
+}
+class Sample
+{
+    void get()
+    {
+
+    }
+}
+

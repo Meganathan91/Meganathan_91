@@ -1,8 +1,6 @@
 package com.filehandling;
-
 import java.io.File;
 import java.io.IOException;
-
 public class Example_FileCreate
 {
     public static void main(String[] args)  {

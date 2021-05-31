@@ -1,6 +1,4 @@
 package com.example.Multithreading;
-import com.sun.java_cup.internal.runtime.Symbol;
-import java.util.Scanner;
 public class ExampleThread extends Thread
 {
     int count=0;
