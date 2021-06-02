@@ -6,7 +6,7 @@ public class Example_StringMethods
 {
     public static void main(String[] args)
     {
-        String[] s2={"How","Are","You",};
+        String[] s2={"How","Are","You"};
         String words="";
         StringBuffer buffer=new StringBuffer();
         for (String word:s2){

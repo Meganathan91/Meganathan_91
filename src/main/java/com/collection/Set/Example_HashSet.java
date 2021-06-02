@@ -17,7 +17,6 @@ public class Example_HashSet
         set.add(10);
         set.add("hi");
         set.add("welcome");
-        HashSet set1=new HashSet();
         Iterator iterator=set.iterator();
         while (iterator.hasNext())
         {

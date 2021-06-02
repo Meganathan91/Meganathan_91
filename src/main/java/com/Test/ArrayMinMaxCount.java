@@ -5,7 +5,7 @@ public class ArrayMinMaxCount
     static void getMin(int[] array)
     {
         int input[]=array;
-        int min=array[0];
+        int min=input[0];
         for(int i=1;i<input.length;i++)
         {
             if(input[i]<min)
@@ -19,7 +19,7 @@ public class ArrayMinMaxCount
     static void getMax(int[] array)
     {
         int input[]=array;
-        int max=array[0];
+        int max=input[0];
         for(int i=1;i<input.length;i++)
         {
             if(input[i]>max)
@@ -36,11 +36,11 @@ public class ArrayMinMaxCount
         getMin(array);
         getMax(array);
         int sum=0;
-        int count=0;
+        int count=array.length;
         //System.out.println(array.length);
         for(int i=0;i<array.length;i++)
         {
-            count=count=array[i];
+            //count=array[i];
             sum=sum+array[i];
         }
         System.out.println("Array Sum "+sum);
