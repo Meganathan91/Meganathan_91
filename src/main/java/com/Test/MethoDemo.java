@@ -4,8 +4,7 @@ class Calculate {
 }
 public class MethoDemo extends Calculate {
     static int getSum(int a, int b) {
-        int sum = a + b;
-        return sum;
+        return a+b;
     }
 
     static Calculate getCalculates(int a, int b) {
