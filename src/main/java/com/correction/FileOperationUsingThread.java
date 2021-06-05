@@ -20,15 +20,19 @@ public class FileOperationUsingThread implements Runnable {
             e.printStackTrace();
         }
     }
-    /*static {
-        String[] file = {"D:\\Megan\\BEYON UNIVERSE SOFTWARE TECHNOLOGIES PVT LTD\\Sample.txt"};
-        main(file);
-    }*/
+    static {
+        String[] file = {"Sample.txt"};
+        //main(file);
+    }
     public static void main(String[] args) {
-        FileOperationUsingThread thread = new FileOperationUsingThread();
+        try{
+        //System.out.println(args[0]);
+        /*FileOperationUsingThread thread = new FileOperationUsingThread();
         Thread t1 = new Thread(thread);
         Thread t2 = new Thread(thread);
         t1.start();
-        t2.start();
-    }
-}
+        t2.start();*/
+    }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+}}
