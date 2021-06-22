@@ -17,6 +17,19 @@ public class Example_HashSet
         set.add(10);
         set.add("hi");
         set.add("welcome");
+        int i=set.size();
+        boolean b=set.isEmpty();
+        set.contains("Safe");
+        set.contains(null);
+        set.remove(null);
+        set.clear();
+        set.add(10);
+        set.add("Safe");
+        set.add("hi");
+        set.add(null);
+        set.add(10);
+        set.add("hi");
+        set.add("welcome");
         Iterator iterator=set.iterator();
         while (iterator.hasNext())
         {

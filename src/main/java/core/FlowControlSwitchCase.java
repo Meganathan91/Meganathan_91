@@ -1,11 +1,10 @@
-package core.flowcontrol;
+package core;
 
 import java.util.Scanner;
 
 public class FlowControlSwitchCase {
     public static void main(String[] args) {
-        Scanner scanner=new Scanner(System.in);
-
+        Scanner scanner = new Scanner(System.in);
         int mark = scanner.nextInt();
         switch (mark) {
             case 87:

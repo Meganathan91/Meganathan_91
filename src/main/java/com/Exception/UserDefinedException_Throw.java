@@ -1,8 +1,8 @@
-package com.example.Exception;
+package com.Exception;
 
 public class UserDefinedException_Throw
 {
-    static void notEligibleForvote(int age)throws Exception  {
+    static void notEligibleForvote(int age) throws EligibleForVote {
         if (age>18)
         {
             throw new EligibleForVote("EligibleForVote");
@@ -24,7 +24,8 @@ public class UserDefinedException_Throw
         catch (EligibleForVote e)
         {
             //System.out.println("You Are eligible For Vote");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            //e.printStackTrace();
         }
     }
 }

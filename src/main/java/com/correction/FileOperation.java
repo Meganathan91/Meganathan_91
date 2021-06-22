@@ -13,9 +13,10 @@ public class FileOperation {
             BufferedReader bufferedreader = new BufferedReader(reader);
             String line = null;
             int wordCount = 0;
+            String[] word = null;
             while ((line = bufferedreader.readLine()) != null) {
-                String[] word = line.split(" ");
-                wordCount = wordCount + word.length;
+                word = line.split(" ");
+                wordCount=wordCount+word.length;
             }
             System.out.println("Word Count :" + wordCount);
         } catch (IOException e) {

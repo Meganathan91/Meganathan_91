@@ -1,6 +1,6 @@
 package com.example.AccessSpecifierProtect;
 
-class Example_ProtectDemo
+ class Example_ProtectDemo
 {
     public static void main(String[] args)
     {

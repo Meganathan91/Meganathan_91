@@ -11,7 +11,7 @@ public class Example_SortedSet
         SortedSet<Integer> set=new TreeSet<Integer>();
         set.clear();
         set.add(20);
-        set.add(30); //set.add(null); Here compare is going so null we can't ble to compare with any thing so null pointer exception.
+        set.add(30); //set.add(null); Here compare is going so null we can't able to compare with any thing so null pointer exception.
         set.add(40);
         set.add(50);
         set.add(60);

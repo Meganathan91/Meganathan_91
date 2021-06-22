@@ -7,20 +7,20 @@ class CustomSortingInteger implements Comparator
 
     @Override
     public int compare(Object o1, Object o2) {
-        Integer i1=(Integer)o1;
-        Integer i2=(Integer)o2;
+        String i1=(String)o1;
+        String i2=(String)o2;
         return -i1.compareTo(i2);
     }
 }
 public class Example_SortingComparatore
 {
     public static void main(String[] args) {
-        TreeMap<Integer,String> treeMap=new TreeMap(new CustomSortingInteger());
-        treeMap.put(80,"Tamil");
-        treeMap.put(60,"English");
-        treeMap.put(80,"Maths");
-        treeMap.put(70,"Science");
-        treeMap.put(70,"Social");
+        TreeMap<String,Integer> treeMap=new TreeMap(new CustomSortingInteger());
+        treeMap.put("Tamil",80);
+        treeMap.put("English",60);
+        treeMap.put("Maths",80);
+        treeMap.put("Science",70);
+        treeMap.put("Social",70);
         System.out.println(treeMap);
     }
 }

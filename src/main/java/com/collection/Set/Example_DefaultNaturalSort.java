@@ -9,7 +9,7 @@ public class Example_DefaultNaturalSort
         TreeSet set=new TreeSet();
         set.add('A');
         set.add('F');   /* JVM internally call F.compareTo(A) method A: old value,
-                           F: Newly coming value. Every new element compare with K. */
+                           F: Newly coming value. Every new element compare with A. */
         set.add('R');
         set.add('U');
         set.add('t');

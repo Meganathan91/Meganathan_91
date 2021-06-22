@@ -1,4 +1,4 @@
-package com.example.Exception;
+package com.Exception;
 
 class EligibleForVote extends RuntimeException {
     public EligibleForVote(String exception)

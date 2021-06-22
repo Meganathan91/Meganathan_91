@@ -1,4 +1,4 @@
-package com.example.Exception;
+package com.Exception;
 public class WithWithOutException
 {
     void display()
