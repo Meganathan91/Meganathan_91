@@ -20,34 +20,19 @@ public class WithUsingException
 
             //k=20;
             //NumberFormateException
-            //int a=Integer.parseInt("10");
-            //System.out.println(a);
-            int c=10/0;
+            int a=Integer.parseInt("hi");
+            System.out.println(a);
+            //int c=10/0;
             //System.out.println(c);
             String name=null;
             int b=name.length();
             System.out.println("Null pointer exception :"+b);
         }
-        /*catch (ArrayIndexOutOfBoundsException e)
+        catch (ArithmeticException | NullPointerException | NumberFormatException e)
         {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-        catch (NullPointerException e)
-        {
-            e.printStackTrace();
-        }*/
-        catch (ArithmeticException | NullPointerException e)
-        {
-            e.printStackTrace();
-        }
-                /*catch (ArrayIndexOutOfBoundsException e)
-                {
-                    e.printStackTrace();
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }*/
+
         System.out.println("Welcome to BU SOFT TECH");
     }
 }

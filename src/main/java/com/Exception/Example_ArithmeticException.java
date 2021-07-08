@@ -1,7 +1,5 @@
 package com.Exception;
 
-import java.io.IOException;
-
 public class Example_ArithmeticException extends RuntimeException{
     public static void voteStatus(int age)  {
         if (age== 18) {

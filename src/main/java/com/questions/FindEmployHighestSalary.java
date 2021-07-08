@@ -1,5 +1,4 @@
-package com.Doubts;
-
+package com.questions;
 import java.util.*;
 
 class Emp {
@@ -48,9 +47,9 @@ public class FindEmployHighestSalary {
         ListIterator iterator = list.listIterator();
         int maxSalary = 0;
         int sal = 0;
-        Emp s=null;
+        Emp s = null;
         while (iterator.hasNext()) {
-             s = (Emp) iterator.next();
+            s = (Emp) iterator.next();
             sal = s.getSalary();
             if (sal > maxSalary) {
                 maxSalary = sal;

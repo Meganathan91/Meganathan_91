@@ -1,4 +1,4 @@
-package com.Doubts;
+package com.questions;
 
 import java.text.DateFormat;
 import java.text.ParseException;

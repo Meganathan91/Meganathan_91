@@ -1,4 +1,4 @@
-package com.Doubts;
+package com.questions;
 
 abstract class Base {
     abstract void sample(String a);

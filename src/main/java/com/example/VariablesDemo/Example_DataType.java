@@ -1,4 +1,4 @@
-package com.example.oops;
+package com.example.VariablesDemo;
 
 import java.util.Scanner;
 

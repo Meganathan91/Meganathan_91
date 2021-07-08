@@ -1,4 +1,4 @@
-package com.Doubts;
+package com.questions;
 class Multi
 {
     static Multi mul=null;

@@ -1,4 +1,4 @@
-package com.Doubts;
+package com.questions;
 
 public class JaggedArray
 {

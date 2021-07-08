@@ -1,9 +1,11 @@
 package keywords;
 
+import com.Array.Example_Array$Copy;
+
 import java.util.StringJoiner;
 
 public class InstanceOfKeyword {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         try {
             int a[] = new int[5];
             a[5] = 10;
@@ -11,19 +13,23 @@ public class InstanceOfKeyword {
             System.out.println("ArithmeticException");
         } catch (Exception e) {
             if (e instanceof ArrayIndexOutOfBoundsException) {
-                System.out.println("e instanceof ArrayIndexOutOfBoundsException");
-                findArrayIndexOutOfBoundsException();
+                //System.out.println("e instanceof ArrayIndexOutOfBoundsException");
+                try {
+                    findArrayIndexOutOfBoundsException();
+                } catch (Exception e1) {
+                    System.out.println(e1.getMessage());
+                }
             } else if (e instanceof StringIndexOutOfBoundsException) {
-                System.out.println("e instanceof StringIndexOutOfBoundsException");
+                //System.out.println("e instanceof StringIndexOutOfBoundsException");
                 findStringIndexOutOfBoundsException();
             } else if (e instanceof Exception) {
-                System.out.println("e instanceof ArithmeticException");
+                //System.out.println("e instanceof ArithmeticException");
                 findArithmeticException();
             }
         }
     }
 
-    static void findArrayIndexOutOfBoundsException()  {
+    static void findArrayIndexOutOfBoundsException() throws ArrayIndexOutOfBoundsException {
         throw new ArrayIndexOutOfBoundsException("ArrayIndexOutOfBoundsException");
 
     }

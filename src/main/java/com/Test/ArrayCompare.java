@@ -15,6 +15,7 @@ public class ArrayCompare {
                 System.out.print(" " + a[i]);
             }
         }
+
     }
 }
 
