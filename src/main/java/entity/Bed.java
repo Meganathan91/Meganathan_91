@@ -1,9 +1,9 @@
 package entity;
 
 public class Bed {
-    Long bedId;
-    String bedType;
-    String roomName;
+    private Long bedId;
+    private String bedType;
+    private String roomName;
 
     public Long getBedId() {
         return bedId;
@@ -28,7 +28,6 @@ public class Bed {
     public void setRoomName(String roomName) {
         this.roomName = roomName;
     }
-
 
     @Override
     public String toString() {

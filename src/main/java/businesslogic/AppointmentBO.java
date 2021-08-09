@@ -3,17 +3,30 @@ package businesslogic;
 import entity.Appointment;
 import entity.Doctor;
 import entity.Patient;
+import entity.VisitLogInformation;
 import generateid.GenerateAppointmentId;
 
 import java.util.*;
 
 public class AppointmentBO {
 
-    public Appointment createAppointment(Long patientId, Map<Long, Patient> patientMap, Long doctorId,
-                                         Map<Long, Doctor> doctorMap, Date d, String purposeOfVisit,
+    public void createAppointment(Long patientId, Map<Long, Patient> patientMap, Long doctorId,
+                                         Map<Long, Doctor> doctorMap, Date date, String purposeOfVisit,
                                          Map<Long, Appointment> appointmentMap) throws Exception {
         if (patientId == null)
             throw new Exception("Patient id is null");
+        if (patientMap.isEmpty())
+            throw new Exception("patientMap is null");
+        if (doctorId == null)
+            throw new Exception("doctor id is null");
+        if (doctorMap.isEmpty())
+            throw new Exception("doctorMap is null");
+        if (appointmentMap.isEmpty())
+            throw new Exception("appointmentMap is null");
+        if (date == null)
+            throw new Exception("date is null");
+        if (purposeOfVisit == null)
+            throw new Exception("purposeOfVisit is null");
 
         Patient p = new Patient();
         if (patientMap.containsKey(patientId)) {
@@ -21,7 +34,7 @@ public class AppointmentBO {
         }
         Appointment appointment = new Appointment();
         appointment.setAppointmentId(GenerateAppointmentId.getId(new ArrayList<>(appointmentMap.keySet())));
-        appointment.setDateOfVisit(d);
+        appointment.setDateOfVisit(date);
         appointment.setDoctor(doctorMap.get(doctorId));
         appointment.setPatient(p);
         appointment.setPurposeOfVisit(purposeOfVisit);
@@ -38,7 +51,7 @@ public class AppointmentBO {
                 break;
             }
         }
+        appointmentMap.put(appointment.getAppointmentId(), appointment);
 
-        return appointment;
     }
 }

@@ -2,6 +2,7 @@ package mainmethod;
 
 import businesslogic.AppointmentBO;
 import businesslogic.InPatientBO;
+import businesslogic.ReportBO;
 import businesslogic.VisitInformationBO;
 import entity.*;
 
@@ -9,78 +10,71 @@ import java.util.*;
 
 public class Report {
 
-    private static Map<Long, Hospital> hospitalDetails;
-    private static Hospital hospital;
+    static private Map<Long, Hospital> hospitalDetails;
+    static private Hospital hospital;
 
-    private static Map<Long, Doctor> doctorDetails;
-    private static Doctor cardiologistDoctor;
-    private static Doctor orthopedicDoctor;
-    private static Doctor dentistDoctor;
-    private static Doctor neurologistDoctor;
-    private static Doctor pulmonologistDoctor;
+    static private Map<Long, Doctor> doctorDetails;
+    static private Doctor cardiologistDoctor;
+    static private Doctor orthopedicDoctor;
+    static private Doctor dentistDoctor;
+    static private Doctor neurologistDoctor;
+    static private Doctor pulmonologistDoctor;
 
-    private static Map<Long, Patient> patientDetails;
-    private static Patient patientSelvam;
-    private static Patient patientRagu;
-    private static Patient patientVimal;
-    private static Patient patientAnu;
-    private static Patient patientMohan;
-    private static Patient patientRajini;
-    private static Patient patientSomu;
-    private static Patient patientSelvi;
+    static private Map<Long, Patient> patientDetails;
+    static private Patient patientSelvam;
+    static private Patient patientRagu;
+    static private Patient patientVimal;
+    static private Patient patientAnu;
+    static private Patient patientMohan;
+    static private Patient patientRajini;
+    static private Patient patientSomu;
+    static private Patient patientSelvi;
 
-    private static Map<Long, Appointment> appointmentDetails;
-    private static Appointment appointmentOne;
-    private static Appointment appointmentTwo;
-    private static Appointment appointmentThree;
-    private static Appointment appointmentFour;
-    private static Appointment appointmentFive;
-    private static Appointment appointmentSix;
-    private static Appointment appointmentSeven;
-    private static Appointment appointmentEight;
-    private static Appointment appointmentNine;
-    private static Appointment appointmentTen;
-    private static Appointment appointmentEleven;
-    private static Appointment appointmentTwelve;
-    private static Appointment appointmentThirteen;
-    private static Appointment appointmentFourteen;
+    static private Map<Long, Appointment> appointmentDetails;
+    static private Appointment appointmentOne;
+    static private Appointment appointmentTwo;
+    static private Appointment appointmentThree;
+    static private Appointment appointmentFour;
+    static private Appointment appointmentFive;
+    static private Appointment appointmentSix;
+    static private Appointment appointmentSeven;
+    static private Appointment appointmentEight;
+    static private Appointment appointmentNine;
+    static private Appointment appointmentTen;
+    static private Appointment appointmentEleven;
+    static private Appointment appointmentTwelve;
+    static private Appointment appointmentThirteen;
+    static private Appointment appointmentFourteen;
 
-    private static Map<Long, Medicine> medicineDetails;
-    private static Medicine medicineForCardiologist;
-    private static Medicine medicineForOrthopedic;
-    private static Medicine medicineForDentist;
-    private static Medicine medicineForNeurologist;
-    private static Medicine medicineForPulmonologist;
+    static private Map<Long, Medicine> medicineDetails;
+    static private Medicine medicineForCardiologist;
+    static private Medicine medicineForOrthopedic;
+    static private Medicine medicineForDentist;
+    static private Medicine medicineForNeurologist;
+    static private Medicine medicineForPulmonologist;
 
-    private static Map<Long, VisitLogInformation> visitDetails;
-    private static VisitLogInformation heartCheckUp;
-    private static VisitLogInformation boneCheckUp;
-    private static VisitLogInformation teethCheckUp;
-    private static VisitLogInformation brainCheckUp;
-    private static VisitLogInformation lungCheckUp;
+    static private Map<Long, VisitLogInformation> visitDetails;
+    static private VisitLogInformation heartCheckUp;
+    static private VisitLogInformation boneCheckUp;
+    static private VisitLogInformation teethCheckUp;
+    static private VisitLogInformation brainCheckUp;
+    static private VisitLogInformation lungCheckUp;
 
-    private static Map<Long, InPatient> inPatientDetails;
-    private static InPatient inPatientSelvam;
-    private static InPatient inPatientRagu;
-    private static InPatient inPatientVimal;
-    private static InPatient inPatientAnu;
-    private static InPatient inPatientMohan;
-    private static InPatient inPatientRajini;
-    private static InPatient inPatientSomu;
-    private static InPatient inPatientSelvi;
+    static private Map<Long, InPatient> inPatientDetail;
 
-    private static Map<Long, Bed> bedDetails;
-    private static Bed bedOne;
-    private static Bed bedTwo;
-    private static Bed bedThree;
-    private static Bed bedFour;
-    private static Bed bedFive;
-    private static Bed bedSix;
-    private static Bed bedSeven;
-    private static Bed bedEight;
+    static private Map<Long, Bed> bedDetails;
+    static private Bed bedOne;
+    static private Bed bedTwo;
+    static private Bed bedThree;
+    static private Bed bedFour;
+    static private Bed bedFive;
+    static private Bed bedSix;
+    static private Bed bedSeven;
+    static private Bed bedEight;
 
     private static List<Medicine> medicineList;
-    private static Medicine medicine;
+
+    private static Calendar calendar;
 
 
     static {
@@ -126,64 +120,100 @@ public class Report {
         doctorDetails.put(neurologistDoctor.getDoctorId(), neurologistDoctor);
         doctorDetails.put(pulmonologistDoctor.getDoctorId(), pulmonologistDoctor);
 
+
+        calendar = Calendar.getInstance();
+        calendar.set(1991, 1, 1, 12, 10, 7);
+        Date date = calendar.getTime();
         patientSelvam = new Patient();
         patientSelvam.setPatientId(1l);
         patientSelvam.setPatientName("Selvam");
+        patientSelvam.setDob(date);
         patientSelvam.setPhoneNumber("9870654320");
         patientSelvam.setAddress("trichy");
         patientSelvam.setPatientType("OP");
 
+        calendar = Calendar.getInstance();
+        calendar.set(1989, 4, 10, 5, 30, 12);
+        Date date1 = calendar.getTime();
         patientRagu = new Patient();
         patientRagu.setPatientId(2l);
         patientRagu.setPatientName("Ragu");
+        patientRagu.setDob(date1);
         patientRagu.setPhoneNumber("7639238764");
         patientRagu.setAddress("Chennai");
         patientRagu.setPatientType("OP");
 
 
+        calendar = Calendar.getInstance();
+        calendar.set(1995, 6, 13, 7, 25, 5);
+        Date date2 = calendar.getTime();
         patientVimal = new Patient();
         patientVimal.setPatientId(3l);
         patientVimal.setPatientName("Vimal");
+        patientVimal.setDob(date2);
         patientVimal.setPhoneNumber("9790654302");
         patientVimal.setAddress("Salem");
         patientVimal.setPatientType("OP");
 
+        calendar = Calendar.getInstance();
+        calendar.set(1998, 8, 17, 2, 55, 10);
+        Date date3 = calendar.getTime();
         patientAnu = new Patient();
         patientAnu.setPatientId(4l);
         patientAnu.setPatientName("Anu");
+        patientAnu.setDob(date3);
         patientAnu.setPhoneNumber("9790654320");
         patientAnu.setAddress("Thanjavur");
         patientAnu.setPatientType("OP");
 
+        calendar = Calendar.getInstance();
+        calendar.set(1993, 3, 21, 8, 45, 25);
+        Date date4 = calendar.getTime();
         patientMohan = new Patient();
         patientMohan.setPatientId(5l);
         patientMohan.setPatientName("Mohan");
+        patientMohan.setDob(date4);
         patientMohan.setPhoneNumber("9500768912");
         patientMohan.setAddress("kumbakonam");
         patientMohan.setPatientType("OP");
 
+        calendar = Calendar.getInstance();
+        calendar.set(2000, 7, 8, 5, 10, 43);
+        Date date5 = calendar.getTime();
         patientRajini = new Patient();
         patientRajini.setPatientId(6l);
         patientRajini.setPatientName("Rajini");
+        patientRajini.setDob(date5);
         patientRajini.setPhoneNumber("6345876301");
         patientRajini.setAddress("Madurai");
         patientRajini.setPatientType("OP");
 
+        calendar = Calendar.getInstance();
+        calendar.set(1981, 10, 19, 10, 20, 60);
+        Date date6 = calendar.getTime();
         patientSomu = new Patient();
         patientSomu.setPatientId(7l);
         patientSomu.setPatientName("Somu");
+        patientSomu.setDob(date6);
         patientSomu.setAddress("Ariyalur");
         patientSomu.setPhoneNumber("9790238764");
         patientSomu.setPatientType("OP");
 
+        calendar = Calendar.getInstance();
+        calendar.set(1975, 11, 16, 9, 20, 51);
+        Date date7 = calendar.getTime();
         patientSelvi = new Patient();
         patientSelvi.setPatientId(8l);
         patientSelvi.setPatientName("Selvi");
+        patientSelvi.setDob(date7);
         patientSelvi.setAddress("Karur");
         patientSelvi.setPhoneNumber("7639128707");
         patientSelvi.setPatientType("OP");
 
         patientDetails = new HashMap<>();
+        calendar = Calendar.getInstance();
+        calendar.set(1997, 2, 9, 6, 19);
+        Date date8 = calendar.getTime();
         patientDetails.put(patientSelvam.getPatientId(), patientSelvam);
         patientDetails.put(patientRagu.getPatientId(), patientRagu);
         patientDetails.put(patientVimal.getPatientId(), patientVimal);
@@ -193,127 +223,183 @@ public class Report {
         patientDetails.put(patientSomu.getPatientId(), patientSomu);
         patientDetails.put(patientSelvi.getPatientId(), patientSelvi);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1989, 1, 1, 1, 10);
+        Date date22 = calendar.getTime();
         appointmentOne = new Appointment();
         appointmentOne.setAppointmentId(1l);
         appointmentOne.setDoctor(doctorDetails.get(1l));
-        appointmentOne.setPatient(patientDetails.get(1l));
+        appointmentOne.setPatient(patientDetails.get(3l));
+        appointmentOne.setDateOfVisit(date22);
         appointmentOne.setPurposeOfVisit("HeartPain");
         appointmentOne.setBp(120.5);
         appointmentOne.setTemperature(90.5);
         appointmentOne.setIsFirstVisit(false);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1971, 2, 3, 4, 35);
+        Date date9 = calendar.getTime();
         appointmentTwo = new Appointment();
         appointmentTwo.setAppointmentId(2l);
-        appointmentTwo.setDoctor(doctorDetails.get(2l));
+        appointmentTwo.setDoctor(doctorDetails.get(1l));
         appointmentTwo.setPatient(patientDetails.get(2l));
+        appointmentTwo.setDateOfVisit(date9);
         appointmentTwo.setPurposeOfVisit("BonesPain");
         appointmentTwo.setBp(140.7);
         appointmentTwo.setTemperature(89.1);
         appointmentTwo.setIsFirstVisit(false);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1975, 3, 3, 3, 49);
+        Date date10 = calendar.getTime();
         appointmentThree = new Appointment();
         appointmentThree.setAppointmentId(3l);
         appointmentThree.setDoctor(doctorDetails.get(3l));
         appointmentThree.setPatient(patientDetails.get(3l));
+        appointmentThree.setDateOfVisit(date10);
         appointmentThree.setPurposeOfVisit("TeethPain");
         appointmentThree.setBp(135.3);
         appointmentThree.setTemperature(81.4);
         appointmentThree.setIsFirstVisit(true);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1983, 4, 4, 4, 27);
+        Date date11 = calendar.getTime();
         appointmentFour = new Appointment();
         appointmentFour.setAppointmentId(4l);
-        appointmentFour.setDoctor(doctorDetails.get(4l));
+        appointmentFour.setDoctor(doctorDetails.get(1l));
         appointmentFour.setPatient(patientDetails.get(4l));
+        appointmentFour.setDateOfVisit(date11);
         appointmentFour.setPurposeOfVisit("Headaches");
         appointmentFour.setBp(154.4);
         appointmentFour.setTemperature(79.5);
         appointmentFour.setIsFirstVisit(false);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1979, 6, 4, 3, 40);
+        Date date12 = calendar.getTime();
         appointmentFive = new Appointment();
         appointmentFive.setAppointmentId(5l);
         appointmentFive.setDoctor(doctorDetails.get(5l));
         appointmentFive.setPatient(patientDetails.get(5l));
+        appointmentFive.setDateOfVisit(Calendar.getInstance().getTime());
         appointmentFive.setPurposeOfVisit("LungCancer");
         appointmentFive.setBp(120.5);
         appointmentFive.setTemperature(90.5);
         appointmentFive.setIsFirstVisit(true);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1995, 9, 5, 8, 12);
+        Date date13 = calendar.getTime();
         appointmentSix = new Appointment();
         appointmentSix.setAppointmentId(6l);
         appointmentSix.setDoctor(doctorDetails.get(1l));
         appointmentSix.setPatient(patientDetails.get(1l));
+        appointmentSix.setDateOfVisit(date13);
         appointmentSix.setPurposeOfVisit("HeartPain");
         appointmentSix.setBp(110.5);
         appointmentSix.setTemperature(80.5);
         appointmentSix.setIsFirstVisit(false);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1997, 7, 10, 6, 39);
+        Date date14 = calendar.getTime();
         appointmentSeven = new Appointment();
         appointmentSeven.setAppointmentId(7l);
         appointmentSeven.setDoctor(doctorDetails.get(1l));
         appointmentSeven.setPatient(patientDetails.get(1l));
+        appointmentSeven.setDateOfVisit(date14);
         appointmentSeven.setPurposeOfVisit("HeartPain");
         appointmentSeven.setBp(120.7);
         appointmentSeven.setTemperature(76.1);
         appointmentSeven.setIsFirstVisit(false);
 
+        calendar = Calendar.getInstance();
+        calendar.set(2000, 11, 12, 5, 53);
+        Date date15 = calendar.getTime();
         appointmentEight = new Appointment();
         appointmentEight.setAppointmentId(8l);
         appointmentEight.setDoctor(doctorDetails.get(1l));
         appointmentEight.setPatient(patientDetails.get(1l));
+        appointmentEight.setDateOfVisit(date15);
         appointmentEight.setPurposeOfVisit("HeartPain");
         appointmentEight.setBp(135.3);
         appointmentEight.setTemperature(81.4);
         appointmentEight.setIsFirstVisit(false);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1982, 06, 6, 4, 34);
+        Date date16 = calendar.getTime();
         appointmentNine = new Appointment();
         appointmentNine.setAppointmentId(9l);
         appointmentNine.setDoctor(doctorDetails.get(2l));
         appointmentNine.setPatient(patientDetails.get(2l));
+        appointmentNine.setDateOfVisit(date16);
         appointmentNine.setPurposeOfVisit("BonesPain");
         appointmentNine.setBp(154.4);
         appointmentNine.setTemperature(79.5);
         appointmentNine.setIsFirstVisit(false);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1971, 8, 5, 7, 27);
+        Date date17 = calendar.getTime();
         appointmentTen = new Appointment();
         appointmentTen.setAppointmentId(10l);
         appointmentTen.setDoctor(doctorDetails.get(2l));
         appointmentTen.setPatient(patientDetails.get(2l));
+        appointmentTen.setDateOfVisit(date17);
         appointmentTen.setPurposeOfVisit("BonesPain");
         appointmentTen.setBp(120.5);
         appointmentTen.setTemperature(90.5);
         appointmentTen.setIsFirstVisit(false);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1981, 7, 21, 8, 21);
+        Date date18 = calendar.getTime();
         appointmentEleven = new Appointment();
         appointmentEleven.setAppointmentId(11l);
         appointmentEleven.setDoctor(doctorDetails.get(2l));
         appointmentEleven.setPatient(patientDetails.get(2l));
+        appointmentEleven.setDateOfVisit(date18);
         appointmentEleven.setPurposeOfVisit("BonesPain");
         appointmentEleven.setBp(135.5);
         appointmentEleven.setTemperature(76.5);
         appointmentEleven.setIsFirstVisit(false);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1977, 5, 3, 9, 47);
+        Date date19 = calendar.getTime();
         appointmentTwelve = new Appointment();
         appointmentTwelve.setAppointmentId(12l);
         appointmentTwelve.setDoctor(doctorDetails.get(2l));
         appointmentTwelve.setPatient(patientDetails.get(2l));
+        appointmentTwelve.setDateOfVisit(date19);
         appointmentTwelve.setPurposeOfVisit("BonesPain");
         appointmentTwelve.setBp(140.7);
         appointmentTwelve.setTemperature(89.1);
         appointmentTwelve.setIsFirstVisit(false);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1980, 9, 6, 7, 27);
+        Date date20 = calendar.getTime();
         appointmentThirteen = new Appointment();
         appointmentThirteen.setAppointmentId(13l);
         appointmentThirteen.setDoctor(doctorDetails.get(3l));
         appointmentThirteen.setPatient(patientDetails.get(3l));
+        appointmentThirteen.setDateOfVisit(date20);
         appointmentThirteen.setPurposeOfVisit("TeethPain");
         appointmentThirteen.setBp(135.3);
         appointmentThirteen.setTemperature(81.4);
         appointmentThirteen.setIsFirstVisit(false);
 
+        calendar = Calendar.getInstance();
+        calendar.set(1976, 3, 9, 3, 17);
+        Date date21 = calendar.getTime();
         appointmentFourteen = new Appointment();
         appointmentFourteen.setAppointmentId(14l);
         appointmentFourteen.setDoctor(doctorDetails.get(4l));
         appointmentFourteen.setPatient(patientDetails.get(4l));
+        appointmentFourteen.setDateOfVisit(date21);
         appointmentFourteen.setPurposeOfVisit("Headaches");
         appointmentFourteen.setBp(154.4);
         appointmentFourteen.setTemperature(79.5);
@@ -335,35 +421,50 @@ public class Report {
         appointmentDetails.put(appointmentThirteen.getAppointmentId(), appointmentThirteen);
         appointmentDetails.put(appointmentFourteen.getAppointmentId(), appointmentFourteen);
 
+        calendar = Calendar.getInstance();
+        calendar.set(2025, 12, 12, 6, 30, 27);
         medicineForCardiologist = new Medicine();
         medicineForCardiologist.setMedicineId(1l);
         medicineForCardiologist.setPurposeOfMedicine("HeartPain");
         medicineForCardiologist.setMedicineName("Aspirin");
         medicineForCardiologist.setBatchNumber("a01");
+        medicineForCardiologist.setExpiryDate(calendar.getTime());
 
+        calendar = Calendar.getInstance();
+        calendar.set(2024, 2, 8, 10, 29, 59);
         medicineForOrthopedic = new Medicine();
         medicineForOrthopedic.setMedicineId(2l);
         medicineForOrthopedic.setPurposeOfMedicine("BonesPain");
         medicineForOrthopedic.setMedicineName("Methocarbamol");
         medicineForOrthopedic.setBatchNumber("m02");
+        medicineForOrthopedic.setExpiryDate(calendar.getTime());
 
+        calendar = Calendar.getInstance();
+        calendar.set(2023, 6, 10);
         medicineForDentist = new Medicine();
         medicineForDentist.setMedicineId(3l);
         medicineForDentist.setPurposeOfMedicine("TeethPain");
         medicineForDentist.setMedicineName("Clindamycin");
         medicineForDentist.setBatchNumber("c03");
+        medicineForDentist.setExpiryDate(calendar.getTime());
 
+        calendar = Calendar.getInstance();
+        calendar.set(2022, 1, 8, 11, 40, 29);
         medicineForNeurologist = new Medicine();
         medicineForNeurologist.setMedicineId(4l);
         medicineForNeurologist.setPurposeOfMedicine("BrainPain");
         medicineForNeurologist.setMedicineName("Lamotrigine");
         medicineForNeurologist.setBatchNumber("l04");
+        medicineForNeurologist.setExpiryDate(calendar.getTime());
 
+        calendar = Calendar.getInstance();
+        calendar.set(2021, 10, 12, 8, 34, 34);
         medicineForPulmonologist = new Medicine();
         medicineForPulmonologist.setMedicineId(5l);
         medicineForPulmonologist.setPurposeOfMedicine("lung cancer");
         medicineForPulmonologist.setMedicineName("ciclesonide");
         medicineForPulmonologist.setBatchNumber("c05");
+        medicineForPulmonologist.setExpiryDate(calendar.getTime());
 
         medicineDetails = new HashMap<>();
         medicineDetails.put(medicineForCardiologist.getMedicineId(), medicineForCardiologist);
@@ -422,56 +523,6 @@ public class Report {
         bedDetails.put(bedSeven.getBedId(), bedSeven);
         bedDetails.put(bedEight.getBedId(), bedEight);
 
-        inPatientSelvam = new InPatient();
-        inPatientSelvam.setPatientId(1l);
-        inPatientSelvam.setIpIdentificationNumber(1l);
-        inPatientSelvam.setBed(bedDetails.get(1l));
-
-        inPatientRagu = new InPatient();
-        inPatientRagu.setPatientId(2l);
-        inPatientRagu.setIpIdentificationNumber(2l);
-        inPatientRagu.setBed(bedDetails.get(2l));
-
-
-        inPatientVimal = new InPatient();
-        inPatientVimal.setPatientId(3l);
-        inPatientVimal.setIpIdentificationNumber(3l);
-        inPatientVimal.setBed(bedDetails.get(3l));
-
-        inPatientAnu = new InPatient();
-        inPatientAnu.setPatientId(4l);
-        inPatientAnu.setIpIdentificationNumber(4l);
-        inPatientAnu.setBed(bedDetails.get(4l));
-
-        inPatientMohan = new InPatient();
-        inPatientMohan.setPatientId(5l);
-        inPatientMohan.setIpIdentificationNumber(5l);
-        inPatientMohan.setBed(bedDetails.get(5l));
-
-        inPatientRajini = new InPatient();
-        inPatientRajini.setPatientId(6l);
-        inPatientRajini.setIpIdentificationNumber(6l);
-        inPatientRajini.setBed(bedDetails.get(6l));
-
-        inPatientSomu = new InPatient();
-        inPatientSomu.setPatientId(7l);
-        inPatientSomu.setIpIdentificationNumber(7l);
-        inPatientSomu.setBed(bedDetails.get(7l));
-
-        inPatientSelvi = new InPatient();
-        inPatientSelvi.setPatientId(8l);
-        inPatientSelvi.setIpIdentificationNumber(8l);
-        inPatientSelvi.setBed(bedDetails.get(8l));
-
-        inPatientDetails = new HashMap<>();
-        inPatientDetails.put(inPatientSelvam.getIpIdentificationNumber(), inPatientSelvam);
-        inPatientDetails.put(inPatientRagu.getIpIdentificationNumber(), inPatientRagu);
-        inPatientDetails.put(inPatientVimal.getIpIdentificationNumber(), inPatientVimal);
-        inPatientDetails.put(inPatientAnu.getIpIdentificationNumber(), inPatientAnu);
-        inPatientDetails.put(inPatientMohan.getIpIdentificationNumber(), inPatientMohan);
-        inPatientDetails.put(inPatientRajini.getIpIdentificationNumber(), inPatientRajini);
-        inPatientDetails.put(inPatientSomu.getIpIdentificationNumber(), inPatientSomu);
-        inPatientDetails.put(inPatientSelvi.getIpIdentificationNumber(), inPatientSelvi);
     }
 
     static public List<Medicine> getMedicine() {
@@ -520,7 +571,7 @@ public class Report {
 
         lungCheckUp = new VisitLogInformation();
         lungCheckUp.setVisitId(5l);
-        lungCheckUp.setAppointment(appointmentDetails.get(2l));
+        lungCheckUp.setAppointment(appointmentDetails.get(5l));
         lungCheckUp.setDoctorRecommendation("breathe issue visit immediately and take scan");
         lungCheckUp.setFollowUpNeed(true);
         lungCheckUp.setListOfMedicine(getMedicine());
@@ -539,34 +590,69 @@ public class Report {
         populateVisitInformation();
 
         AppointmentBO appointmentBO = new AppointmentBO();
-        Appointment appointment;
+
         try {
-            appointment = appointmentBO.createAppointment(5l, patientDetails, 5l, doctorDetails,
+            appointmentBO.createAppointment(5l, patientDetails, 5l, doctorDetails,
                     Calendar.getInstance().getTime(), "Bone Pain", appointmentDetails);
-            appointmentDetails.put(appointment.getAppointmentId(), appointment);
+
         } catch (Exception e) {
-            System.out.println(" Patient id is null: " + e.getMessage());
+            System.out.println(" Patient id is null : " + e.getMessage());
         }
 
         VisitInformationBO visitInformation = new VisitInformationBO();
+
         try {
-            Patient patient = visitInformation.checkPatientNoOfFVisit(2l, appointmentDetails, visitDetails, medicineList,
+            Patient patient = visitInformation.createVisitLogInformation(2l, appointmentDetails, visitDetails, medicineList,
                     "TeethPain", true);
+
             patientDetails.put(patient.getPatientId(), patient);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         InPatientBO inPatientBO = new InPatientBO();
-        InPatient inPatient = new InPatient();
         try {
-            inPatient = inPatientBO.allocateBedForINPatient(2l, patientDetails, 2l, bedDetails, "Simple Bed",
+            inPatientBO.allocateBedForInPatient(2l, patientDetails, 7l, bedDetails, inPatientDetail, "Simple Bed",
                     "A");
-            inPatientDetails.put(inPatient.getPatientId(), inPatient);
-            System.out.println("hiiiiiiiiiii"+inPatientDetails);
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+
+        ReportBO reportBO = new ReportBO();
+        try {
+            reportBO.getPatientDetail(patientDetails, 1l, "Mohan");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            reportBO.listOfVisitForPatientId(visitDetails, 2l);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            reportBO.displayOutPatient(patientDetails);
+        } catch (Exception e) {
+            System.out.println(" Invalid Patient details : " + e.getMessage());
+        }
+
+        try {
+            reportBO.displayInPatient(inPatientDetail);
+        } catch (Exception e) {
+            System.out.println(" Invalid InPatient details : " + e.getMessage());
+        }
+
+        try {
+            reportBO.displayPatientByDoctorId(appointmentDetails, 1l);
+        } catch (Exception e) {
+            System.out.println(" appointmentDetails details is empty : " + e.getMessage());
+        }
+
+        try {
+            reportBO.patientFollowUpVisit(visitDetails);
+        } catch (Exception e) {
+            System.out.println(" PatientFollowUpVisit details is empty : " + e.getMessage());
         }
     }
 }

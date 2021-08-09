@@ -1,8 +1,9 @@
 package entity;
 
+import java.util.Calendar;
 import java.util.List;
 
-public class VisitLogInformation {
+public class VisitLogInformation  {
     private Long visitId;
     private Appointment appointment;
     private String doctorRecommendation;
@@ -59,5 +60,6 @@ public class VisitLogInformation {
                 ", listOfMedicine=" + listOfMedicine +
                 '}';
     }
+
 }
 

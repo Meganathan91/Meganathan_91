@@ -3,26 +3,23 @@ package businesslogic;
 import entity.Bed;
 import entity.InPatient;
 import entity.Patient;
-import entity.VisitLogInformation;
 import generateid.GenerateIPIdentificationNumber;
-import generateid.GeneratePatientId;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 
 public class InPatientBO {
 
-    public InPatient allocateBedForINPatient(Long patientId, Map<Long, Patient> patientDetails, Long bedId,
-                                             Map<Long, Bed> bedDetails, String bedType, String roomName) throws Exception {
+    public void allocateBedForInPatient(Long patientId, Map<Long, Patient> patientDetails, Long bedId,
+                                             Map<Long, Bed> bedDetails, Map<Long, InPatient> inPatientMap, String bedType, String roomName) throws Exception {
 
         InPatient inPatient = new InPatient();
 
         if (patientId == null) {
-            throw new Exception("InValid InPatient Id : ");
+            throw new Exception("InValid Patient Id : ");
         }
-        if (bedId == null) {
-            throw new Exception("BedId is Null : ");
+        if (bedId == null || bedId > 8) {
+            throw new Exception("BedId is not Available : ");
         }
         if (patientDetails.isEmpty()) {
             throw new Exception("InPatient Details is Empty : ");
@@ -42,16 +39,19 @@ public class InPatientBO {
         if (patientDetails.containsKey(patientId)) {
             patient = patientDetails.get(patientId);
         } else {
-            throw new Exception("he is not in-patient : ");
+            throw new Exception("Patient is not Available : ");
         }
 
-        inPatient.setIpIdentificationNumber(GenerateIPIdentificationNumber.getIpIdentificationNumber(new ArrayList<>(patientDetails.keySet())));
-        inPatient.setPatientId( GeneratePatientId.getPatientId( new ArrayList<>( patientDetails.keySet())));
+        inPatient.setIpIdentificationNumber(GenerateIPIdentificationNumber.getIpIdentificationNumber(new ArrayList<Long>(inPatientMap.keySet())));
+
         if (patient.getPatientType().equals("IP")) {
+            inPatient.setPatient(patient);
             inPatient.setBed(bedDetails.get(bedId));
         } else {
             throw new Exception("Won't allocate bed for out-patient");
         }
-        return inPatient;
+            inPatientMap.put(inPatient.getIpIdentificationNumber(), inPatient);
+
+        }
     }
-}
+

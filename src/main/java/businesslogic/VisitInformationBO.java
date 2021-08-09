@@ -13,10 +13,10 @@ import java.util.Map;
 
 public class VisitInformationBO {
 
-    public Patient checkPatientNoOfFVisit(Long appointmentId, Map<Long, Appointment> appointmentMap,
-                                                      Map<Long, VisitLogInformation> visitDetails,
-                                                      List<Medicine> medicines, String doctorRecommendation,
-                                                      Boolean followUpNeed) throws Exception {
+    public Patient createVisitLogInformation(Long appointmentId, Map<Long, Appointment> appointmentMap,
+                                             Map<Long, VisitLogInformation> visitDetails,
+                                             List<Medicine> medicines, String doctorRecommendation,
+                                             Boolean followUpNeed) throws Exception {
 
         if (appointmentId == null) {
             throw new Exception(" appointmentId is null ");
@@ -68,6 +68,8 @@ public class VisitInformationBO {
                 visitCount++;
             }
         }
+
+        System.out.println("visitCount : " + visitCount);
 
         if (visitCount >= 3) {
             patient.setPatientType("IP");

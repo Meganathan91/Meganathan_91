@@ -1,17 +1,10 @@
 package entity;
 
 public class InPatient {
-    Long patientId;
-    Long ipIdentificationNumber;
-    Bed bed;
+    private Long ipIdentificationNumber;
+    private Patient patient;
+    private Bed bed;
 
-    public Long getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
-    }
 
     public Long getIpIdentificationNumber() {
         return ipIdentificationNumber;
@@ -29,11 +22,19 @@ public class InPatient {
         this.bed = bed;
     }
 
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
     @Override
     public String toString() {
         return "InPatient{" +
-                "patientId=" + patientId +
                 ", ipIdentificationNumber=" + ipIdentificationNumber +
+                ", patient=" + patient +
                 ", bed=" + bed +
                 '}';
     }
