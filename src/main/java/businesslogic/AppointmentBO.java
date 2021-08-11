@@ -10,6 +10,11 @@ import java.util.*;
 
 public class AppointmentBO {
 
+/* create appointment for patient, this appointment contain patientId for first
+   time visit, appointment having member Boolean isFirstVisit by default true otherwise false.
+   after creating appointment put this appointment into appointment map as key(appointmentId)
+   and value(appointment object) pair.
+ */
     public void createAppointment(Long patientId, Map<Long, Patient> patientMap, Long doctorId,
                                          Map<Long, Doctor> doctorMap, Date date, String purposeOfVisit,
                                          Map<Long, Appointment> appointmentMap) throws Exception {

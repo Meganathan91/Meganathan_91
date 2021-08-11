@@ -13,6 +13,12 @@ import java.util.Map;
 
 public class VisitInformationBO {
 
+/* create visit information for given appointmentId. given appointmentId contain patientId compare with
+   visit details -> appointment -> patient -> patientId. This patientId already have three visit, setPatientType as "IP",
+   for this particular patient object from appointment object. This patient converted from out-patient to in-patient and
+   update patient object in patient map. And put newly created visitInformation for appointment into visit map.
+*/
+
     public Patient createVisitLogInformation(Long appointmentId, Map<Long, Appointment> appointmentMap,
                                              Map<Long, VisitLogInformation> visitDetails,
                                              List<Medicine> medicines, String doctorRecommendation,
@@ -68,7 +74,6 @@ public class VisitInformationBO {
                 visitCount++;
             }
         }
-
         System.out.println("visitCount : " + visitCount);
 
         if (visitCount >= 3) {

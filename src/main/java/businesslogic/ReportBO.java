@@ -4,13 +4,20 @@ import entity.Appointment;
 import entity.InPatient;
 import entity.Patient;
 import entity.VisitLogInformation;
-import practice.DateDemo;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ReportBO {
-
-    public void getPatientDetail(Map<Long, Patient> patientDetails, Long patientId, String patientName) throws Exception {
+    /* 1. Generated report for patient detail for given patient name/id,
+       2. Displayed list of visit for given patientId
+       3. Displayed out-patient details from patient map.
+       4. Displayed in-patient from in-patient map.
+       5. Displayed list of patient details for followup visit.
+       6. Displayed patients list for given doctorId.
+     */
+    public void getPatientDetail(Map<Long, Patient> patientDetails, Long patientId,
+                                 String patientName) throws Exception {
 
         Patient patient = new Patient();
 
@@ -25,7 +32,7 @@ public class ReportBO {
 
         if (patientDetails.containsKey(patientId)) {
             patient = patientDetails.get(patientId);
-            //System.out.println("Patient detail for given patient id : " + patient);
+            //System.out.println("1. Patient detail for given patient id : " + patient);
         }
 
         Patient patient1 = new Patient();
@@ -75,16 +82,13 @@ public class ReportBO {
         System.out.println("");
     }
 
-    public void displayInPatient(Map<Long, InPatient> inPatientDetail) throws Exception {
-
-        if (inPatientDetail.isEmpty())
-            throw new Exception("in-patient detail is null");
+    public void displayInPatient(Map<Long, InPatient> inPatientDetail) {
 
         Iterator<Long> itr = inPatientDetail.keySet().iterator();
         InPatient inPatient;
         while (itr.hasNext()) {
             inPatient = inPatientDetail.get(itr.next());
-            //System.out.println(" InPatient Detail: " + inPatient.getPatient());
+            //System.out.println(" inPatientDetail : " + inPatient.getPatient());
         }
     }
 
@@ -111,7 +115,23 @@ public class ReportBO {
         while (itr.hasNext()) {
             VisitLogInformation followUp = visitDetails.get(itr.next());
             if (followUp.getFollowUpNeed() == true) {
-                //System.out.println("  patient needs the follow up visit : " + followUp.getAppointment().getPatient());
+                //System.out.println(" patient needs the follow up visit : " + followUp.getAppointment().getPatient());
+            }
+        }
+    }
+
+    public void getVisitDetailBetweenDateRange(Map<Long, VisitLogInformation> visitDetails) {
+        VisitLogInformation logInformation;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-mm-yyyy");
+        Iterator<Long> itr = visitDetails.keySet().iterator();
+        while (itr.hasNext()) {
+            logInformation = visitDetails.get(itr.next());
+            Date date = logInformation.getAppointment().getDateOfVisit();
+            String dateOne = dateFormat.format(date);
+            String dateTwo = dateFormat1.format(Calendar.getInstance().getTime());
+            if (dateOne.equals(dateTwo)) {
+                //System.out.println("today visited patient detail : " + logInformation.getAppointment().getPatient());
             }
         }
     }
