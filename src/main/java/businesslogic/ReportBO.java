@@ -1,10 +1,11 @@
 package businesslogic;
 
 import entity.Appointment;
-import entity.InPatient;
+import entity.IP;
 import entity.Patient;
 import entity.VisitLogInformation;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -19,7 +20,7 @@ public class ReportBO {
     public void getPatientDetail(Map<Long, Patient> patientDetails, Long patientId,
                                  String patientName) throws Exception {
 
-        Patient patient = new Patient();
+        Patient patient;
 
         if (patientDetails.isEmpty())
             throw new Exception("patient detail is null");
@@ -35,7 +36,7 @@ public class ReportBO {
             //System.out.println("1. Patient detail for given patient id : " + patient);
         }
 
-        Patient patient1 = new Patient();
+        Patient patient1;
         Iterator<Long> itr = patientDetails.keySet().iterator();
         while (itr.hasNext()) {
             patient1 = patientDetails.get(itr.next());
@@ -82,10 +83,10 @@ public class ReportBO {
         System.out.println("");
     }
 
-    public void displayInPatient(Map<Long, InPatient> inPatientDetail) {
+    public void displayInPatient(Map<Long, IP> inPatientDetail) {
 
         Iterator<Long> itr = inPatientDetail.keySet().iterator();
-        InPatient inPatient;
+        IP inPatient;
         while (itr.hasNext()) {
             inPatient = inPatientDetail.get(itr.next());
             //System.out.println(" inPatientDetail : " + inPatient.getPatient());
@@ -120,7 +121,11 @@ public class ReportBO {
         }
     }
 
-    public void getVisitDetailBetweenDateRange(Map<Long, VisitLogInformation> visitDetails) {
+    /*
+       Displayed today visited patient details,
+       Displayed visit details for given date range.
+     */
+    public void getVisitDetail(Map<Long, VisitLogInformation> visitDetails) {
         VisitLogInformation logInformation;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-mm-yyyy");
@@ -131,8 +136,27 @@ public class ReportBO {
             String dateOne = dateFormat.format(date);
             String dateTwo = dateFormat1.format(Calendar.getInstance().getTime());
             if (dateOne.equals(dateTwo)) {
-                //System.out.println("today visited patient detail : " + logInformation.getAppointment().getPatient());
+                //System.out.println("today visited patient detail " + logInformation.getAppointment().getPatient());
             }
         }
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+        Iterator<Long> itr1 = visitDetails.keySet().iterator();
+        Date date;
+        while (itr1.hasNext()) {
+            logInformation = visitDetails.get(itr1.next());
+            date = logInformation.getAppointment().getDateOfVisit();
+            try {
+                Date visitDate = new SimpleDateFormat("yyyy/mm/dd").parse(format.format(date));
+                Date startDate = new SimpleDateFormat("yyyy/mm/dd").parse("2021/01/01");
+                Date endDate = new SimpleDateFormat("yyyy/mm/dd").parse("2021/03/12");
+                if (visitDate.after(startDate) && visitDate.before(endDate)) {
+                    //System.out.println("Visit Details given Date Range " + logInformation);
+                }
+            } catch (ParseException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
     }
 }
