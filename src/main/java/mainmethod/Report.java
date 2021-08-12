@@ -29,6 +29,7 @@ public class Report {
     static private Patient patientRajini;
     static private Patient patientSomu;
     static private Patient patientSelvi;
+    static private Patient IPSelvam;
 
     static private Map<Long, Appointment> appointmentDetails;
     static private Appointment appointmentOne;
@@ -208,12 +209,12 @@ public class Report {
         calendar.set(1975, 11, 16);
         Date date7 = calendar.getTime();
         patientSelvi = new Patient();
-        patientSelvi.setPatientId(8l);
+        patientSelvi.setPatientId(20l);
         patientSelvi.setPatientName("Selvi");
         patientSelvi.setDob(date7);
         patientSelvi.setAddress("Karur");
         patientSelvi.setPhoneNumber("7639128707");
-        patientSelvi.setPatientType("OP");
+        patientSelvi.setPatientType("IP");
 
         patientDetails = new HashMap<>();
         calendar = Calendar.getInstance();
@@ -526,12 +527,11 @@ public class Report {
 
         INPatientMohan = new IP();
         INPatientMohan.setIpIdentificationNumber(1l);
-        INPatientMohan.setPatient(patientDetails.get(2l));
+        INPatientMohan.setPatient(patientDetails.get(20l));
         INPatientMohan.setBed(bedDetails.get(1l));
 
         INPatientDetails = new HashMap<>();
         INPatientDetails.put(INPatientMohan.getIpIdentificationNumber(), INPatientMohan);
-
 
     }
 
@@ -619,31 +619,11 @@ public class Report {
 
     }
 
-    public static void main(String[] args) {
-
-        populateVisitInformation();
-
-        AppointmentBO appointmentBO = new AppointmentBO();
-        appointmentBO.createAppointment(9l, patientDetails, 5l, doctorDetails,
-                "Bone Pain", appointmentDetails);
-
-        VisitInformationBO visitInformation = new VisitInformationBO();
-            visitInformation.createVisitLogInformation(9l, appointmentDetails, visitDetails, medicineList,
-                    "TeethPain", true, 6l, patientDetails, 5l, doctorDetails,
-                    "Bone Pain");
-
-        INPatientBO inPatientBO = new INPatientBO();
-
-        try {
-            inPatientBO.allocateBedForIP(2l, 7l, patientDetails, bedDetails, INPatientDetails, "Simple Bed",
-                    "A");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    static public void report() {
 
         ReportBO reportBO = new ReportBO();
         try {
-            reportBO.getPatientDetail(patientDetails, 1l, "Mohan");
+            reportBO.getPatientDetail(patientDetails, 6l, "Mohan");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -679,5 +659,30 @@ public class Report {
         }
 
         reportBO.getVisitDetail(visitDetails);
+
+    }
+
+    public static void main(String[] args) {
+
+        populateVisitInformation();
+
+        AppointmentBO appointmentBO = new AppointmentBO();
+        VisitInformationBO visitInformation = new VisitInformationBO();
+        INPatientBO inPatientBO = new INPatientBO();
+
+        appointmentBO.createAppointment(9l, patientDetails, 5l, doctorDetails,
+                "Bone Pain", appointmentDetails);
+
+            visitInformation.createVisitLogInformation(8l, appointmentDetails, visitDetails, medicineList,
+                    "TeethPain", true, 6l, patientDetails, 5l, doctorDetails,
+                    "Bone Pain");
+
+            inPatientBO.allocateBedForIP(5l, 7l, patientDetails, bedDetails, INPatientDetails, "Simple Bed",
+                    "A");
+
+        report();
+
+
+
     }
 }

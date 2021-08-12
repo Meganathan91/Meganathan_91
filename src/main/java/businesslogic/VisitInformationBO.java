@@ -22,7 +22,6 @@ public class VisitInformationBO {
                                              Map<Long, Doctor> doctorMap, String purposeOfVisit) {
 
         VisitLogInformation visit = new VisitLogInformation();
-        IP inPatient = new IP();
 
         // check given parameter values are valid, calling checkException.
         try {
@@ -31,6 +30,8 @@ public class VisitInformationBO {
             System.out.println(e.getMessage());
         }
 
+        /* calling getAppointment method, create visit for given appointment,
+         appointment is not having for patient create appointment .*/
         Appointment appointment = getAppointment(appointmentId, appointmentMap, patientId, patientMap, doctorId, doctorMap, purposeOfVisit);
 
         System.out.println(appointment);
@@ -94,7 +95,6 @@ public class VisitInformationBO {
         return false;
     }
 
-
     private Appointment getAppointment(Long appointmentId, Map<Long, Appointment> appointmentMap, Long patientId,
                                        Map<Long, Patient> patientMap, Long doctorId, Map<Long, Doctor> doctorMap,
                                        String purposeOfVisit) {
@@ -105,7 +105,7 @@ public class VisitInformationBO {
         } else {
             appointment = appointmentBO.createAppointment(patientId, patientMap, doctorId, doctorMap, purposeOfVisit,
                                                             appointmentMap);
-            System.out.println(" newly created appointment " + appointment);
+            System.out.println(" no appointment for visit create new appointment " + appointment);
         }
         return appointment;
     }
