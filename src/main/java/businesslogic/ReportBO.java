@@ -132,8 +132,8 @@ public class ReportBO {
     public void getVisitDetail(Map<Long, VisitLogInformation> visitDetails) {
         System.out.println("======today visited patient detail======");
         VisitLogInformation logInformation;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd");
         Iterator<Long> itr = visitDetails.keySet().iterator();
         while (itr.hasNext()) {
             logInformation = visitDetails.get(itr.next());
@@ -147,16 +147,16 @@ public class ReportBO {
 
         System.out.println("======visit details between date range======");
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+        SimpleDateFormat dateFormats = new SimpleDateFormat("yyyy/MM/dd");
         Iterator<Long> itr1 = visitDetails.keySet().iterator();
         Date date;
         while (itr1.hasNext()) {
             logInformation = visitDetails.get(itr1.next());
             date = logInformation.getAppointment().getDateOfVisit();
             try {
-                Date visitDate = new SimpleDateFormat("yyyy/mm/dd").parse(format.format(date));
-                Date startDate = new SimpleDateFormat("yyyy/mm/dd").parse("2021/08/01");
-                Date endDate = new SimpleDateFormat("yyyy/mm/dd").parse("2021/07/12");
+                Date visitDate = dateFormats.parse(dateFormats.format(date));
+                Date startDate = new SimpleDateFormat("yyyy/MM/dd").parse("2021/1/1");
+                Date endDate = new SimpleDateFormat("yyyy/MM/dd").parse("2021/7/12");
                 if (visitDate.after(startDate) && visitDate.before(endDate)) {
                     System.out.println(logInformation);
                 }
