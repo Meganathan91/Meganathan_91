@@ -342,50 +342,50 @@ public class Report {
         appointmentDetails.put(appointmentThirteen.getAppointmentId(), appointmentThirteen);
         appointmentDetails.put(appointmentFourteen.getAppointmentId(), appointmentFourteen);
 
-        Calendar mfgDate1 = Calendar.getInstance();
-        mfgDate1.set(2025, Calendar.DECEMBER, 12);
+        Calendar ED1 = Calendar.getInstance();
+        ED1.set(2025, Calendar.DECEMBER, 12);
         Medicine medicineForCardiologist = new Medicine();
         medicineForCardiologist.setMedicineId(1L);
         medicineForCardiologist.setPurposeOfMedicine("HeartPain");
         medicineForCardiologist.setMedicineName("Aspirin");
         medicineForCardiologist.setBatchNumber("a01");
-        medicineForCardiologist.setExpiryDate(mfgDate1.getTime());
+        medicineForCardiologist.setExpiryDate(ED1.getTime());
 
-        Calendar mfgDate2 = Calendar.getInstance();
-        mfgDate2.set(2024, Calendar.MARCH, 8);
+        Calendar ED2 = Calendar.getInstance();
+        ED2.set(2024, Calendar.MARCH, 8);
         Medicine medicineForOrthopedic = new Medicine();
         medicineForOrthopedic.setMedicineId(2L);
         medicineForOrthopedic.setPurposeOfMedicine("BonesPain");
         medicineForOrthopedic.setMedicineName("Methocarbamol");
         medicineForOrthopedic.setBatchNumber("m02");
-        medicineForOrthopedic.setExpiryDate(mfgDate2.getTime());
+        medicineForOrthopedic.setExpiryDate(ED2.getTime());
 
-        Calendar mfgDate3 = Calendar.getInstance();
-        mfgDate3.set(2023, Calendar.JULY, 10);
+        Calendar ED3 = Calendar.getInstance();
+        ED3.set(2023, Calendar.JULY, 10);
         Medicine medicineForDentist = new Medicine();
         medicineForDentist.setMedicineId(3L);
         medicineForDentist.setPurposeOfMedicine("TeethPain");
         medicineForDentist.setMedicineName("Clindamycin");
         medicineForDentist.setBatchNumber("c03");
-        medicineForDentist.setExpiryDate(mfgDate3.getTime());
+        medicineForDentist.setExpiryDate(ED3.getTime());
 
-        Calendar mfgDate4 = Calendar.getInstance();
-        mfgDate4.set(2022, Calendar.FEBRUARY, 8);
+        Calendar ED4 = Calendar.getInstance();
+        ED4.set(2022, Calendar.FEBRUARY, 8);
         Medicine medicineForNeurologist = new Medicine();
         medicineForNeurologist.setMedicineId(4L);
         medicineForNeurologist.setPurposeOfMedicine("BrainPain");
         medicineForNeurologist.setMedicineName("Lamotrigine");
         medicineForNeurologist.setBatchNumber("l04");
-        medicineForNeurologist.setExpiryDate(mfgDate4.getTime());
+        medicineForNeurologist.setExpiryDate(ED4.getTime());
 
-        Calendar mfgDate5 = Calendar.getInstance();
-        mfgDate5.set(2024, Calendar.NOVEMBER, 12);
+        Calendar ED5 = Calendar.getInstance();
+        ED5.set(2024, Calendar.NOVEMBER, 12);
         Medicine medicineForPulmonologist = new Medicine();
         medicineForPulmonologist.setMedicineId(5L);
         medicineForPulmonologist.setPurposeOfMedicine("lung cancer");
         medicineForPulmonologist.setMedicineName("ciclesonide");
         medicineForPulmonologist.setBatchNumber("c05");
-        medicineForPulmonologist.setExpiryDate(mfgDate5.getTime());
+        medicineForPulmonologist.setExpiryDate(ED5.getTime());
 
         medicineDetails = new HashMap<>();
         medicineDetails.put(medicineForCardiologist.getMedicineId(), medicineForCardiologist);
@@ -460,10 +460,13 @@ public class Report {
 
         Random random = new Random();
         int randomNumber;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 1; i <= 3; i++) {
             randomNumber = random.nextInt(5);
-            if (medicineDetails.containsKey((long) randomNumber))
-                medicineList.add(medicineDetails.get((long) randomNumber));
+            if(randomNumber == 0) {
+                randomNumber += 1;
+            }
+            if (medicineDetails.containsKey(new Long( randomNumber)));
+                medicineList.add(medicineDetails.get(new Long( randomNumber)));
         }
 
         return medicineList;
@@ -592,11 +595,11 @@ public class Report {
         appointmentBO.createAppointment(9L, patientDetails, 5L, doctorDetails,
                 "Bone Pain", appointmentDetails);
 
-            visitInformation.createVisitLogInformation(8L, appointmentDetails, visitDetails, medicineList,
+        visitInformation.createVisitLogInformation(8L, appointmentDetails, visitDetails, medicineList,
                     "TeethPain", true, 6L, patientDetails, 5L, doctorDetails,
                     "Bone Pain");
 
-            inPatientBO.allocateBedForIP(5L, 7L, patientDetails, bedDetails, INPatientDetails, "Simple Bed",
+        inPatientBO.allocateBedForIP(5L, 7L, patientDetails, bedDetails, INPatientDetails, "Simple Bed",
                     "A");
 
         report();

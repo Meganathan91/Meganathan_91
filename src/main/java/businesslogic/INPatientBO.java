@@ -3,10 +3,9 @@ package businesslogic;
 import entity.Bed;
 import entity.IP;
 import entity.Patient;
-import generateid.HMSUtility;
+import utility.HMSUtility;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 
 public class INPatientBO {
@@ -17,9 +16,9 @@ public class INPatientBO {
 
         // check given parameter values are valid, calling checkException.
         try {
-            checkException(patientId, bedId, bedDetails, inPatientMap, bedType, roomName);
+            displayException(patientId, bedId, bedDetails, inPatientMap, bedType, roomName);
         } catch (Exception e) {
-            System.out.println(" check exception " + e.getMessage());
+            System.out.println(" Allocate Bed " + e.getMessage());
         }
 
         /*
@@ -29,13 +28,11 @@ public class INPatientBO {
          */
         IP ip = patientBO.allocateBedForIP(patientId, inPatientMap, patientMap, bedDetails, bedId);
         inPatientMap.put(ip.getIpIdentificationNumber(), ip);
-
-        System.out.println(" =========  ip object details " + inPatientMap);
-
     }
 
-    private void checkException(Long patientId, Long bedId, Map<Long, Bed> bedDetails, Map<Long, IP> inPatientMap,
+    private void displayException(Long patientId, Long bedId, Map<Long, Bed> bedDetails, Map<Long, IP> inPatientMap,
                                 String bedType, String roomName) throws Exception {
+
         if (patientId == null) {
             throw new Exception("patient is not available : ");
         }
@@ -43,16 +40,16 @@ public class INPatientBO {
             throw new Exception("BedId is not Available : ");
         }
         if (bedDetails.isEmpty()) {
-            throw new Exception("BedDetails Is Empty : ");
+            throw new Exception("BedDetails is Empty : ");
         }
         if (inPatientMap.isEmpty()) {
-            throw new Exception("inPatientMap Is Empty : ");
+            throw new Exception("inPatientMap is Empty : ");
         }
         if (bedType == null) {
-            throw new Exception("Bed Is Not Available : ");
+            throw new Exception("Bed is Not Available : ");
         }
         if (roomName == null) {
-            throw new Exception("Room Is Not Available : ");
+            throw new Exception("Room is Not Available : ");
         }
     }
 
