@@ -18,20 +18,18 @@ public class VisitInformationBO {
     */
     public void createVisitLogInformation(Long appointmentId, Map<Long, Appointment> appointmentMap,
                                           Map<Long, VisitLogInformation> visitMap, List<Medicine> lstMedicines,
-                                          String doctorRecommendation, Boolean followUpNeed, Long patientId,
-                                          Map<Long, Patient> patientMap, Long doctorId,
-                                          Map<Long, Doctor> doctorMap, String purposeOfVisit) {
+                                          String doctorRecommendation, Boolean followUpNeed,
+                                          Map<Long, Patient> patientMap,
+                                          Map<Long, Doctor> doctorMap) {
 
         VisitLogInformation visit;
 
-        // check given parameter values are valid, calling checkException.
+        /* check given parameter values are valid, calling validateVisitInformationFields.
+         calling getAppointment method, create visit for given appointment,
+         appointment is not having for patient create appointment .*/
         try {
             validateVisitInformationFields(appointmentId, appointmentMap, visitMap, lstMedicines, doctorRecommendation, followUpNeed);
-
-        /* calling getAppointment method, create visit for given appointment,
-         appointment is not having for patient create appointment .*/
-
-            Appointment appointment = getAppointment(appointmentId, appointmentMap, patientId, patientMap, doctorId, doctorMap, purposeOfVisit);
+            Appointment appointment = getAppointment(appointmentId, appointmentMap, patientMap, doctorMap);
             Patient patient = appointment.getPatient();
 
             Boolean status = isInPatient(visitMap, patient);
@@ -48,7 +46,6 @@ public class VisitInformationBO {
         } catch (Exception e) {
             System.out.println("create visit log information" + e.getMessage());
         }
-
     }
 
     private void validateVisitInformationFields(Long appointmentId, Map<Long, Appointment> appointmentMap,
@@ -81,7 +78,7 @@ public class VisitInformationBO {
         int visitCount = 0;
         while (visitId.hasNext()) {
             visitLog = visitDetails.get(visitId.next());
-            if (visitLog.getAppointment().getPatient().getPatientId() == patient.getPatientId()) {
+            if (visitLog.getAppointment() != null && visitLog.getAppointment().getPatient().getPatientId() == patient.getPatientId()) {
                 visitCount++;
             }
         }
@@ -92,15 +89,14 @@ public class VisitInformationBO {
         return false;
     }
 
-    private Appointment getAppointment(Long appointmentId, Map<Long, Appointment> appointmentMap, Long patientId,
-                                       Map<Long, Patient> patientMap, Long doctorId, Map<Long, Doctor> doctorMap,
-                                       String purposeOfVisit) {
+    private Appointment getAppointment(Long appointmentId, Map<Long, Appointment> appointmentMap,
+                                       Map<Long, Patient> patientMap, Map<Long, Doctor> doctorMap) {
         AppointmentBO appointmentBO = new AppointmentBO();
         Appointment appointment;
         if (appointmentMap.containsKey(appointmentId)) {
             appointment = appointmentMap.get(appointmentId);
         } else {
-            appointment = appointmentBO.createAppointment(patientId, patientMap, doctorId, doctorMap, purposeOfVisit,
+            appointment = appointmentBO.createAppointment(6L, patientMap, 5L, doctorMap, "Bone Pain",
                     appointmentMap);
         }
         return appointment;

@@ -462,11 +462,11 @@ public class Report {
         int randomNumber;
         for (int i = 1; i <= 3; i++) {
             randomNumber = random.nextInt(5);
-            if(randomNumber == 0) {
+            if (randomNumber == 0) {
                 randomNumber += 1;
             }
-            if (medicineDetails.containsKey(new Long( randomNumber)));
-                medicineList.add(medicineDetails.get(new Long( randomNumber)));
+            if (medicineDetails.containsKey(new Long(randomNumber))) ;
+            medicineList.add(medicineDetails.get(new Long(randomNumber)));
         }
 
         return medicineList;
@@ -592,15 +592,13 @@ public class Report {
         VisitInformationBO visitInformation = new VisitInformationBO();
         INPatientBO inPatientBO = new INPatientBO();
 
-        appointmentBO.createAppointment(9L, patientDetails, 5L, doctorDetails,
+        appointmentBO.createAppointment(8L, patientDetails, 5L, doctorDetails,
                 "Bone Pain", appointmentDetails);
 
-        visitInformation.createVisitLogInformation(8L, appointmentDetails, visitDetails, medicineList,
-                    "TeethPain", true, 6L, patientDetails, 5L, doctorDetails,
-                    "Bone Pain");
+        visitInformation.createVisitLogInformation(9L, appointmentDetails, visitDetails, medicineList,
+                "TeethPain", true, patientDetails, doctorDetails);
 
-        inPatientBO.allocateBedForIP(5L, 7L, patientDetails, bedDetails, INPatientDetails, "Simple Bed",
-                    "A");
+        inPatientBO.allocateBedForIP(2L, 1L, patientDetails, bedDetails, INPatientDetails);
 
         report();
 

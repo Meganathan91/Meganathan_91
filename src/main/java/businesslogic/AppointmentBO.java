@@ -15,10 +15,11 @@ public class AppointmentBO {
                                          Map<Long, Doctor> doctorMap, String purposeOfVisit,
                                          Map<Long, Appointment> appointmentMap) {
         Appointment appointment = null;
+        Patient patient;
         // check given parameter values are valid, calling checkException.
         try {
             validateAppointmentFields(patientId, patientMap, doctorId, doctorMap, purposeOfVisit, appointmentMap);
-            Patient patient = getPatient(patientId, patientMap);
+            patient = getPatient(patientId, patientMap);
 
             appointment = new Appointment();
             appointment.setAppointmentId(HMSUtility.getId(new ArrayList<>(appointmentMap.keySet())));
@@ -49,12 +50,12 @@ public class AppointmentBO {
     private void validateAppointmentFields(Long patientId, Map<Long, Patient> patientMap, Long doctorId,
                                            Map<Long, Doctor> doctorMap, String purposeOfVisit,
                                            Map<Long, Appointment> appointmentMap) throws Exception {
-        if (patientId == null)
+        if (patientId == null || patientId == 0)
             throw new Exception("Patient id is invalid ");
         if (patientMap.isEmpty())
             throw new Exception("patientMap is empty ");
-        if (doctorId == null)
-            throw new Exception("doctor id is invalid ");
+        if (doctorId == null || !doctorMap.containsKey(doctorId))
+            throw new Exception("doctor is not available ");
         if (doctorMap.isEmpty())
             throw new Exception("doctorMap is empty ");
         if (appointmentMap.isEmpty())

@@ -36,7 +36,7 @@ public class ReportBO {
 
         if (patientDetails.containsKey(patientId)) {
             patient = patientDetails.get(patientId);
-            //System.out.println(patient);
+            System.out.println(patient);
         }
 
         System.out.println(" ======= Patient detail for given patient name ======= ");
@@ -45,7 +45,7 @@ public class ReportBO {
         for (Long patientIds : patientDetails.keySet()) {
             _patient = patientDetails.get(patientIds);
             if (_patient.getPatientName().equals(patientName)) {
-                //System.out.println(_patient);
+                System.out.println(_patient);
             }
         }
     }
@@ -63,7 +63,7 @@ public class ReportBO {
         for (Long visitId : visitDetails.keySet()) {
             visitLogInformation = visitDetails.get(visitId);
             if (visitLogInformation.getAppointment().getPatient().getPatientId().equals(patientId)) {
-                //System.out.println(visitLogInformation);
+                System.out.println(visitLogInformation);
             }
         }
     }
@@ -78,7 +78,7 @@ public class ReportBO {
         for (Long patientId : patientDetails.keySet()) {
             patient = patientDetails.get(patientId);
             if (patient.getPatientType().equals("OP")) {
-                //System.out.println(patient);
+                System.out.println(patient);
             }
         }
     }
@@ -93,7 +93,7 @@ public class ReportBO {
         IP inPatient;
         while (ipIdentificationNumber.hasNext()) {
             inPatient = inPatientDetail.get(ipIdentificationNumber.next());
-            //System.out.println(inPatient.getPatient());
+            System.out.println(inPatient.getPatient());
         }
     }
 
@@ -109,7 +109,7 @@ public class ReportBO {
         for (Long appointmentId : appointmentDetails.keySet()) {
             Appointment appointment = appointmentDetails.get(appointmentId);
             if (appointment.getDoctor().getDoctorId().equals(doctorId)) {
-                //System.out.println(appointment.getPatient());
+                System.out.println(appointment.getPatient());
             }
         }
     }
@@ -120,7 +120,7 @@ public class ReportBO {
         for (Long visitId : visitDetails.keySet()) {
             VisitLogInformation followUp = visitDetails.get(visitId);
             if (followUp.getFollowUpNeed()) {
-                //System.out.println(followUp.getAppointment().getPatient());
+                System.out.println(followUp.getAppointment().getPatient());
             }
         }
     }
@@ -137,7 +137,7 @@ public class ReportBO {
             String dateOne = dateFormat.format(date);
             String dateTwo = dateFormat1.format(Calendar.getInstance().getTime());
             if (dateOne.equals(dateTwo)) {
-                //System.out.println(logInformation.getAppointment().getPatient());
+                System.out.println(logInformation.getAppointment().getPatient());
             }
         }
 
@@ -154,7 +154,7 @@ public class ReportBO {
                 Date startDate = new SimpleDateFormat("yyyy/MM/dd").parse("2021/1/1");
                 Date endDate = new SimpleDateFormat("yyyy/MM/dd").parse("2021/7/12");
                 if (visitDate.after(startDate) && visitDate.before(endDate)) {
-                    //System.out.println(logInformation);
+                    System.out.println(logInformation);
                 }
             } catch (ParseException ex) {
                 System.out.println(ex.getMessage());
