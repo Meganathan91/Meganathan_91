@@ -1,4 +1,4 @@
-package businesslogic;
+package business;
 
 import entity.Appointment;
 import entity.IP;
@@ -125,19 +125,20 @@ public class ReportBO {
         }
     }
 
-    public void getVisitDetail(Map<Long, VisitLogInformation> visitDetails) {
+    public void getVisitDetail(Map<Long, VisitLogInformation> visitDetails, Map<Long, Appointment> appointmentDetails) {
         System.out.println("======today visited patient detail======");
+        Appointment appointment;
         VisitLogInformation logInformation;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd");
 
-        for (Long visitId : visitDetails.keySet()) {
-            logInformation = visitDetails.get(visitId);
-            Date date = logInformation.getAppointment().getDateOfVisit();
+        for (Long visitId : appointmentDetails.keySet()) {
+            appointment = appointmentDetails.get(visitId);
+            Date date = appointment.getDateOfVisit();
             String dateOne = dateFormat.format(date);
             String dateTwo = dateFormat1.format(Calendar.getInstance().getTime());
             if (dateOne.equals(dateTwo)) {
-                System.out.println(logInformation.getAppointment().getPatient());
+                System.out.println(appointment.getPatient());
             }
         }
 
