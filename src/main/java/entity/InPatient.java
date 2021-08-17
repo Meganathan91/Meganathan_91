@@ -1,6 +1,6 @@
 package entity;
 
-public class IP {
+public class InPatient {
     private Long ipIdentificationNumber;
     private Patient patient;
     private Bed bed;
@@ -31,7 +31,7 @@ public class IP {
 
     @Override
     public String toString() {
-        return "IP{" +
+        return "InPatient{" +
                 ", ipIdentificationNumber=" + ipIdentificationNumber +
                 ", patient=" + patient +
                 ", bed=" + bed +

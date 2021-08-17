@@ -1,4 +1,4 @@
-package mainmethod;
+package hospitalmanagementsystem;
 
 import java.util.Random;
 

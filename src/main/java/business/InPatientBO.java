@@ -1,8 +1,8 @@
 package business;
 
 import entity.Bed;
-import entity.IP;
-import entity.Patient;
+import entity.InPatient;
+import entity.VisitLogInformation;
 import utility.HMSUtility;
 
 import java.util.ArrayList;
@@ -10,41 +10,37 @@ import java.util.Map;
 
 public class InPatientBO {
 
-    public void allocateBedForIP(Patient patient, Map<Long, Bed> bedDetails, Map<Long, IP> inPatientMap) {
-        InPatientBO patientBO = new InPatientBO();
+    public void allocateBedForInPatient(VisitLogInformation visitLogInformation, Map<Long, Bed> bedDetails, Map<Long, InPatient> inPatientMap) {
 
-        /* check given parameter values are valid, calling validateIPFields.
-         calling allocateBedForIP method, check given patientId contain in patientMap and for this object check
-         patientType is "IP". This patient object is IP object, create IP object set this IP patient object and
-          set bed given bedId. Finally put this inpatient object into inPatientMap.
-         */
         try {
-            validateIPFields(patient, bedDetails);
-            IP ip = patientBO.allocateBed(patient, inPatientMap, bedDetails);
-            inPatientMap.put(ip.getIpIdentificationNumber(), ip);
-        } catch (
-                Exception e) {
+            validateInPatientFields(visitLogInformation, bedDetails);
+            InPatient inPatient = allocateBed(visitLogInformation, inPatientMap, bedDetails);
+
+            System.out.println("Bed Allocated successfully ....." + "\n" +inPatient +"\n");
+
+            inPatientMap.put(inPatient.getIpIdentificationNumber(), inPatient);
+        } catch (Exception e) {
             System.out.println(" Allocate Bed Exception " + e.getMessage());
         }
     }
 
-    private void validateIPFields(Patient patient, Map<Long, Bed> bedDetails) throws Exception {
-
-        if (patient == null) {
-            throw new Exception("patient is not available : ");
+    private void validateInPatientFields(VisitLogInformation visitLogInformation, Map<Long, Bed> bedDetails) throws Exception {
+        if (visitLogInformation == null) {
+            throw new Exception("visitLogInformation is not available");
         }
         if (bedDetails.isEmpty()) {
-            throw new Exception("BedDetails is Empty : ");
+            throw new Exception("BedDetails is Empty");
         }
     }
 
-    private IP allocateBed(Patient patient, Map<Long, IP> inPatientMap, Map<Long, Bed> bedDetails) throws Exception {
-
-        IP inPatient = null;
-        if (patient != null && patient.getPatientType().equals("IP")) {
-            inPatient = new IP();
+    private InPatient allocateBed(VisitLogInformation visitLogInformation, Map<Long, InPatient> inPatientMap, Map<Long, Bed> bedDetails) throws Exception {
+        InPatient inPatient = null;
+        if ( visitLogInformation != null && visitLogInformation.getAppointment() != null &&
+                visitLogInformation.getAppointment().getPatient() != null &&
+                visitLogInformation.getAppointment().getPatient().getPatientType().equals("IP") ) {
+            inPatient = new InPatient();
             inPatient.setIpIdentificationNumber(HMSUtility.getId(new ArrayList<>(inPatientMap.keySet())));
-            inPatient.setPatient(patient);
+            inPatient.setPatient(visitLogInformation.getAppointment().getPatient());
             inPatient.setBed(getBed(bedDetails, 1L));
         }
         return inPatient;

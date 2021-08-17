@@ -8,20 +8,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class VisitInformationBO {
-
-    /* create visit information for given appointmentId. given appointmentId contain patientId compare with
-       visit details -> appointment -> patient -> patientId. This patientId already have three visit, for this patient
-       object setPatientType as "IP" and update this patient object in patientMap. After this patient converted from
-       out-patient to in-patient and update patient object in patient map. And update newly created visit object into visit
-       map.
-    */
-    public Patient createVisitLogInformation(Appointment appointment, Map<Long, VisitLogInformation> visitMap, List<Medicine> lstMedicines,
+public class VisitLogInformationBO {
+    public VisitLogInformation createVisitLogInformation(Appointment appointment, Map<Long, VisitLogInformation> visitMap, List<Medicine> lstMedicines,
                                              Map<Long, Patient> patientMap) {
-        /* check given parameter values are valid, calling validateVisitInformationFields.
-         calling getAppointment method, create visit for given appointment,
-         appointment is not having for patient create appointment .*/
-        VisitLogInformation visit;
+
+        VisitLogInformation visitLogInformation = null;
         Patient patient = null;
         try {
             validateVisitInformationFields(appointment, visitMap, lstMedicines);
@@ -34,18 +25,20 @@ public class VisitInformationBO {
                 patientMap.put(patient.getPatientId(), patient);
             }
 
-            visit = new VisitLogInformation();
-            visit.setVisitId(HMSUtility.getId(new ArrayList<>(visitMap.keySet())));
-            visit.setDoctorRecommendation("best, mouthwashes for better dental care");
-            visit.setFollowUpNeed(true);
-            visit.setListOfMedicine(lstMedicines);
-            visit.setAppointment(appointment);
+            visitLogInformation = new VisitLogInformation();
+            visitLogInformation.setVisitId(HMSUtility.getId(new ArrayList<>(visitMap.keySet())));
+            visitLogInformation.setDoctorRecommendation("best, mouthwashes for better dental care");
+            visitLogInformation.setFollowUpNeed(true);
+            visitLogInformation.setListOfMedicine(lstMedicines);
+            visitLogInformation.setAppointment(appointment);
 
-            visitMap.put(visit.getVisitId(), visit);
+            System.out.println("VisitLogInformation created successfully ....." + "\n" +visitLogInformation +"\n");
+
+            visitMap.put(visitLogInformation.getVisitId(), visitLogInformation);
         } catch (Exception e) {
             System.out.println("VisitLog Exception " + e.getMessage());
         }
-        return patient;
+        return visitLogInformation;
     }
 
     private void validateVisitInformationFields(Appointment appointment, Map<Long, VisitLogInformation> visitMap,

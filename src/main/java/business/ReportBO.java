@@ -1,7 +1,7 @@
 package business;
 
 import entity.Appointment;
-import entity.IP;
+import entity.InPatient;
 import entity.Patient;
 import entity.VisitLogInformation;
 
@@ -19,116 +19,76 @@ public class ReportBO {
        7. Displayed today visited patient details,
        8. Displayed visit details for given date range.
      */
-    public void getPatientDetail(Map<Long, Patient> patientDetails, Long patientId,
-                                 String patientName) throws Exception {
 
-        System.out.println("======= Patient detail for given patient id =======");
-        Patient patient;
-
+    public void displayHospitalReport(Map<Long, Patient> patientDetails, Map<Long, Appointment> appointmentDetails,
+                                      Map<Long, VisitLogInformation> visitDetails, Map<Long, InPatient> inPatientDetails) throws Exception {
         if (patientDetails.isEmpty())
             throw new Exception("Patient details is empty ");
+        if (appointmentDetails.isEmpty())
+            throw new Exception("appointment Details is empty ");
+        if (visitDetails.isEmpty())
+            throw new Exception("visit Details is empty ");
+        if (inPatientDetails.isEmpty())
+            throw new Exception("inPatient Details is empty ");
 
-        if (patientId == null || patientId == 0)
-            throw new Exception("invalid patient id ");
-
-        if (patientName == null || patientName.length() == 0)
-            throw new Exception("invalid patient name ");
-
-        if (patientDetails.containsKey(patientId)) {
-            patient = patientDetails.get(patientId);
-            System.out.println(patient);
+        System.out.println("Patient detail for given patient id .....");
+        if (patientDetails.containsKey(2L)) {                                  // input patientId 2L
+            Patient patient = patientDetails.get(2L);
+            System.out.println(patient + "\n");
         }
 
-        System.out.println(" ======= Patient detail for given patient name ======= ");
-
-        Patient _patient;
-        for (Long patientIds : patientDetails.keySet()) {
-            _patient = patientDetails.get(patientIds);
-            if (_patient.getPatientName().equals(patientName)) {
-                System.out.println(_patient);
+        System.out.println("Patient detail for given patient name .....");
+        for (Long patientId : patientDetails.keySet()) {
+            Patient _patient = patientDetails.get(patientId);
+            if (_patient.getPatientName().equals("Mohan")) {                 // input patient name "Mohan"
+                System.out.println(_patient+ "\n");
             }
         }
-    }
 
-    public void listOfVisitForPatientId(Map<Long, VisitLogInformation> visitDetails, Long patientId) throws Exception {
-        System.out.println(" ======= list of visit for patient id ======= ");
-
-        if (visitDetails.isEmpty())
-            throw new Exception("visit details is empty ");
-
-        if (patientId == null || patientId == 0)
-            throw new Exception("invalid patient id ");
-
+        System.out.println("List of visit for patient id .....");
         VisitLogInformation visitLogInformation;
         for (Long visitId : visitDetails.keySet()) {
             visitLogInformation = visitDetails.get(visitId);
-            if (visitLogInformation.getAppointment().getPatient().getPatientId().equals(patientId)) {
-                System.out.println(visitLogInformation);
+            if (visitLogInformation.getAppointment().getPatient().getPatientId().equals(5L)) {    // input patientId 5L
+                System.out.println(visitLogInformation + "\n");
             }
         }
-    }
 
-    public void displayOutPatient(Map<Long, Patient> patientDetails) throws Exception {
-        System.out.println("======== OutPatient Details =======" );
-
-        if (patientDetails.isEmpty())
-            throw new Exception("patient detail is empty");
-
-        Patient patient;
+        System.out.println("OutPatient Details .....");
         for (Long patientId : patientDetails.keySet()) {
-            patient = patientDetails.get(patientId);
-            if (patient.getPatientType().equals("OP")) {
-                System.out.println(patient);
+            Patient patient = patientDetails.get(patientId);
+            if (patient.getPatientType().equals("OP")) {                 // input patientType "OP"
+                System.out.println(patient + "\n");
             }
         }
-    }
 
-    public void displayInPatient(Map<Long, IP> inPatientDetail) throws Exception {
-        System.out.println("======== InPatient Details =======" );
-
-        if(inPatientDetail.isEmpty())
-            throw new Exception("inPatient details is empty ");
-
-        Iterator<Long> ipIdentificationNumber = inPatientDetail.keySet().iterator();
-        IP inPatient;
+        System.out.println("InPatient Details .....");
+        Iterator<Long> ipIdentificationNumber = inPatientDetails.keySet().iterator();
+        InPatient inPatient;
         while (ipIdentificationNumber.hasNext()) {
-            inPatient = inPatientDetail.get(ipIdentificationNumber.next());
-            System.out.println(inPatient.getPatient());
+            inPatient = inPatientDetails.get(ipIdentificationNumber.next());
+            System.out.println(inPatient.getPatient() + "\n");
         }
-    }
 
-    public void displayPatientByDoctorId(Map<Long, Appointment> appointmentDetails, Long doctorId) throws Exception {
-        System.out.println("======= list of patient by doctor id =======" );
+        System.out.println("Patient who's needs the follow up visit .....");
+        for(Long visitId : visitDetails.keySet()) {
+            VisitLogInformation _visitLogInformation = visitDetails.get(visitId);
+            if (_visitLogInformation.getFollowUpNeed()) {
+                System.out.println(_visitLogInformation.getAppointment().getPatient() + "\n");
+            }
+        }
 
-        if (appointmentDetails.isEmpty())
-            throw new Exception("appointment details is empty ");
-
-        if (doctorId == null || doctorId == 0)
-            throw new Exception("invalid doctor id ");
-
+        System.out.println("List of patient by doctor id .....");
         for (Long appointmentId : appointmentDetails.keySet()) {
             Appointment appointment = appointmentDetails.get(appointmentId);
-            if (appointment.getDoctor().getDoctorId().equals(doctorId)) {
-                System.out.println(appointment.getPatient());
+            if (appointment.getDoctor().getDoctorId().equals(5L)) {    // display patient details by doctorId 2L
+                System.out.println(appointment.getPatient() + "\n");
             }
         }
-    }
 
-    public void patientFollowUpVisit(Map<Long, VisitLogInformation> visitDetails) {
-        System.out.println("======patient who's needs the follow up visit======");
-
-        for (Long visitId : visitDetails.keySet()) {
-            VisitLogInformation followUp = visitDetails.get(visitId);
-            if (followUp.getFollowUpNeed()) {
-                System.out.println(followUp.getAppointment().getPatient());
-            }
-        }
-    }
-
-    public void getVisitDetail(Map<Long, VisitLogInformation> visitDetails, Map<Long, Appointment> appointmentDetails) {
-        System.out.println("======today visited patient detail======");
+        System.out.println("Today visited patient detail .....");
         Appointment appointment;
-        VisitLogInformation logInformation;
+        VisitLogInformation _visitLogInformation;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -138,24 +98,24 @@ public class ReportBO {
             String dateOne = dateFormat.format(date);
             String dateTwo = dateFormat1.format(Calendar.getInstance().getTime());
             if (dateOne.equals(dateTwo)) {
-                System.out.println(appointment.getPatient());
+                System.out.println(appointment.getPatient() + "\n");    // displayed today visited patient details
             }
         }
 
-        System.out.println("======visit details between date range======");
+        System.out.println("Visit details between date range .....");
 
         SimpleDateFormat dateFormats = new SimpleDateFormat("yyyy/MM/dd");
-        Iterator<Long> visitIds = visitDetails.keySet().iterator();
+        Iterator<Long> visitId = visitDetails.keySet().iterator();
         Date date;
-        while (visitIds.hasNext()) {
-            logInformation = visitDetails.get(visitIds.next());
-            date = logInformation.getAppointment().getDateOfVisit();
+        while (visitId.hasNext()) {
+            _visitLogInformation = visitDetails.get(visitId.next());
+            date = _visitLogInformation.getAppointment().getDateOfVisit();
             try {
                 Date visitDate = dateFormats.parse(dateFormats.format(date));
-                Date startDate = new SimpleDateFormat("yyyy/MM/dd").parse("2021/1/1");
+                Date startDate = new SimpleDateFormat("yyyy/MM/dd").parse("2021/1/1");  // VisitLogInformation between 2021/1/1 to 2021/7/12
                 Date endDate = new SimpleDateFormat("yyyy/MM/dd").parse("2021/7/12");
                 if (visitDate.after(startDate) && visitDate.before(endDate)) {
-                    System.out.println(logInformation);
+                    System.out.println(_visitLogInformation + "\n");
                 }
             } catch (ParseException ex) {
                 System.out.println(ex.getMessage());

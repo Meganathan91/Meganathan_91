@@ -1,9 +1,9 @@
-package mainmethod;
+package hospitalmanagementsystem;
 
 import business.AppointmentBO;
 import business.InPatientBO;
 import business.ReportBO;
-import business.VisitInformationBO;
+import business.VisitLogInformationBO;
 import entity.*;
 
 import java.util.*;
@@ -22,7 +22,7 @@ public class HospitalManagementSystem {
 
     static private Map<Long, VisitLogInformation> visitDetails;
 
-    static private Map<Long, IP> inPatientDetails;
+    static private Map<Long, InPatient> inPatientDetails;
 
     static private Map<Long, Bed> bedDetails;
 
@@ -150,7 +150,7 @@ public class HospitalManagementSystem {
         patientSelvi.setDob(selviDOB.getTime());
         patientSelvi.setAddress("Karur");
         patientSelvi.setPhoneNumber("7639128707");
-        patientSelvi.setPatientType("IP");
+        patientSelvi.setPatientType("InPatient");
 
         patientDetails = new HashMap<>();
         patientDetails.put(patientSelvam.getPatientId(), patientSelvam);
@@ -474,21 +474,21 @@ public class HospitalManagementSystem {
         heartCheckUp.setVisitId(1L);
         heartCheckUp.setAppointment(appointmentDetails.get(10L));
         heartCheckUp.setDoctorRecommendation("any little pain visit again");
-        heartCheckUp.setFollowUpNeed(false);
+        heartCheckUp.setFollowUpNeed(true);
         heartCheckUp.setListOfMedicine(getMedicine());
 
         VisitLogInformation boneCheckUp = new VisitLogInformation();
         boneCheckUp.setVisitId(2L);
         boneCheckUp.setAppointment(appointmentDetails.get(9L));
         boneCheckUp.setDoctorRecommendation("Every week come for check up");
-        boneCheckUp.setFollowUpNeed(false);
+        boneCheckUp.setFollowUpNeed(true);
         boneCheckUp.setListOfMedicine(getMedicine());
 
         VisitLogInformation teethCheckUp = new VisitLogInformation();
         teethCheckUp.setVisitId(3L);
         teethCheckUp.setAppointment(appointmentDetails.get(11L));
         teethCheckUp.setDoctorRecommendation("Brush carefully and gently along your gum line");
-        teethCheckUp.setFollowUpNeed(false);
+        teethCheckUp.setFollowUpNeed(true);
         teethCheckUp.setListOfMedicine(getMedicine());
 
         VisitLogInformation brainCheckUp = new VisitLogInformation();
@@ -509,7 +509,7 @@ public class HospitalManagementSystem {
         cavitiesCheckUp.setVisitId(6L);
         cavitiesCheckUp.setAppointment(appointmentDetails.get(8L));
         cavitiesCheckUp.setDoctorRecommendation("Brush carefully and gently along your gum line");
-        cavitiesCheckUp.setFollowUpNeed(false);
+        cavitiesCheckUp.setFollowUpNeed(true);
         cavitiesCheckUp.setListOfMedicine(getMedicine());
 
         VisitLogInformation headCheckUp = new VisitLogInformation();
@@ -538,64 +538,26 @@ public class HospitalManagementSystem {
 
     }
 
-    static public void report() {
-
-        ReportBO reportBO = new ReportBO();
-        try {
-            reportBO.getPatientDetail(patientDetails, 6L, "Mohan");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            reportBO.listOfVisitForPatientId(visitDetails, 2L);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            reportBO.displayOutPatient(patientDetails);
-        } catch (Exception e) {
-            System.out.println( e.getMessage());
-        }
-
-        try {
-            reportBO.displayInPatient(inPatientDetails);
-        } catch (Exception e) {
-            System.out.println( e.getMessage());
-        }
-
-        try {
-            reportBO.displayPatientByDoctorId(appointmentDetails, 1L);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            reportBO.patientFollowUpVisit(visitDetails);
-        } catch (Exception e) {
-            System.out.println( e.getMessage());
-        }
-
-        reportBO.getVisitDetail(visitDetails, appointmentDetails);
-
-    }
-
     public static void main(String[] args) {
 
         populateVisitInformation();
 
         AppointmentBO appointmentBO = new AppointmentBO();
-        VisitInformationBO visitInformation = new VisitInformationBO();
+        VisitLogInformationBO visitInformation = new VisitLogInformationBO();
         InPatientBO inPatientBO = new InPatientBO();
+        ReportBO reportBO = new ReportBO();
 
-        Appointment appointment = appointmentBO.createAppointment(5L, patientDetails, 5L, doctorDetails,appointmentDetails);
+        Appointment appointment = appointmentBO.createAppointment(2L, patientDetails, 5L, doctorDetails,appointmentDetails);
 
-        Patient patient = visitInformation.createVisitLogInformation(appointment, visitDetails, medicineList, patientDetails);
+        VisitLogInformation visitLogInformation = visitInformation.createVisitLogInformation(appointment, visitDetails, medicineList, patientDetails);
 
-        inPatientBO.allocateBedForIP(patient, bedDetails, inPatientDetails);
+        inPatientBO.allocateBedForInPatient(visitLogInformation, bedDetails, inPatientDetails);
 
-        report();
+        try {
+            reportBO.displayHospitalReport(patientDetails, appointmentDetails, visitDetails, inPatientDetails);
+        } catch (Exception e) {
+            System.out.println("Report Exception "+ e.getMessage() );
+        }
 
     }
 }
