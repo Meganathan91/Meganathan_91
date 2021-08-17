@@ -7,10 +7,6 @@ import utility.HMSUtility;
 import java.util.*;
 
 public class AppointmentBO {
-    /* create appointment for patient, this appointment contain patientId for first
-       time visit, appointment having member Boolean isFirstVisit by default true otherwise false.
-       after creating appointment put this appointment into appointment map as key(appointmentId)
-       and value(appointment object) pair.*/
     public Appointment createAppointment(Long patientId, Map<Long, Patient> patientMap, Long doctorId,
                                          Map<Long, Doctor> doctorMap, Map<Long, Appointment> appointmentMap) {
         Appointment appointment = null;
@@ -20,7 +16,7 @@ public class AppointmentBO {
             validateAppointmentFields(patientId, patientMap, doctorId, appointmentMap);
 
             appointment = new Appointment();
-            appointment.setAppointmentId(HMSUtility.getId(new ArrayList<>(appointmentMap.keySet())));
+            appointment.setAppointmentId(HMSUtility.getId(new ArrayList<>(appointmentMap.keySet()))); // get appointmentId calling HMSUtility.
             appointment.setDateOfVisit(Calendar.getInstance().getTime());
             if (!doctorMap.containsKey(doctorId)) {
                 throw new Exception("doctor is not available...");
@@ -31,7 +27,7 @@ public class AppointmentBO {
             appointment.setPurposeOfVisit("Bone Pain");
             appointment.setBp(120.6);
             appointment.setTemperature(85.3);
-            appointment.setIsFirstVisit(isFirstVisit(appointmentMap, patientId));
+            appointment.setIsFirstVisit(isFirstVisit(appointmentMap, patientId)); // check patientId already have an appointment
 
             System.out.println("Appointment created successfully ....." + "\n" +appointment + "\n");
 

@@ -1,6 +1,9 @@
 package business;
 
-import entity.*;
+import entity.Appointment;
+import entity.Medicine;
+import entity.Patient;
+import entity.VisitLogInformation;
 import utility.HMSUtility;
 
 import java.util.ArrayList;
@@ -15,20 +18,20 @@ public class VisitLogInformationBO {
         VisitLogInformation visitLogInformation = null;
         Patient patient = null;
         try {
-            validateVisitInformationFields(appointment, visitMap, lstMedicines);
+            validateVisitInformationFields(appointment, visitMap, lstMedicines); // validateVisitInformationFields
 
             if(appointment.getPatient() != null) {
                 patient = appointment.getPatient();
             }
-            if (isInPatient(visitMap, patient)) {
+            if (isInPatient(visitMap, patient)) {                                // check given patient isInPatient
                 patient.setPatientType("IP");
                 patientMap.put(patient.getPatientId(), patient);
             }
 
             visitLogInformation = new VisitLogInformation();
-            visitLogInformation.setVisitId(HMSUtility.getId(new ArrayList<>(visitMap.keySet())));
-            visitLogInformation.setDoctorRecommendation("best, mouthwashes for better dental care");
-            visitLogInformation.setFollowUpNeed(true);
+            visitLogInformation.setVisitId(HMSUtility.getId(new ArrayList<>(visitMap.keySet()))); // get visitLogInformationId calling HMSUtility
+            visitLogInformation.setDoctorRecommendation("best, mouthwashes for better");
+            visitLogInformation.setFollowUpNeed(false);
             visitLogInformation.setListOfMedicine(lstMedicines);
             visitLogInformation.setAppointment(appointment);
 
