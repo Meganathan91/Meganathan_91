@@ -18,10 +18,10 @@ public class AppointmentBO {
             appointment = new Appointment();
             appointment.setAppointmentId(HMSUtility.getId(new ArrayList<>(appointmentMap.keySet()))); // get appointmentId calling HMSUtility.
             appointment.setDateOfVisit(Calendar.getInstance().getTime());
-            if (!doctorMap.containsKey(doctorId)) {
-                throw new Exception("doctor is not available...");
-            } else {
+            if (doctorMap.containsKey(doctorId)) {
                 appointment.setDoctor(doctorMap.get(doctorId));
+            } else {
+                throw new Exception("doctor is not available...");
             }
             appointment.setPatient(getPatient(patientId, patientMap));
             appointment.setPurposeOfVisit("Bone Pain");

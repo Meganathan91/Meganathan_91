@@ -56,10 +56,10 @@ public class ReportBO {
         for (Long patientId : patientMap.keySet()) {
             patient = patientMap.get(patientId);
             if (patient.getPatientName().equals("Mohan")) {                 // input patient name "Mohan"
-                System.out.println();
                 System.out.println(patient);
             }
         }
+        System.out.println();
     }
 
     private void visitDetailForPatientId(Map<Long, VisitLogInformation> visitDetails) {
@@ -82,6 +82,7 @@ public class ReportBO {
                 System.out.println(patient);
             }
         }
+        System.out.println();
     }
 
     private void displayInPatientDetail(Map<Long, InPatient> inPatientMap) {
@@ -92,6 +93,7 @@ public class ReportBO {
             inPatient = inPatientMap.get(ipIdentificationNumber.next());
             System.out.println(inPatient.getPatient());
         }
+        System.out.println();
     }
 
     private void followUpVisitPatientDetail(Map<Long, VisitLogInformation> visitDetails) {
@@ -102,6 +104,7 @@ public class ReportBO {
                 System.out.println(_visitLogInformation.getAppointment().getPatient());
             }
         }
+        System.out.println();
     }
 
     private void displayPatientByDoctorId(Map<Long, Appointment> appointmentDetails) {
@@ -112,6 +115,7 @@ public class ReportBO {
                 System.out.println(appointment.getPatient());
             }
         }
+        System.out.println();
     }
 
     private void todayVisitedPatientDetail(Map<Long, VisitLogInformation> visitDetails) {
@@ -129,6 +133,7 @@ public class ReportBO {
                 System.out.println(_visitLogInformation.getAppointment().getPatient());    // displayed today visited patient details
             }
         }
+        System.out.println();
     }
 
     private void visitDetailGivenDateRange(Map<Long, VisitLogInformation> visitDetails) {
@@ -137,14 +142,15 @@ public class ReportBO {
         VisitLogInformation logInformation;
         while (visitId.hasNext()) {
             logInformation = visitDetails.get(visitId.next());
-                Date visitDate = logInformation.getAppointment().getDateOfVisit();
-                Date startDate = getDate("2021/3/1");  // VisitLogInformation between 2021/1/1 to 2021/7/12
-                Date endDate = getDate("2021/8/12");
-                if (visitDate.after(startDate) && visitDate.before(endDate)) {
-                    System.out.println(logInformation);
-                }
+            Date visitDate = logInformation.getAppointment().getDateOfVisit();
+            Date startDate = getDate("2021/3/1");  // VisitLogInformation between 2021/1/1 to 2021/7/12
+            Date endDate = getDate("2021/8/12");
+            if (visitDate.after(startDate) && visitDate.before(endDate)) {
+                System.out.println(logInformation);
             }
         }
+        System.out.println();
+    }
 
     public static Date getDate(String s) {
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -156,4 +162,4 @@ public class ReportBO {
         }
         return date;
     }
-    }
+}
