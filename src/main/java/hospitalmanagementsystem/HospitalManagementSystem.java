@@ -10,9 +10,9 @@ import java.util.*;
 
 public class HospitalManagementSystem {
 
-    static private final Map<Long, Hospital> hospitalDetails;
+    static private Map<Long, Hospital> hospitalDetails;
 
-    static private final Map<Long, Doctor> doctorDetails;
+    static private Map<Long, Doctor> doctorDetails;
 
     static private Map<Long, Patient> patientDetails;
 
@@ -74,7 +74,7 @@ public class HospitalManagementSystem {
         Patient patientSelvam = new Patient();
         patientSelvam.setPatientId(1L);
         patientSelvam.setPatientName("Selvam");
-        patientSelvam.setDob(new GregorianCalendar(1991, Calendar.FEBRUARY, 1).getTime());
+        patientSelvam.setDob(getDate(1991, 2, 1));
         patientSelvam.setPhoneNumber("9870654320");
         patientSelvam.setAddress("Trichy");
         patientSelvam.setPatientType("OP");
@@ -82,7 +82,7 @@ public class HospitalManagementSystem {
         Patient patientRagu = new Patient();
         patientRagu.setPatientId(2L);
         patientRagu.setPatientName("Ragu");
-        patientRagu.setDob(new GregorianCalendar(1989, Calendar.MAY, 10).getTime());
+        patientRagu.setDob(getDate(1989, 5, 10));
         patientRagu.setPhoneNumber("7639238764");
         patientRagu.setAddress("Chennai");
         patientRagu.setPatientType("OP");
@@ -90,7 +90,7 @@ public class HospitalManagementSystem {
         Patient patientVimal = new Patient();
         patientVimal.setPatientId(3L);
         patientVimal.setPatientName("Vimal");
-        patientVimal.setDob(new GregorianCalendar(1995, Calendar.JULY, 13).getTime());
+        patientVimal.setDob(getDate(1995, 6, 13));
         patientVimal.setPhoneNumber("9790654302");
         patientVimal.setAddress("Salem");
         patientVimal.setPatientType("OP");
@@ -98,7 +98,7 @@ public class HospitalManagementSystem {
         Patient patientAnu = new Patient();
         patientAnu.setPatientId(4L);
         patientAnu.setPatientName("Anu");
-        patientAnu.setDob(new GregorianCalendar(1998, Calendar.SEPTEMBER, 17).getTime());
+        patientAnu.setDob(getDate(1998,9, 17));
         patientAnu.setPhoneNumber("9790654320");
         patientAnu.setAddress("Thanjavur");
         patientAnu.setPatientType("OP");
@@ -106,7 +106,7 @@ public class HospitalManagementSystem {
         Patient patientMohan = new Patient();
         patientMohan.setPatientId(5L);
         patientMohan.setPatientName("Mohan");
-        patientMohan.setDob(new GregorianCalendar(1993, Calendar.APRIL, 21).getTime());
+        patientMohan.setDob(getDate(1993, 4, 21));
         patientMohan.setPhoneNumber("9500768912");
         patientMohan.setAddress("kumbakonam");
         patientMohan.setPatientType("OP");
@@ -114,7 +114,7 @@ public class HospitalManagementSystem {
         Patient patientRajini = new Patient();
         patientRajini.setPatientId(6L);
         patientRajini.setPatientName("Rajini");
-        patientRajini.setDob(new GregorianCalendar(2000, Calendar.AUGUST, 8).getTime());
+        patientRajini.setDob(getDate(2000, 8, 8));
         patientRajini.setPhoneNumber("6345876301");
         patientRajini.setAddress("Madurai");
         patientRajini.setPatientType("OP");
@@ -122,7 +122,7 @@ public class HospitalManagementSystem {
         Patient patientSomu = new Patient();
         patientSomu.setPatientId(7L);
         patientSomu.setPatientName("Somu");
-        patientSomu.setDob(new GregorianCalendar(1981, Calendar.NOVEMBER, 19).getTime());
+        patientSomu.setDob(getDate(1981, 11, 19));
         patientSomu.setAddress("Ariyalur");
         patientSomu.setPhoneNumber("9790238764");
         patientSomu.setPatientType("OP");
@@ -130,7 +130,7 @@ public class HospitalManagementSystem {
         Patient patientSelvi = new Patient();
         patientSelvi.setPatientId(8L);
         patientSelvi.setPatientName("Selvi");
-        patientSelvi.setDob(new GregorianCalendar(1975, Calendar.DECEMBER, 16).getTime());
+        patientSelvi.setDob(getDate(1975, 12, 16));
         patientSelvi.setAddress("Karur");
         patientSelvi.setPhoneNumber("7639128707");
         patientSelvi.setPatientType("InPatient");
@@ -149,7 +149,7 @@ public class HospitalManagementSystem {
         appointmentOne.setAppointmentId(1L);
         appointmentOne.setDoctor(doctorDetails.get(1L));
         appointmentOne.setPatient(patientDetails.get(3L));
-        appointmentOne.setDateOfVisit(getDate(2021, 2, 1));
+        appointmentOne.setDateOfVisit(getDate(2021, 1, 6));
         appointmentOne.setPurposeOfVisit("HeartPain");
         appointmentOne.setBp(120.5);
         appointmentOne.setTemperature(90.5);
@@ -159,7 +159,7 @@ public class HospitalManagementSystem {
         appointmentTwo.setAppointmentId(2L);
         appointmentTwo.setDoctor(doctorDetails.get(1L));
         appointmentTwo.setPatient(patientDetails.get(2L));
-        appointmentTwo.setDateOfVisit(getDate(2021, 8, 3));
+        appointmentTwo.setDateOfVisit(getDate(2021, 2, 13));
         appointmentTwo.setPurposeOfVisit("BonesPain");
         appointmentTwo.setBp(140.7);
         appointmentTwo.setTemperature(89.1);
@@ -169,7 +169,7 @@ public class HospitalManagementSystem {
         appointmentThree.setAppointmentId(3L);
         appointmentThree.setDoctor(doctorDetails.get(3L));
         appointmentThree.setPatient(patientDetails.get(3L));
-        appointmentThree.setDateOfVisit(getDate(2021, 6, 3));
+        appointmentThree.setDateOfVisit(getDate(2021, 3, 9));
         appointmentThree.setPurposeOfVisit("TeethPain");
         appointmentThree.setBp(135.3);
         appointmentThree.setTemperature(81.4);
@@ -179,7 +179,7 @@ public class HospitalManagementSystem {
         appointmentFour.setAppointmentId(4L);
         appointmentFour.setDoctor(doctorDetails.get(1L));
         appointmentFour.setPatient(patientDetails.get(4L));
-        appointmentFour.setDateOfVisit(getDate(2021, 4, 4));
+        appointmentFour.setDateOfVisit(getDate(2021, 4, 12));
         appointmentFour.setPurposeOfVisit("Headaches");
         appointmentFour.setBp(154.4);
         appointmentFour.setTemperature(79.5);
@@ -189,7 +189,7 @@ public class HospitalManagementSystem {
         appointmentFive.setAppointmentId(5L);
         appointmentFive.setDoctor(doctorDetails.get(5L));
         appointmentFive.setPatient(patientDetails.get(5L));
-        appointmentFive.setDateOfVisit(getDate(2021, 5, 4));
+        appointmentFive.setDateOfVisit(getDate(2021, 5, 10));
         appointmentFive.setPurposeOfVisit("LungCancer");
         appointmentFive.setBp(120.5);
         appointmentFive.setTemperature(90.5);
@@ -199,17 +199,17 @@ public class HospitalManagementSystem {
         appointmentSix.setAppointmentId(6L);
         appointmentSix.setDoctor(doctorDetails.get(1L));
         appointmentSix.setPatient(patientDetails.get(1L));
-        appointmentSix.setDateOfVisit(getDate(2021, 5, 5));
+        appointmentSix.setDateOfVisit(getDate(2021, 6, 5));
         appointmentSix.setPurposeOfVisit("HeartPain");
         appointmentSix.setBp(110.5);
         appointmentSix.setTemperature(80.5);
-        appointmentSix.setIsFirstVisit(false);
+        appointmentSix.setIsFirstVisit(true);
 
         Appointment appointmentSeven = new Appointment();
         appointmentSeven.setAppointmentId(7L);
         appointmentSeven.setDoctor(doctorDetails.get(1L));
         appointmentSeven.setPatient(patientDetails.get(1L));
-        appointmentSeven.setDateOfVisit(getDate(2021, 7, 10));
+        appointmentSeven.setDateOfVisit(getDate(2021, 7, 18));
         appointmentSeven.setPurposeOfVisit("HeartPain");
         appointmentSeven.setBp(120.7);
         appointmentSeven.setTemperature(76.1);
@@ -229,7 +229,7 @@ public class HospitalManagementSystem {
         appointmentNine.setAppointmentId(9L);
         appointmentNine.setDoctor(doctorDetails.get(2L));
         appointmentNine.setPatient(patientDetails.get(2L));
-        appointmentNine.setDateOfVisit(getDate(2021, 1, 16));
+        appointmentNine.setDateOfVisit(getDate(2021, 3, 16));
         appointmentNine.setPurposeOfVisit("BonesPain");
         appointmentNine.setBp(154.4);
         appointmentNine.setTemperature(79.5);
@@ -239,7 +239,7 @@ public class HospitalManagementSystem {
         appointmentTen.setAppointmentId(10L);
         appointmentTen.setDoctor(doctorDetails.get(2L));
         appointmentTen.setPatient(patientDetails.get(2L));
-        appointmentTen.setDateOfVisit(getDate(2021, 4, 6));
+        appointmentTen.setDateOfVisit(getDate(2021, 7, 6));
         appointmentTen.setPurposeOfVisit("BonesPain");
         appointmentTen.setBp(120.5);
         appointmentTen.setTemperature(90.5);
@@ -259,7 +259,7 @@ public class HospitalManagementSystem {
         appointmentTwelve.setAppointmentId(12L);
         appointmentTwelve.setDoctor(doctorDetails.get(2L));
         appointmentTwelve.setPatient(patientDetails.get(2L));
-        appointmentTwelve.setDateOfVisit(getDate(2021, 2, 3));
+        appointmentTwelve.setDateOfVisit(getDate(2021, 5, 3));
         appointmentTwelve.setPurposeOfVisit("BonesPain");
         appointmentTwelve.setBp(140.7);
         appointmentTwelve.setTemperature(89.1);
@@ -425,21 +425,21 @@ public class HospitalManagementSystem {
         heartCheckUp.setVisitId(1L);
         heartCheckUp.setAppointment(appointmentDetails.get(10L));
         heartCheckUp.setDoctorRecommendation("any little pain visit again");
-        heartCheckUp.setFollowUpNeed(true);
+        heartCheckUp.setFollowUpNeed(false);
         heartCheckUp.setListOfMedicine(getMedicine());
 
         VisitLogInformation boneCheckUp = new VisitLogInformation();
         boneCheckUp.setVisitId(2L);
         boneCheckUp.setAppointment(appointmentDetails.get(9L));
         boneCheckUp.setDoctorRecommendation("Every week come for check up");
-        boneCheckUp.setFollowUpNeed(true);
+        boneCheckUp.setFollowUpNeed(false);
         boneCheckUp.setListOfMedicine(getMedicine());
 
         VisitLogInformation teethCheckUp = new VisitLogInformation();
         teethCheckUp.setVisitId(3L);
         teethCheckUp.setAppointment(appointmentDetails.get(11L));
         teethCheckUp.setDoctorRecommendation("Brush carefully and gently along your gum line");
-        teethCheckUp.setFollowUpNeed(true);
+        teethCheckUp.setFollowUpNeed(false);
         teethCheckUp.setListOfMedicine(getMedicine());
 
         VisitLogInformation brainCheckUp = new VisitLogInformation();

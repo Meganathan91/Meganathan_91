@@ -121,15 +121,12 @@ public class ReportBO {
     private void todayVisitedPatientDetail(Map<Long, VisitLogInformation> visitDetails) {
         System.out.println("Today visited patient detail .....");
         VisitLogInformation _visitLogInformation;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd");
-
         for (Long visitId : visitDetails.keySet()) {
             _visitLogInformation = visitDetails.get(visitId);
             Date date = _visitLogInformation.getAppointment().getDateOfVisit();
-            String dateOne = dateFormat.format(date);
-            String dateTwo = dateFormat1.format(Calendar.getInstance().getTime());
-            if (dateOne.equals(dateTwo)) {
+            String visitDate = getDate(date);
+            String currentDate = getDate(Calendar.getInstance().getTime());
+            if (visitDate.equals(currentDate)) {
                 System.out.println(_visitLogInformation.getAppointment().getPatient());    // displayed today visited patient details
             }
         }
@@ -152,7 +149,7 @@ public class ReportBO {
         System.out.println();
     }
 
-    public static Date getDate(String s) {
+    public Date getDate(String s) {
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         Date date = null;
         try {
@@ -161,5 +158,17 @@ public class ReportBO {
             System.out.println("Date format exception");
         }
         return date;
+    }
+
+    public String getDate(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String _date = "";
+        try {
+            _date = dateFormat.format(date);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return _date;
     }
 }
