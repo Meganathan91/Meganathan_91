@@ -29,7 +29,7 @@ public class AppointmentBO {
             appointment.setTemperature(85.3);
             appointment.setIsFirstVisit(isFirstVisit(appointmentMap, patientId)); // check patientId already have an appointment
 
-            System.out.println("Appointment created successfully ....." + "\n" +appointment + "\n");
+            //System.out.println("Appointment created successfully ....." + "\n" +appointment + "\n");
 
             appointmentMap.put(appointment.getAppointmentId(), appointment);
 

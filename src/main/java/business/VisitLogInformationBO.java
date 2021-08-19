@@ -35,7 +35,7 @@ public class VisitLogInformationBO {
             visitLogInformation.setListOfMedicine(lstMedicines);
             visitLogInformation.setAppointment(appointment);
 
-            System.out.println("VisitLogInformation created successfully ....." + "\n" +visitLogInformation +"\n");
+            //System.out.println("VisitLogInformation created successfully ....." + "\n" +visitLogInformation +"\n");
 
             visitMap.put(visitLogInformation.getVisitId(), visitLogInformation);
         } catch (Exception e) {
