@@ -66,6 +66,7 @@ public class AppointmentBO {
 
         if (patientMap.containsKey(patientId)) {
             patient = patientMap.get(patientId);
+
         } else {
             patient = new Patient();
             patient.setPatientId(HMSUtility.getId(new ArrayList<>(patientMap.keySet())));

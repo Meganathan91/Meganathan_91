@@ -6,6 +6,8 @@ import business.ReportBO;
 import business.VisitLogInformationBO;
 import entity.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class HospitalManagementSystem {
@@ -27,6 +29,9 @@ public class HospitalManagementSystem {
     static private Map<Long, Bed> bedDetails;
 
     static private List<Medicine> medicineList;
+
+    static int patientId;
+    static int doctorId;
 
     static {
 
@@ -98,7 +103,7 @@ public class HospitalManagementSystem {
         Patient patientAnu = new Patient();
         patientAnu.setPatientId(4L);
         patientAnu.setPatientName("Anu");
-        patientAnu.setDob(getDate(1998,9, 17));
+        patientAnu.setDob(getDate(1998, 9, 17));
         patientAnu.setPhoneNumber("9790654320");
         patientAnu.setAddress("Thanjavur");
         patientAnu.setPatientType("OP");
@@ -396,9 +401,9 @@ public class HospitalManagementSystem {
         inPatientDetails = new HashMap<>();
     }
 
-    private static Date getDate(int year, int month, int date){
-        Calendar  calendar = Calendar.getInstance();
-        calendar.set(year,month,date);
+    private static Date getDate(int year, int month, int date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, date);
         return calendar.getTime();
     }
 
@@ -487,28 +492,28 @@ public class HospitalManagementSystem {
         visitDetails.put(headCheckUp.getVisitId(), headCheckUp);
         visitDetails.put(spirometryCheckUp.getVisitId(), spirometryCheckUp);
 
+
     }
 
     public static void main(String[] args) {
-        try{
+        try {
             populateVisitInformation();
-
             AppointmentBO appointmentBO = new AppointmentBO();
             VisitLogInformationBO visitInformation = new VisitLogInformationBO();
             InPatientBO inPatientBO = new InPatientBO();
             ReportBO reportBO = new ReportBO();
             VisitLogInformation visitLogInformation = null;
 
-            Appointment appointment = appointmentBO.createAppointment(2L, patientDetails, 5L, doctorDetails,appointmentDetails);
-            if(appointment != null) {
+            Appointment appointment = appointmentBO.createAppointment(2L, patientDetails, 5L, doctorDetails, appointmentDetails);
+            if (appointment != null) {
                 visitLogInformation = visitInformation.createVisitLogInformation(appointment, visitDetails, medicineList, patientDetails);
             }
-            if(visitLogInformation != null && visitLogInformation.getAppointment().getPatient() != null && ("IP").equalsIgnoreCase(visitLogInformation.getAppointment().getPatient().getPatientType())) {
+            if (visitLogInformation != null && visitLogInformation.getAppointment().getPatient() != null && ("IP").equalsIgnoreCase(visitLogInformation.getAppointment().getPatient().getPatientType())) {
                 inPatientBO.patientConvertAsInPatient(visitLogInformation.getAppointment().getPatient(), bedDetails, inPatientDetails);
             }
             reportBO.generateHospitalReport(patientDetails, appointmentDetails, visitDetails, inPatientDetails);
         } catch (Exception e) {
-            System.out.println("HMS Exception " + e.getMessage() );
+            System.out.println("HMS Exception " + e.getMessage());
         }
     }
 }

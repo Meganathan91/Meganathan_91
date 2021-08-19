@@ -1,4 +1,4 @@
-package hospitalmanagementsystem;
+package practice;
 
 import java.util.Random;
 
