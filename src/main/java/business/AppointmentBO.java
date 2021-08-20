@@ -4,6 +4,7 @@ import entity.Appointment;
 import entity.Doctor;
 import entity.Patient;
 import utility.HMSUtility;
+
 import java.util.*;
 
 public class AppointmentBO {
@@ -17,19 +18,19 @@ public class AppointmentBO {
 
             appointment = new Appointment();
             appointment.setAppointmentId(HMSUtility.getId(new ArrayList<>(appointmentMap.keySet()))); // get appointmentId calling HMSUtility.
+            appointment.setPatient(patientMap.get(patientId));
             appointment.setDateOfVisit(Calendar.getInstance().getTime());
-            if (!doctorMap.containsKey(doctorId)) {
-                throw new Exception("doctor is not available...");
-            } else {
+            if (doctorMap.containsKey(doctorId)) {
                 appointment.setDoctor(doctorMap.get(doctorId));
+            } else {
+                throw new Exception("doctor is not available...");
             }
-            appointment.setPatient(getPatient(patientId, patientMap));
             appointment.setPurposeOfVisit("Bone Pain");
             appointment.setBp(120.6);
             appointment.setTemperature(85.3);
             appointment.setIsFirstVisit(isFirstVisit(appointmentMap, patientId)); // check patientId already have an appointment
 
-            //System.out.println("Appointment created successfully ....." + "\n" +appointment + "\n");
+            System.out.println("Appointment created successfully ....." + "\n" + appointment + "\n");
 
             appointmentMap.put(appointment.getAppointmentId(), appointment);
 
@@ -42,11 +43,11 @@ public class AppointmentBO {
     private boolean isFirstVisit(Map<Long, Appointment> appointmentMap, Long patientId) {
         for (Long appointmentId : appointmentMap.keySet()) {
             Appointment appointment = appointmentMap.get(appointmentId);
-            if(appointment.getPatient() != null && appointment.getPatient().getPatientId() == patientId) {
+            if (appointment.getPatient() != null && appointment.getPatient().getPatientId() == patientId) {
                 return false;
             }
         }
-        return  true;
+        return true;
     }
 
     private void validateAppointmentFields(Long patientId, Map<Long, Patient> patientMap, Long doctorId,

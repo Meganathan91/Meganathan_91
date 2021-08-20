@@ -8,10 +8,7 @@ import entity.VisitLogInformation;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class ReportBO {
     /* 1. Generated report for patient detail for given patient name/id,
@@ -42,108 +39,165 @@ public class ReportBO {
     }
 
     private void displayPatientDetail(Map<Long, Patient> patientMap) {
-        System.out.println("Patient detail for given patient id .....");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(" Enter patient id to get Patient Detail.....");
+        int _patientId = scanner.nextInt();
         Patient patient = null;
-        if (patientMap.containsKey(2L)) {                                  // input patientId 2L
-            patient = patientMap.get(2L);
+        if (patientMap.containsKey((long)_patientId)) {                                  // input patientId 2L
+            patient = patientMap.get((long)_patientId);
             System.out.println(patient);
         } else {
-            System.out.println("Patient detail not available for given patient id");
+            System.out.println("Entered InValid Patient Id");
         }
 
         System.out.println();
-        System.out.println("Patient detail for given patient name .....");
+        System.out.println("Enter Patient name to get Patient Detail.....");
+        String name = scanner.next();
         for (Long patientId : patientMap.keySet()) {
             patient = patientMap.get(patientId);
-            if (patient.getPatientName().equals("Mohan")) {                 // input patient name "Mohan"
-                System.out.println();
+            if (name.equalsIgnoreCase(patient.getPatientName())) {                 // input patient name "Mohan"
                 System.out.println(patient);
+            } else {
+                System.out.println("Entered incorrect Patient Name");
+                break;
             }
         }
+        System.out.println();
     }
 
     private void visitDetailForPatientId(Map<Long, VisitLogInformation> visitDetails) {
-        System.out.println("List of visit for patient id .....");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Patient Id to get No of Visit .....");
+        int patientId = scanner.nextInt();
         VisitLogInformation visitLogInformation;
         for (Long visitId : visitDetails.keySet()) {
             visitLogInformation = visitDetails.get(visitId);
-            if (visitLogInformation.getAppointment().getPatient().getPatientId().equals(5L)) {    // input patientId 5L
+            if (visitLogInformation.getAppointment().getPatient().getPatientId().equals((long)patientId)) {    // input patientId 5L
                 System.out.println(visitLogInformation);
+            } else {
+                System.out.println("Visit Details not Exist given Patient Id");
+                break;
             }
         }
         System.out.println();
     }
 
     private void displayOutPatientDetail(Map<Long, Patient> patientDetails) {
-        System.out.println("OutPatient Details .....");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter patient type OutPatient(OP) to get OutPatient Details .....");
+        String patientType = scanner.next();
         for (Long patientId : patientDetails.keySet()) {
             Patient patient = patientDetails.get(patientId);
-            if (patient.getPatientType().equals("OP")) {                 // input patientType "OP"
+            if (patient.getPatientType().equalsIgnoreCase(patientType)) {                 // input patientType "OP"
                 System.out.println(patient);
+            } else {
+                System.out.println("Entered InPut is Not Valid, no OutPatient");
+                break;
             }
         }
+        System.out.println();
     }
 
     private void displayInPatientDetail(Map<Long, InPatient> inPatientMap) {
         System.out.println("InPatient Details .....");
+        Scanner scanner = new Scanner(System.in);
+        String _inPatient = scanner.next();
         Iterator<Long> ipIdentificationNumber = inPatientMap.keySet().iterator();
         InPatient inPatient;
         while (ipIdentificationNumber.hasNext()) {
             inPatient = inPatientMap.get(ipIdentificationNumber.next());
-            System.out.println(inPatient.getPatient());
+            if (inPatient.getPatient().getPatientType().equalsIgnoreCase(_inPatient)) {
+                System.out.println(inPatient.getPatient());
+            } else {
+                System.out.println("No InPatient");
+                break;
+            }
         }
+        System.out.println();
     }
 
     private void followUpVisitPatientDetail(Map<Long, VisitLogInformation> visitDetails) {
-        System.out.println("Patient who's needs the follow up visit .....");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter (true) get patient Detail for follow up visit .....");
+        boolean followUpVisit = scanner.nextBoolean();
         for (Long visitId : visitDetails.keySet()) {
             VisitLogInformation _visitLogInformation = visitDetails.get(visitId);
-            if (_visitLogInformation.getFollowUpNeed()) {
+            if (_visitLogInformation.getFollowUpNeed() == followUpVisit) {
                 System.out.println(_visitLogInformation.getAppointment().getPatient());
+            } else {
+                System.out.println("InPut is Not Valid");
+                break;
             }
         }
+        System.out.println();
     }
 
     private void displayPatientByDoctorId(Map<Long, Appointment> appointmentDetails) {
-        System.out.println("List of patient by doctor id .....");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Doctor Id to get list of patient .....");
+        int doctorId = scanner.nextInt();
         for (Long appointmentId : appointmentDetails.keySet()) {
             Appointment appointment = appointmentDetails.get(appointmentId);
-            if (appointment.getDoctor().getDoctorId().equals(5L)) {    // display patient details by doctorId 2L
+            if (appointment.getDoctor().getDoctorId().equals((long)doctorId)) {    // display patient details by doctorId 2L
                 System.out.println(appointment.getPatient());
+            } else {
+                System.out.println("Patient detail not exist given doctor id");
+                break;
             }
         }
+        System.out.println();
     }
 
     private void todayVisitedPatientDetail(Map<Long, VisitLogInformation> visitDetails) {
-        System.out.println("Today visited patient detail .....");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter current date, to get today visited patient detail .....");
+        String todayDate = scanner.next();
         VisitLogInformation _visitLogInformation;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd");
-
         for (Long visitId : visitDetails.keySet()) {
             _visitLogInformation = visitDetails.get(visitId);
             Date date = _visitLogInformation.getAppointment().getDateOfVisit();
-            String dateOne = dateFormat.format(date);
-            String dateTwo = dateFormat1.format(Calendar.getInstance().getTime());
-            if (dateOne.equals(dateTwo)) {
+            String dateOne = get(date);
+            String dateTwo = get(Calendar.getInstance().getTime());
+            if (dateOne.equals(todayDate)) {
                 System.out.println(_visitLogInformation.getAppointment().getPatient());    // displayed today visited patient details
+            } else {
+                System.out.println("Given date not valid");
+                break;
             }
         }
+        System.out.println();
+    }
+
+    private String get(Date date) {
+        String _date = "";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        _date = dateFormat.format(date);
+
+        return _date;
     }
 
     private void visitDetailGivenDateRange(Map<Long, VisitLogInformation> visitDetails) {
-        System.out.println("Visit details between date range .....");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Start and End Date to get Visit details given date range.....");
+        System.out.println("Enter Start Date .....");
+        String dateOne = scanner.next();
+        System.out.println("Enter End Date.....");
+        String dateTwo = scanner.next();
         Iterator<Long> visitId = visitDetails.keySet().iterator();
         VisitLogInformation logInformation;
         while (visitId.hasNext()) {
             logInformation = visitDetails.get(visitId.next());
                 Date visitDate = logInformation.getAppointment().getDateOfVisit();
-                Date startDate = getDate("2021/3/1");  // VisitLogInformation between 2021/1/1 to 2021/7/12
-                Date endDate = getDate("2021/8/12");
+                Date startDate = getDate(dateOne);  // VisitLogInformation between 2021/1/1 to 2021/7/12
+                Date endDate = getDate(dateTwo);
                 if (visitDate.after(startDate) && visitDate.before(endDate)) {
                     System.out.println(logInformation);
+                } else {
+                    System.out.println("Given invalid date range");
+                    break;
                 }
             }
+        System.out.println();
         }
 
     public static Date getDate(String s) {

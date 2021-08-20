@@ -5,14 +5,17 @@ import business.InPatientBO;
 import business.ReportBO;
 import business.VisitLogInformationBO;
 import entity.*;
+import utility.HMSUtility;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class HospitalManagementSystem {
 
-    static private final Map<Long, Hospital> hospitalDetails;
+    static private Map<Long, Hospital> hospitalDetails;
 
-    static private final Map<Long, Doctor> doctorDetails;
+    static private Map<Long, Doctor> doctorDetails;
 
     static private Map<Long, Patient> patientDetails;
 
@@ -77,7 +80,7 @@ public class HospitalManagementSystem {
         Patient patientSelvam = new Patient();
         patientSelvam.setPatientId(1L);
         patientSelvam.setPatientName("Selvam");
-        patientSelvam.setDob(new GregorianCalendar(1991, Calendar.FEBRUARY, 1).getTime());
+        patientSelvam.setDob(getDate(1991, 2, 1));
         patientSelvam.setPhoneNumber("9870654320");
         patientSelvam.setAddress("Trichy");
         patientSelvam.setPatientType("OP");
@@ -85,7 +88,7 @@ public class HospitalManagementSystem {
         Patient patientRagu = new Patient();
         patientRagu.setPatientId(2L);
         patientRagu.setPatientName("Ragu");
-        patientRagu.setDob(new GregorianCalendar(1989, Calendar.MAY, 10).getTime());
+        patientRagu.setDob(getDate(1989, 5, 10));
         patientRagu.setPhoneNumber("7639238764");
         patientRagu.setAddress("Chennai");
         patientRagu.setPatientType("OP");
@@ -93,7 +96,7 @@ public class HospitalManagementSystem {
         Patient patientVimal = new Patient();
         patientVimal.setPatientId(3L);
         patientVimal.setPatientName("Vimal");
-        patientVimal.setDob(new GregorianCalendar(1995, Calendar.JULY, 13).getTime());
+        patientVimal.setDob(getDate(1995, 6, 13));
         patientVimal.setPhoneNumber("9790654302");
         patientVimal.setAddress("Salem");
         patientVimal.setPatientType("OP");
@@ -101,7 +104,7 @@ public class HospitalManagementSystem {
         Patient patientAnu = new Patient();
         patientAnu.setPatientId(4L);
         patientAnu.setPatientName("Anu");
-        patientAnu.setDob(new GregorianCalendar(1998, Calendar.SEPTEMBER, 17).getTime());
+        patientAnu.setDob(getDate(1998, 7, 17));
         patientAnu.setPhoneNumber("9790654320");
         patientAnu.setAddress("Thanjavur");
         patientAnu.setPatientType("OP");
@@ -109,7 +112,7 @@ public class HospitalManagementSystem {
         Patient patientMohan = new Patient();
         patientMohan.setPatientId(5L);
         patientMohan.setPatientName("Mohan");
-        patientMohan.setDob(new GregorianCalendar(1993, Calendar.APRIL, 21).getTime());
+        patientMohan.setDob(getDate(1993, 4, 21));
         patientMohan.setPhoneNumber("9500768912");
         patientMohan.setAddress("kumbakonam");
         patientMohan.setPatientType("OP");
@@ -117,7 +120,7 @@ public class HospitalManagementSystem {
         Patient patientRajini = new Patient();
         patientRajini.setPatientId(6L);
         patientRajini.setPatientName("Rajini");
-        patientRajini.setDob(new GregorianCalendar(2000, Calendar.AUGUST, 8).getTime());
+        patientRajini.setDob(getDate(2000, 8, 8));
         patientRajini.setPhoneNumber("6345876301");
         patientRajini.setAddress("Madurai");
         patientRajini.setPatientType("OP");
@@ -125,7 +128,7 @@ public class HospitalManagementSystem {
         Patient patientSomu = new Patient();
         patientSomu.setPatientId(7L);
         patientSomu.setPatientName("Somu");
-        patientSomu.setDob(new GregorianCalendar(1981, Calendar.NOVEMBER, 19).getTime());
+        patientSomu.setDob(getDate(1981, 9, 19));
         patientSomu.setAddress("Ariyalur");
         patientSomu.setPhoneNumber("9790238764");
         patientSomu.setPatientType("OP");
@@ -133,10 +136,10 @@ public class HospitalManagementSystem {
         Patient patientSelvi = new Patient();
         patientSelvi.setPatientId(8L);
         patientSelvi.setPatientName("Selvi");
-        patientSelvi.setDob(new GregorianCalendar(1975, Calendar.DECEMBER, 16).getTime());
+        patientSelvi.setDob(getDate(1975, 10, 16));
         patientSelvi.setAddress("Karur");
         patientSelvi.setPhoneNumber("7639128707");
-        patientSelvi.setPatientType("InPatient");
+        patientSelvi.setPatientType("OP");
 
         patientDetails = new HashMap<>();
         patientDetails.put(patientSelvam.getPatientId(), patientSelvam);
@@ -371,37 +374,19 @@ public class HospitalManagementSystem {
         bedFive.setBedType("Manual Bed");
         bedFive.setRoomName("E");
 
-        Bed bedSix = new Bed();
-        bedSix.setBedId(6L);
-        bedSix.setBedType("Manual Bed");
-        bedSix.setRoomName("F");
-
-        Bed bedSeven = new Bed();
-        bedSeven.setBedId(7L);
-        bedSeven.setBedType("Manual Bed");
-        bedSeven.setRoomName("G");
-
-        Bed bedEight = new Bed();
-        bedEight.setBedId(8L);
-        bedEight.setBedType("Manual Bed");
-        bedEight.setRoomName("H");
-
         bedDetails = new HashMap<>();
         bedDetails.put(bedOne.getBedId(), bedOne);
         bedDetails.put(bedTwo.getBedId(), bedTwo);
         bedDetails.put(bedThree.getBedId(), bedThree);
         bedDetails.put(bedFour.getBedId(), bedFour);
         bedDetails.put(bedFive.getBedId(), bedFive);
-        bedDetails.put(bedSix.getBedId(), bedSix);
-        bedDetails.put(bedSeven.getBedId(), bedSeven);
-        bedDetails.put(bedEight.getBedId(), bedEight);
 
         inPatientDetails = new HashMap<>();
     }
 
-    private static Date getDate(int year, int month, int date){
-        Calendar  calendar = Calendar.getInstance();
-        calendar.set(year,month,date);
+    private static Date getDate(int year, int month, int date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, date);
         return calendar.getTime();
     }
 
@@ -428,21 +413,21 @@ public class HospitalManagementSystem {
         heartCheckUp.setVisitId(1L);
         heartCheckUp.setAppointment(appointmentDetails.get(10L));
         heartCheckUp.setDoctorRecommendation("any little pain visit again");
-        heartCheckUp.setFollowUpNeed(true);
+        heartCheckUp.setFollowUpNeed(false);
         heartCheckUp.setListOfMedicine(getMedicine());
 
         VisitLogInformation boneCheckUp = new VisitLogInformation();
         boneCheckUp.setVisitId(2L);
         boneCheckUp.setAppointment(appointmentDetails.get(9L));
         boneCheckUp.setDoctorRecommendation("Every week come for check up");
-        boneCheckUp.setFollowUpNeed(true);
+        boneCheckUp.setFollowUpNeed(false);
         boneCheckUp.setListOfMedicine(getMedicine());
 
         VisitLogInformation teethCheckUp = new VisitLogInformation();
         teethCheckUp.setVisitId(3L);
         teethCheckUp.setAppointment(appointmentDetails.get(11L));
         teethCheckUp.setDoctorRecommendation("Brush carefully and gently along your gum line");
-        teethCheckUp.setFollowUpNeed(true);
+        teethCheckUp.setFollowUpNeed(false);
         teethCheckUp.setListOfMedicine(getMedicine());
 
         VisitLogInformation brainCheckUp = new VisitLogInformation();
@@ -492,35 +477,87 @@ public class HospitalManagementSystem {
 
     }
 
-    public static void createAppointment() {
-        AppointmentBO appointmentBO = new AppointmentBO();
+    public static void createAppointmentUsingUserInput() {
 
-        System.out.println("Existing Patient Details.....");
-        for (Map.Entry<Long, Patient> patientEntry : patientDetails.entrySet()) {
-            System.out.println(patientEntry.getKey() + "  " + patientEntry.getValue().getPatientName());
-        }
-        System.out.println("Enter Patient Id for create Appointment.....");
+        System.out.println("create appointment for Existing Patient OR New Patient Select ( 1/2 ).....");
         Scanner scanner = new Scanner(System.in);
-        patientId = scanner.nextInt();
-        if (patientDetails.containsKey((long) patientId)) {
-            for (Map.Entry<Long, Doctor> doctorEntry : doctorDetails.entrySet()) {
-                System.out.println(doctorEntry.getKey() + "  " + doctorEntry.getValue().getSpecialisation());
-            }
-            System.out.println("Select doctor for appointment....");
-            doctorId = scanner.nextInt();
-            int number = scanner.nextInt();
-            switch (number) {
-                case 1:
-                    System.out.println(appointmentBO.createAppointment((long) patientId, patientDetails, (long) doctorId, doctorDetails, appointmentDetails));
+        int option = scanner.nextInt();
+        switch (option) {
+            case 1:
+                System.out.println("Existing Patient Details.....");
+                for (Long pid : patientDetails.keySet()) {
+                    Patient patient = patientDetails.get(pid);
+                    System.out.println(patient.getPatientId() + "  " + patient.getPatientName() + "  " + patient.getDob() + "  " + patient.getPhoneNumber() + "  " + patient.getPatientType());
+                }
+                System.out.println("select patient id");
+                patientId = scanner.nextInt();
+                if (!patientDetails.containsKey((long) patientId)) {
+                    System.out.println("Invalid Patient Id.....");
                     break;
-                default:
-                    System.out.println("hiiiii");
-            }
+                }
+
+                for (Long did : doctorDetails.keySet()) {
+                    Doctor doctor = doctorDetails.get(did);
+                    System.out.println(doctor.getDoctorId() + " " + doctor.getDoctorName() + "" + doctor.getSpecialisation());
+                }
+                System.out.println("select doctor id");
+                doctorId = scanner.nextInt();
+                if (!doctorDetails.containsKey((long) doctorId)) {
+                    System.out.println("doctor not available");
+                }
+                break;
+            case 2:
+                Patient patient = new Patient();
+                System.out.println("New patient.....");
+                scanner = new Scanner(System.in);
+                patient.setPatientId(HMSUtility.getId(new ArrayList<>(patientDetails.keySet())));
+                System.out.println("Name ");
+                patient.setPatientName(scanner.next());
+
+                System.out.println("DOB This Format (yyyy/MM/dd) ");
+                patient.setDob(get(scanner.next()));
+
+                System.out.println("Address");
+                patient.setAddress(scanner.next());
+
+                System.out.println("PhoneNumber");
+                patient.setPhoneNumber(scanner.next());
+
+                patient.setPatientType("OP");
+
+                System.out.println();
+
+                patientDetails.put(patient.getPatientId(), patient);
+                patientId = Math.toIntExact(patient.getPatientId());
+
+                System.out.println("Doctor Details.....");
+                for (Long did : doctorDetails.keySet()) {
+                    Doctor doctor = doctorDetails.get(did);
+                    System.out.println(doctor.getDoctorId() + " " + doctor.getDoctorName() + "" + doctor.getSpecialisation());
+                }
+                System.out.println();
+                System.out.println("select doctor id.....");
+
+                doctorId = scanner.nextInt();
+                break;
+            default:
+                System.out.println("invalid option");
         }
     }
 
+    private static Date get(String s) {
+        Date date = null;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            date = dateFormat.parse(s);
+        } catch (ParseException e) {
+            System.out.println("Date Parse Exception...");
+        }
+        return date;
+    }
+
     public static void main(String[] args) {
-        try{
+        try {
             populateVisitInformation();
 
             AppointmentBO appointmentBO = new AppointmentBO();
@@ -529,17 +566,17 @@ public class HospitalManagementSystem {
             ReportBO reportBO = new ReportBO();
             VisitLogInformation visitLogInformation = null;
 
-            createAppointment();
-            Appointment appointment = appointmentBO.createAppointment(2L, patientDetails, 5L, doctorDetails,appointmentDetails);
-            if(appointment != null) {
+            createAppointmentUsingUserInput();
+            Appointment appointment = appointmentBO.createAppointment((long) patientId, patientDetails, (long) doctorId, doctorDetails, appointmentDetails);
+            if (appointment != null) {
                 visitLogInformation = visitInformation.createVisitLogInformation(appointment, visitDetails, medicineList, patientDetails);
             }
-            if(visitLogInformation != null && visitLogInformation.getAppointment().getPatient() != null && ("IP").equalsIgnoreCase(visitLogInformation.getAppointment().getPatient().getPatientType())) {
+            if (visitLogInformation != null && visitLogInformation.getAppointment().getPatient() != null && ("IP").equalsIgnoreCase(visitLogInformation.getAppointment().getPatient().getPatientType())) {
                 inPatientBO.patientConvertAsInPatient(visitLogInformation.getAppointment().getPatient(), bedDetails, inPatientDetails);
             }
-            //reportBO.generateHospitalReport(patientDetails, appointmentDetails, visitDetails, inPatientDetails);
+            reportBO.generateHospitalReport(patientDetails, appointmentDetails, visitDetails, inPatientDetails);
         } catch (Exception e) {
-            System.out.println("HMS Exception " + e.getMessage() );
+            System.out.println("HMS Exception " + e.getMessage());
         }
     }
 }
