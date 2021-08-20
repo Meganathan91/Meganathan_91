@@ -401,8 +401,8 @@ public class HospitalManagementSystem {
             if (randomNumber == 0) {
                 randomNumber += 1;
             }
-            if (medicineDetails.containsKey(new Long(randomNumber))) ;
-            medicineList.add(medicineDetails.get(new Long(randomNumber)));
+            if (medicineDetails.containsKey((long) randomNumber)) ;
+            medicineList.add(medicineDetails.get((long) randomNumber));
         }
 
         return medicineList;
@@ -477,9 +477,9 @@ public class HospitalManagementSystem {
 
     }
 
-    public static void createAppointmentUsingUserInput() {
+    public static void createAppointmentUsingUserInput() throws Exception {
 
-        System.out.println("create appointment for Existing Patient OR New Patient Select ( 1/2 ).....");
+        System.out.print("create appointment for Existing Patient OR New Patient Select ( 1/2 ) : ");
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
         switch (option) {
@@ -489,13 +489,11 @@ public class HospitalManagementSystem {
                     Patient patient = patientDetails.get(pid);
                     System.out.println(patient.getPatientId() + "  " + patient.getPatientName() + "  " + patient.getDob() + "  " + patient.getPhoneNumber() + "  " + patient.getPatientType());
                 }
-                System.out.println("select patient id");
-                patientId = scanner.nextInt();
-                if (!patientDetails.containsKey((long) patientId)) {
-                    System.out.println("Invalid Patient Id.....");
-                    break;
-                }
-
+                    System.out.println("select patient id");
+                    patientId = scanner.nextInt();
+                    if (!patientDetails.containsKey((long) patientId)) {
+                        throw new Exception("invalid patient id");
+                    }
                 for (Long did : doctorDetails.keySet()) {
                     Doctor doctor = doctorDetails.get(did);
                     System.out.println(doctor.getDoctorId() + " " + doctor.getDoctorName() + "" + doctor.getSpecialisation());
@@ -503,7 +501,7 @@ public class HospitalManagementSystem {
                 System.out.println("select doctor id");
                 doctorId = scanner.nextInt();
                 if (!doctorDetails.containsKey((long) doctorId)) {
-                    System.out.println("doctor not available");
+                    throw new Exception("invalid doctor id");
                 }
                 break;
             case 2:
@@ -544,6 +542,7 @@ public class HospitalManagementSystem {
                 System.out.println("invalid option");
         }
     }
+
 
     private static Date get(String s) {
         Date date = null;

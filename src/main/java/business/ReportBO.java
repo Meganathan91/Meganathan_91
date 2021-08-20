@@ -43,8 +43,8 @@ public class ReportBO {
         System.out.println(" Enter patient id to get Patient Detail.....");
         int _patientId = scanner.nextInt();
         Patient patient = null;
-        if (patientMap.containsKey((long)_patientId)) {                                  // input patientId 2L
-            patient = patientMap.get((long)_patientId);
+        if (patientMap.containsKey((long) _patientId)) {                                  // input patientId 2L
+            patient = patientMap.get((long) _patientId);
             System.out.println(patient);
         } else {
             System.out.println("Entered InValid Patient Id");
@@ -59,7 +59,6 @@ public class ReportBO {
                 System.out.println(patient);
             } else {
                 System.out.println("Entered incorrect Patient Name");
-                break;
             }
         }
         System.out.println();
@@ -72,11 +71,10 @@ public class ReportBO {
         VisitLogInformation visitLogInformation;
         for (Long visitId : visitDetails.keySet()) {
             visitLogInformation = visitDetails.get(visitId);
-            if (visitLogInformation.getAppointment().getPatient().getPatientId().equals((long)patientId)) {    // input patientId 5L
+            if (visitLogInformation.getAppointment().getPatient().getPatientId().equals((long) patientId)) {    // input patientId 5L
                 System.out.println(visitLogInformation);
             } else {
                 System.out.println("Visit Details not Exist given Patient Id");
-                break;
             }
         }
         System.out.println();
@@ -92,7 +90,6 @@ public class ReportBO {
                 System.out.println(patient);
             } else {
                 System.out.println("Entered InPut is Not Valid, no OutPatient");
-                break;
             }
         }
         System.out.println();
@@ -110,7 +107,6 @@ public class ReportBO {
                 System.out.println(inPatient.getPatient());
             } else {
                 System.out.println("No InPatient");
-                break;
             }
         }
         System.out.println();
@@ -126,7 +122,6 @@ public class ReportBO {
                 System.out.println(_visitLogInformation.getAppointment().getPatient());
             } else {
                 System.out.println("InPut is Not Valid");
-                break;
             }
         }
         System.out.println();
@@ -138,11 +133,10 @@ public class ReportBO {
         int doctorId = scanner.nextInt();
         for (Long appointmentId : appointmentDetails.keySet()) {
             Appointment appointment = appointmentDetails.get(appointmentId);
-            if (appointment.getDoctor().getDoctorId().equals((long)doctorId)) {    // display patient details by doctorId 2L
+            if (appointment.getDoctor().getDoctorId().equals((long) doctorId)) {    // display patient details by doctorId 2L
                 System.out.println(appointment.getPatient());
             } else {
                 System.out.println("Patient detail not exist given doctor id");
-                break;
             }
         }
         System.out.println();
@@ -162,7 +156,6 @@ public class ReportBO {
                 System.out.println(_visitLogInformation.getAppointment().getPatient());    // displayed today visited patient details
             } else {
                 System.out.println("Given date not valid");
-                break;
             }
         }
         System.out.println();
@@ -187,18 +180,17 @@ public class ReportBO {
         VisitLogInformation logInformation;
         while (visitId.hasNext()) {
             logInformation = visitDetails.get(visitId.next());
-                Date visitDate = logInformation.getAppointment().getDateOfVisit();
-                Date startDate = getDate(dateOne);  // VisitLogInformation between 2021/1/1 to 2021/7/12
-                Date endDate = getDate(dateTwo);
-                if (visitDate.after(startDate) && visitDate.before(endDate)) {
-                    System.out.println(logInformation);
-                } else {
-                    System.out.println("Given invalid date range");
-                    break;
-                }
+            Date visitDate = logInformation.getAppointment().getDateOfVisit();
+            Date startDate = getDate(dateOne);  // VisitLogInformation between 2021/1/1 to 2021/7/12
+            Date endDate = getDate(dateTwo);
+            if (visitDate.after(startDate) && visitDate.before(endDate)) {
+                System.out.println(logInformation);
+            } else {
+                System.out.println("Start date before for end date");
             }
-        System.out.println();
         }
+        System.out.println();
+    }
 
     public static Date getDate(String s) {
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -210,4 +202,4 @@ public class ReportBO {
         }
         return date;
     }
-    }
+}
