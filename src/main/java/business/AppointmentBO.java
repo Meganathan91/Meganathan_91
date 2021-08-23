@@ -9,17 +9,17 @@ import java.util.*;
 
 public class AppointmentBO {
     public Appointment createAppointment(Long patientId, Map<Long, Patient> patientMap, Long doctorId,
-                                         Map<Long, Doctor> doctorMap, Map<Long, Appointment> appointmentMap) {
+                                         Map<Long, Doctor> doctorMap, Map<Long, Appointment> appointmentMap, Date appointmentDate) {
         Appointment appointment = null;
 
         // check given parameter values are valid, calling validateAppointmentFields.
         try {
-            validateAppointmentFields(patientId, patientMap, doctorId, appointmentMap);
+            validateAppointmentFields(patientId, patientMap, doctorId, appointmentMap, appointmentDate);
 
             appointment = new Appointment();
             appointment.setAppointmentId(HMSUtility.getId(new ArrayList<>(appointmentMap.keySet()))); // get appointmentId calling HMSUtility.
             appointment.setPatient(patientMap.get(patientId));
-            appointment.setDateOfVisit(Calendar.getInstance().getTime());
+            appointment.setDateOfVisit(appointmentDate);
             if (doctorMap.containsKey(doctorId)) {
                 appointment.setDoctor(doctorMap.get(doctorId));
             } else {
@@ -51,7 +51,7 @@ public class AppointmentBO {
     }
 
     private void validateAppointmentFields(Long patientId, Map<Long, Patient> patientMap, Long doctorId,
-                                           Map<Long, Appointment> appointmentMap) throws Exception {
+                                           Map<Long, Appointment> appointmentMap, Date appointmentDate) throws Exception {
         if (patientId == null || patientId == 0)
             throw new Exception("Patient id is invalid ");
         if (patientMap.isEmpty())
@@ -60,6 +60,8 @@ public class AppointmentBO {
             throw new Exception("doctor id is invalid ");
         if (appointmentMap.isEmpty())
             throw new Exception("appointmentMap is empty ");
+        if (appointmentDate == null)
+            throw new Exception("appointmentDate invalid ");
     }
 
     private Patient getPatient(Long patientId, Map<Long, Patient> patientMap) {

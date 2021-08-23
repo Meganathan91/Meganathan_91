@@ -38,7 +38,6 @@ public class DemoDate {
 
      //   System.out.println(dd+" date "+mm);
        // System.out.println(x+" x------y "+y);
-        Date date = new GregorianCalendar(2000,Calendar.JUNE,1).getTime();
         Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse("2021/1/1");
 
     }
