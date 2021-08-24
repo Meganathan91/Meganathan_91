@@ -30,27 +30,11 @@ public class HospitalManagementSystem {
     static private Map<Long, Bed> bedDetails;
 
     static private List<Medicine> medicineList;
-    
 
     static private int patientId;
     static private int doctorId;
-    static private Scanner scanner;
-
-    public static Map<Long, Patient> getPatientDetails() {
-        return patientDetails;
-    }
-
-    public static Map<Long, Appointment> getAppointmentDetails() {
-        return appointmentDetails;
-    }
-
-    public static Map<Long, VisitLogInformation> getVisitDetails() {
-        return visitDetails;
-    }
-
-    public static Map<Long, InPatient> getInPatientDetails() {
-        return inPatientDetails;
-    }
+    static private Date appointmentDate;
+    static Scanner scanner;
 
     static {
 
@@ -551,12 +535,9 @@ public class HospitalManagementSystem {
                 System.out.println("Patient and Doctor detail not exist, can't create Appointment.....");
         }
         System.out.print("\n");
-        /*System.out.println("Enter appointment date, date after that today date (yyyy/MM/dd) ");
+        System.out.println("Enter appointment date, format (yyyy/MM/dd) ");
         appointmentDate = get(scanner.next());
 
-        if (appointmentDate.after(Calendar.getInstance().getTime())) {
-            throw new Exception("Appointment Date after that current date ");
-        }*/
     }
 
     private static int checkDoctorAvailability() {
@@ -585,8 +566,7 @@ public class HospitalManagementSystem {
     private static Patient createNewPatient() {
         Patient patient = new Patient();
         scanner = new Scanner(System.in);
-        
-        
+
 
         System.out.println("Provide patient details.....");
         System.out.print("Name ");

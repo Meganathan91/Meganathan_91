@@ -12,24 +12,16 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ReportBO extends HospitalManagementSystem {
-    /* 1. Generated report for patient detail for given patient name/id,
-       2. Displayed list of visit for given patientId
-       3. Displayed out-patient details from patient map.
-       4. Displayed in-patient from in-patient map.
-       5. Displayed list of patient details for followup visit.
-       6. Displayed patients list for given doctorId.
-       7. Displayed today visited patient details,
-       8. Displayed visit details for given date range.
-     */
+
     public void generateHospitalReport(Map<Long, Patient> patientDetails, Map<Long, Appointment> appointmentDetails,
                                        Map<Long, VisitLogInformation> visitDetails, Map<Long, InPatient> inPatientDetails) {
-
         boolean valid;
         Scanner scanner = new Scanner(System.in);
 
         try {
+            displayReport();
             do {
-                System.out.println("Enter number for to get patient report ( 1 to 8  ) ");
+                System.out.println("Enter number to get patient report, [ Number between 1 to 8 ] ");
                 int number = scanner.nextInt();
                 if (number >= 1 && number < 9) {
                     valid = true;
@@ -66,7 +58,7 @@ public class ReportBO extends HospitalManagementSystem {
                         continue;
                     }
                 } else
-                    System.out.println("invalid option ");
+                    System.out.println("Selected Invalid Option ");
                 valid = false;
             } while (valid);
 
@@ -74,6 +66,7 @@ public class ReportBO extends HospitalManagementSystem {
             System.out.println(e.getMessage());
         }
     }
+
 
     private void displayPatientDetail(Map<Long, Patient> patientMap) {
         boolean b = true;
@@ -119,7 +112,7 @@ public class ReportBO extends HospitalManagementSystem {
     private void displayOutPatientDetail(Map<Long, Patient> patientDetails) {
         boolean b = true;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter patient type OutPatient(OP) to get OutPatient Details .....");
+        System.out.println("Enter patient type 'OP' to get OutPatient Details .....");
         String patientType = scanner.next();
         for (Long patientId : patientDetails.keySet()) {
             Patient patient = patientDetails.get(patientId);
@@ -136,7 +129,7 @@ public class ReportBO extends HospitalManagementSystem {
 
     private void displayInPatientDetail(Map<Long, InPatient> inPatientMap) {
         boolean b = true;
-        System.out.println("InPatient Details .....");
+        System.out.println("Enter patient type 'IP' to get InPatient Details .....");
         Scanner scanner = new Scanner(System.in);
         String _inPatient = scanner.next();
         Iterator<Long> ipIdentificationNumber = inPatientMap.keySet().iterator();
@@ -149,7 +142,7 @@ public class ReportBO extends HospitalManagementSystem {
             }
         }
         if (b) {
-            System.out.println("No InPatient");
+            System.out.println("InPatient not Exist");
         }
         System.out.println();
     }
@@ -199,17 +192,15 @@ public class ReportBO extends HospitalManagementSystem {
         for (Long visitId : visitDetails.keySet()) {
             _visitLogInformation = visitDetails.get(visitId);
             Date date = _visitLogInformation.getAppointment().getDateOfVisit();
-            String dateOne = get(date);
+            String visitDate = get(date);
             String dateTwo = get(Calendar.getInstance().getTime());
-            if (dateOne.equals(todayDate)) {
+            if (visitDate.equals(todayDate)) {
                 System.out.println(_visitLogInformation.getAppointment().getPatient());    // displayed today visited patient details
                 b = false;
             }
         }
-
-
         if (b) {
-            System.out.println("Patient detail not exist given doctor id");
+            System.out.println("Patient not visited for today ");
         }
 
     }
@@ -244,7 +235,7 @@ public class ReportBO extends HospitalManagementSystem {
         }
         System.out.println();
         if (b) {
-            System.out.println("Patient detail not exist given doctor id");
+            System.out.println("Patient detail not exist given date range");
         }
 
     }
@@ -260,12 +251,20 @@ public class ReportBO extends HospitalManagementSystem {
         return date;
     }
 
-    public static void main(String[] args) {
-        ReportBO reportBO = new ReportBO();
-        Map<Long, InPatient> inPatientMap = getInPatientDetails();
-        System.out.println(inPatientMap.entrySet());
-
-
-
+    private void displayReport() {
+        System.out.println("PATIENT REPORT \n");
+        Map<Integer, String> reportMap = new HashMap<>();
+        reportMap.put(1, "Enter patient name to get patient detail ");
+        reportMap.put(2, "Enter patient id to get patient list of visit ");
+        reportMap.put(3, "Enter 'OP' to get out-patient detail ");
+        reportMap.put(4, "Enter 'IP' to to get in-patient detail ");
+        reportMap.put(5, "Enter 'true' to get patient list for followup visit ");
+        reportMap.put(6, "Enter doctor id to get patient list ");
+        reportMap.put(7, "Enter current date, to get today visited patient detail ");
+        reportMap.put(8, "Enter Start and End date, to get visited detail \n");
+        for (Map.Entry<Integer,String>  report: reportMap.entrySet()) {
+            System.out.println(report.getKey()+"  "+report.getValue());
+        }
     }
+
 }
