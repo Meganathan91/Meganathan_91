@@ -21,9 +21,9 @@ public class ReportBO extends HospitalManagementSystem {
         try {
             displayReport();
             do {
-                System.out.println("Enter number to get patient report, [ Number between 1 to 8 ] ");
+                System.out.println("Enter number to get patient report, [ Number between ( 1 to 9 )] ");
                 int number = scanner.nextInt();
-                if (number >= 1 && number < 9) {
+                if (number >= 1 && number <= 9) {
                     valid = true;
                     if (number == 1) {
                         displayPatientDetail(patientDetails);
@@ -57,6 +57,10 @@ public class ReportBO extends HospitalManagementSystem {
                         visitDetailGivenDateRange(visitDetails);
                         continue;
                     }
+                    if (number == 9) {
+                        displayPatientDetailForFollowUpVisitDate(visitDetails);
+                        continue;
+                    }
                 } else
                     System.out.println("Selected Invalid Option ");
                 valid = false;
@@ -67,6 +71,28 @@ public class ReportBO extends HospitalManagementSystem {
         }
     }
 
+    private void displayPatientDetailForFollowUpVisitDate(Map<Long, VisitLogInformation> visitDetails) {
+        boolean isValid = true;
+        Scanner scanner = new Scanner(System.in);
+        VisitLogInformation visitLogInformation;
+
+        System.out.println();
+        System.out.print("Enter date to get follow up visit Patient Detail, Date format ( yyyy/MM/dd ) ... ");
+        String date = scanner.next();
+        for (Long visitId : visitDetails.keySet()) {
+            visitLogInformation = visitDetails.get(visitId);
+            if (get(visitLogInformation.getAppointment().getDateOfVisit()).equals(date)) {                // input patient name "Mohan"
+                System.out.println(visitLogInformation.getAppointment().getPatient());
+                isValid = false;
+            }
+        }
+        if (isValid) {
+            System.out.println("followup visit Patient Detail not exist given date ");
+        }
+        System.out.println();
+
+    }
+
 
     private void displayPatientDetail(Map<Long, Patient> patientMap) {
         boolean b = true;
@@ -74,7 +100,7 @@ public class ReportBO extends HospitalManagementSystem {
         Patient patient;
 
         System.out.println();
-        System.out.println("Enter Patient name to get Patient Detail.....");
+        System.out.print("Enter Patient name to get Patient Detail ... ");
         String name = scanner.next();
         for (Long patientId : patientMap.keySet()) {
             patient = patientMap.get(patientId);
@@ -93,7 +119,7 @@ public class ReportBO extends HospitalManagementSystem {
     private void visitDetailForPatientId(Map<Long, VisitLogInformation> visitDetails) {
         boolean b = true;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Patient Id to get No of Visit .....");
+        System.out.print("Enter Patient Id to get No of Visit ... ");
         int patientId = scanner.nextInt();
         VisitLogInformation visitLogInformation;
         for (Long visitId : visitDetails.keySet()) {
@@ -111,12 +137,9 @@ public class ReportBO extends HospitalManagementSystem {
 
     private void displayOutPatientDetail(Map<Long, Patient> patientDetails) {
         boolean b = true;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter patient type 'OP' to get OutPatient Details .....");
-        String patientType = scanner.next();
         for (Long patientId : patientDetails.keySet()) {
             Patient patient = patientDetails.get(patientId);
-            if (patient.getPatientType().equalsIgnoreCase(patientType)) {                 // input patientType "OP"
+            if (patient.getPatientType().equalsIgnoreCase("OP")) {                 // input patientType "OP"
                 System.out.println(patient);
                 b = false;
             }
@@ -129,14 +152,11 @@ public class ReportBO extends HospitalManagementSystem {
 
     private void displayInPatientDetail(Map<Long, InPatient> inPatientMap) {
         boolean b = true;
-        System.out.println("Enter patient type 'IP' to get InPatient Details .....");
-        Scanner scanner = new Scanner(System.in);
-        String _inPatient = scanner.next();
         Iterator<Long> ipIdentificationNumber = inPatientMap.keySet().iterator();
         InPatient inPatient;
         while (ipIdentificationNumber.hasNext()) {
             inPatient = inPatientMap.get(ipIdentificationNumber.next());
-            if (inPatient.getPatient().getPatientType().equalsIgnoreCase(_inPatient)) {
+            if (inPatient.getPatient().getPatientType().equalsIgnoreCase("IP")) {
                 System.out.println(inPatient.getPatient());
                 b = false;
             }
@@ -149,12 +169,9 @@ public class ReportBO extends HospitalManagementSystem {
 
     private void followUpVisitPatientDetail(Map<Long, VisitLogInformation> visitDetails) {
         boolean b = false;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter (true) get patient Detail for follow up visit .....");
-        boolean followUpVisit = scanner.nextBoolean();
         for (Long visitId : visitDetails.keySet()) {
             VisitLogInformation _visitLogInformation = visitDetails.get(visitId);
-            if (_visitLogInformation.getFollowUpNeed() == followUpVisit) {
+            if (_visitLogInformation.getFollowUpNeed()) {
                 System.out.println(_visitLogInformation.getAppointment().getPatient());
                 b = false;
             }
@@ -168,7 +185,7 @@ public class ReportBO extends HospitalManagementSystem {
     private void displayPatientByDoctorId(Map<Long, Appointment> appointmentDetails) {
         boolean b = true;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Doctor Id to get list of patient .....");
+        System.out.print("Enter Doctor Id to get list of patient ... ");
         int doctorId = scanner.nextInt();
         for (Long appointmentId : appointmentDetails.keySet()) {
             Appointment appointment = appointmentDetails.get(appointmentId);
@@ -186,7 +203,7 @@ public class ReportBO extends HospitalManagementSystem {
     private void todayVisitedPatientDetail(Map<Long, VisitLogInformation> visitDetails) {
         boolean b = true;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter current date, to get today visited patient detail .....");
+        System.out.print("Enter current date, to get today visited patient detail date format ( yyyy/MM/dd ) ... ");
         String todayDate = scanner.next();
         VisitLogInformation _visitLogInformation;
         for (Long visitId : visitDetails.keySet()) {
@@ -216,7 +233,7 @@ public class ReportBO extends HospitalManagementSystem {
     private void visitDetailGivenDateRange(Map<Long, VisitLogInformation> visitDetails) {
         boolean b = true;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Start and End Date to get Visit details given date range.....");
+        System.out.println("Enter Start and End Date to get Visit details given date range ... ");
         System.out.println("Enter Start Date .....");
         String dateOne = scanner.next();
         System.out.println("Enter End Date.....");
@@ -241,29 +258,35 @@ public class ReportBO extends HospitalManagementSystem {
     }
 
     public static Date getDate(String s) {
+        boolean isValid = false;
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         Date date = null;
-        try {
-            date = format.parse(s);
-        } catch (ParseException e) {
-            System.out.println("Date format exception");
-        }
+        do {
+            try {
+                date = format.parse(s);
+            } catch (ParseException e) {
+                System.out.println("Enter valid Date format ( yyyy/MM/dd ) ");
+                isValid = true;
+            }
+
+        } while (isValid);
         return date;
     }
 
     private void displayReport() {
         System.out.println("PATIENT REPORT \n");
         Map<Integer, String> reportMap = new HashMap<>();
-        reportMap.put(1, "Enter patient name to get patient detail ");
-        reportMap.put(2, "Enter patient id to get patient list of visit ");
-        reportMap.put(3, "Enter 'OP' to get out-patient detail ");
-        reportMap.put(4, "Enter 'IP' to to get in-patient detail ");
-        reportMap.put(5, "Enter 'true' to get patient list for followup visit ");
-        reportMap.put(6, "Enter doctor id to get patient list ");
-        reportMap.put(7, "Enter current date, to get today visited patient detail ");
-        reportMap.put(8, "Enter Start and End date, to get visited detail \n");
-        for (Map.Entry<Integer,String>  report: reportMap.entrySet()) {
-            System.out.println(report.getKey()+"  "+report.getValue());
+        reportMap.put(1, "Display patient details for the patient name");
+        reportMap.put(2, "Display the list of visit for the patient id");
+        reportMap.put(3, "Display only the out-patient");
+        reportMap.put(4, "Display all patient who are in-patient");
+        reportMap.put(5, "Display the list of patient who needs the follow up visit");
+        reportMap.put(6, "Display the list of patient by doctor id");
+        reportMap.put(7, "Display visited patient for given date");
+        reportMap.put(8, "Display the visit details for given date range");
+        reportMap.put(9, "Display the list of patient who needs the follow up visit given date \n");
+        for (Map.Entry<Integer, String> report : reportMap.entrySet()) {
+            System.out.println(report.getKey() + "  " + report.getValue());
         }
     }
 

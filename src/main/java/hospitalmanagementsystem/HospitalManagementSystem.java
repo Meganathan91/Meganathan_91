@@ -188,7 +188,7 @@ public class HospitalManagementSystem {
         appointmentSeven.setAppointmentId(7L);
         appointmentSeven.setDoctor(doctorDetails.get(1L));
         appointmentSeven.setPatient(patientDetails.get(1L));
-        appointmentSeven.setDateOfVisit(getDate(2021, 7, 10));
+        appointmentSeven.setDateOfVisit(getDate(2021, 8, 12));
         appointmentSeven.setPurposeOfVisit("HeartPain");
         appointmentSeven.setBp(120.7);
         appointmentSeven.setTemperature(76.1);
@@ -258,7 +258,7 @@ public class HospitalManagementSystem {
         appointmentFourteen.setAppointmentId(14L);
         appointmentFourteen.setDoctor(doctorDetails.get(4L));
         appointmentFourteen.setPatient(patientDetails.get(5L));
-        appointmentFourteen.setDateOfVisit(getDate(2021, 7, 9));
+        appointmentFourteen.setDateOfVisit(getDate(2021, 4, 6));
         appointmentFourteen.setPurposeOfVisit("Headaches");
         appointmentFourteen.setBp(154.4);
         appointmentFourteen.setTemperature(79.5);
@@ -486,7 +486,7 @@ public class HospitalManagementSystem {
         System.out.println();
         System.out.print("create appointment for Existing Patient select - 1 (OR) New Patient Select - 2 : ");
         scanner = new Scanner(System.in);
-        Integer number = scanner.nextInt();
+        int number = scanner.nextInt();
         switch (number) {
             case 1:
                 System.out.println("Existing Patient Details.....");
@@ -509,7 +509,7 @@ public class HospitalManagementSystem {
                                 System.out.println("select patient id");
                                 patientId = scanner.nextInt();
                                 if (!patientDetails.containsKey((long) patientId)) {
-                                    System.out.println("Entered invalid patient id, try again.....");
+                                    System.out.println("In correct patient id, Please Enter valid patient id.....");
                                     isContinue = true;
                                 } else
                                     isContinue = false;
@@ -534,10 +534,17 @@ public class HospitalManagementSystem {
             default:
                 System.out.println("Patient and Doctor detail not exist, can't create Appointment.....");
         }
+
         System.out.print("\n");
         System.out.println("Enter appointment date, format (yyyy/MM/dd) ");
-        appointmentDate = get(scanner.next());
-
+        boolean isValid;
+        do {
+            appointmentDate = get(scanner.next());
+            if(appointmentDate == null) {
+                isValid = true;
+            } else
+                isValid = false;
+        }while (isValid);
     }
 
     private static int checkDoctorAvailability() {
@@ -547,7 +554,7 @@ public class HospitalManagementSystem {
             System.out.println("select doctor id");
             doctorId = scanner.nextInt();
             if (!doctorDetails.containsKey((long) doctorId)) {
-                System.out.println("Given doctor id not valid, try again.....");
+                System.out.println("In correct doctor id, Please Enter valid doctor id.....");
                 isContinue = true;
             } else
                 isContinue = false;
@@ -569,16 +576,16 @@ public class HospitalManagementSystem {
 
 
         System.out.println("Provide patient details.....");
-        System.out.print("Name ");
+        System.out.print("Name ... ");
         String name = scanner.next();
 
-        System.out.print("Date of birth Format (yyyy/MM/dd) ");
+        System.out.print("Date of birth Format (yyyy/MM/dd) ... ");
         Date dateOfBirth = get(scanner.next());
 
-        System.out.print("Address ");
+        System.out.print("Address ... ");
         String address = scanner.next();
 
-        System.out.print("PhoneNumber ");
+        System.out.print("PhoneNumber ... ");
         String phoneNumber = scanner.next();
 
         patient.setPatientId(HMSUtility.getId(new ArrayList<>(patientDetails.keySet())));
@@ -602,7 +609,7 @@ public class HospitalManagementSystem {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             date = dateFormat.parse(s);
         } catch (ParseException e) {
-            System.out.println("Date Parse Exception...");
+            System.out.print("Enter valid date, Format ( yyyy/MM/dd ) ... ");
         }
         return date;
     }
@@ -618,7 +625,7 @@ public class HospitalManagementSystem {
             VisitLogInformation visitLogInformation = null;
 
             createAppointmentUsingUserInput();
-            Appointment appointment = appointmentBO.createAppointment((long) patientId, patientDetails, (long) doctorId, doctorDetails, appointmentDetails, Calendar.getInstance().getTime());
+            Appointment appointment = appointmentBO.createAppointment((long) patientId, patientDetails, (long) doctorId, doctorDetails, appointmentDetails, appointmentDate);
             if (appointment != null) {
                 visitLogInformation = visitInformation.createVisitLogInformation(appointment, visitDetails, medicineList, patientDetails);
             }
