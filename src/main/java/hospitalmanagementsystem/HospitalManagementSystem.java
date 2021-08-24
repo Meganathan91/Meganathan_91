@@ -11,7 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class HospitalManagementSystem<doctorId> {
+public class HospitalManagementSystem {
 
     static private Map<Long, Hospital> hospitalDetails;
 
@@ -30,11 +30,27 @@ public class HospitalManagementSystem<doctorId> {
     static private Map<Long, Bed> bedDetails;
 
     static private List<Medicine> medicineList;
+    
 
     static private int patientId;
     static private int doctorId;
     static private Scanner scanner;
-    static private Date appointmentDate;
+
+    public static Map<Long, Patient> getPatientDetails() {
+        return patientDetails;
+    }
+
+    public static Map<Long, Appointment> getAppointmentDetails() {
+        return appointmentDetails;
+    }
+
+    public static Map<Long, VisitLogInformation> getVisitDetails() {
+        return visitDetails;
+    }
+
+    public static Map<Long, InPatient> getInPatientDetails() {
+        return inPatientDetails;
+    }
 
     static {
 
@@ -45,9 +61,9 @@ public class HospitalManagementSystem<doctorId> {
 
         Doctor cardiologistDoctor = getDoctor(1L, "Rahim", "Cardiologists");
         Doctor orthopedicDoctor = getDoctor(2L, "Vishal", "Orthopedic");
-        Doctor  dentistDoctor = getDoctor(3L, "Suganya", "Dentist");
-        Doctor  neurologistDoctor = getDoctor(4L, "Anu", "Neurologist");
-        Doctor  pulmonologistDoctor = getDoctor(5L, "VelRaj", "Pulmonologist");
+        Doctor dentistDoctor = getDoctor(3L, "Suganya", "Dentist");
+        Doctor neurologistDoctor = getDoctor(4L, "Anu", "Neurologist");
+        Doctor pulmonologistDoctor = getDoctor(5L, "VelRaj", "Pulmonologist");
 
         doctorDetails = new HashMap<>();
         doctorDetails.put(cardiologistDoctor.getDoctorId(), cardiologistDoctor);
@@ -477,16 +493,17 @@ public class HospitalManagementSystem<doctorId> {
 
     }
 
-    public static void createAppointmentUsingUserInput() throws Exception {
+    public static void createAppointmentUsingUserInput() {
+        boolean isContinue = false;
         System.out.println("Hospital details ");
-        for(Long id : hospitalDetails.keySet()) {
-            System.out.print(hospitalDetails.get(id).getHospitalName()+" "+hospitalDetails.get(id).getHospitalLocation());
+        for (Long id : hospitalDetails.keySet()) {
+            System.out.print(hospitalDetails.get(id).getHospitalName() + " " + hospitalDetails.get(id).getHospitalLocation());
         }
         System.out.println();
-        System.out.print("create appointment for Existing Patient OR New Patient Select ( 1/2 ) : ");
+        System.out.print("create appointment for Existing Patient select - 1 (OR) New Patient Select - 2 : ");
         scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-        switch (option) {
+        Integer number = scanner.nextInt();
+        switch (number) {
             case 1:
                 System.out.println("Existing Patient Details.....");
                 for (Long pid : patientDetails.keySet()) {
@@ -496,19 +513,26 @@ public class HospitalManagementSystem<doctorId> {
                 System.out.println("select patient id");
                 patientId = scanner.nextInt();
                 if (!patientDetails.containsKey((long) patientId)) {
-                    System.out.print("Entered Invalid Patient Id, You want to create new Patient (Yes/No)  : ");
-                    switch (scanner.next()) {
-                        case "yes":
+                    System.out.print("Given patient is not exist, You want to create new Patient (yes - 1 / no - 2)  : ");
+                    int option = scanner.nextInt();
+                    switch (option) {
+                        case 1:
                             createNewPatient();
                             break;
-                        case "no":
-                            System.out.println("select patient id");
-                            patientId = scanner.nextInt();
-                            if (!patientDetails.containsKey((long) patientId))
-                                throw new Exception("invalid patient id ");
+                        case 2:
+
+                            do {
+                                System.out.println("select patient id");
+                                patientId = scanner.nextInt();
+                                if (!patientDetails.containsKey((long) patientId)) {
+                                    System.out.println("Entered invalid patient id, try again.....");
+                                    isContinue = true;
+                                } else
+                                    isContinue = false;
+                            } while (isContinue);
                             break;
                         default:
-                            throw new Exception("selected option not valid ");
+                            System.out.println("selected option not valid ");
                     }
                 }
                 displayDoctorDetails();
@@ -524,22 +548,29 @@ public class HospitalManagementSystem<doctorId> {
 
                 break;
             default:
-                System.out.println("invalid option");
+                System.out.println("Patient and Doctor detail not exist, can't create Appointment.....");
         }
-        System.out.println("Enter appointment date, date after that today date (yyyy/MM/dd) ");
+        System.out.print("\n");
+        /*System.out.println("Enter appointment date, date after that today date (yyyy/MM/dd) ");
         appointmentDate = get(scanner.next());
 
         if (appointmentDate.after(Calendar.getInstance().getTime())) {
             throw new Exception("Appointment Date after that current date ");
-        }
+        }*/
     }
 
-    private static int checkDoctorAvailability() throws Exception {
+    private static int checkDoctorAvailability() {
+        boolean isContinue;
         int doctorId;
-        System.out.println("select doctor id");
-        doctorId = scanner.nextInt();
-        if (!doctorDetails.containsKey((long) doctorId))
-            throw new Exception("doctor not available ");
+        do {
+            System.out.println("select doctor id");
+            doctorId = scanner.nextInt();
+            if (!doctorDetails.containsKey((long) doctorId)) {
+                System.out.println("Given doctor id not valid, try again.....");
+                isContinue = true;
+            } else
+                isContinue = false;
+        } while (isContinue);
         return doctorId;
     }
 
@@ -552,23 +583,29 @@ public class HospitalManagementSystem<doctorId> {
     }
 
     private static Patient createNewPatient() {
-
         Patient patient = new Patient();
-        System.out.println("New patient.....");
         scanner = new Scanner(System.in);
+        
+        
+
+        System.out.println("Provide patient details.....");
+        System.out.print("Name ");
+        String name = scanner.next();
+
+        System.out.print("Date of birth Format (yyyy/MM/dd) ");
+        Date dateOfBirth = get(scanner.next());
+
+        System.out.print("Address ");
+        String address = scanner.next();
+
+        System.out.print("PhoneNumber ");
+        String phoneNumber = scanner.next();
+
         patient.setPatientId(HMSUtility.getId(new ArrayList<>(patientDetails.keySet())));
-        System.out.println("Name ");
-        patient.setPatientName(scanner.next());
-
-        System.out.println("DOB This Format (yyyy/MM/dd) ");
-        patient.setDob(get(scanner.next()));
-
-        System.out.println("Address");
-        patient.setAddress(scanner.next());
-
-        System.out.println("PhoneNumber");
-        patient.setPhoneNumber(scanner.next());
-
+        patient.setPatientName(name);
+        patient.setDob(dateOfBirth);
+        patient.setAddress(address);
+        patient.setPhoneNumber(phoneNumber);
         patient.setPatientType("OP");
 
         System.out.println();
@@ -601,7 +638,7 @@ public class HospitalManagementSystem<doctorId> {
             VisitLogInformation visitLogInformation = null;
 
             createAppointmentUsingUserInput();
-            Appointment appointment = appointmentBO.createAppointment((long) patientId, patientDetails, (long) doctorId, doctorDetails, appointmentDetails, appointmentDate);
+            Appointment appointment = appointmentBO.createAppointment((long) patientId, patientDetails, (long) doctorId, doctorDetails, appointmentDetails, Calendar.getInstance().getTime());
             if (appointment != null) {
                 visitLogInformation = visitInformation.createVisitLogInformation(appointment, visitDetails, medicineList, patientDetails);
             }

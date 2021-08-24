@@ -4,13 +4,14 @@ import entity.Appointment;
 import entity.InPatient;
 import entity.Patient;
 import entity.VisitLogInformation;
+import hospitalmanagementsystem.HospitalManagementSystem;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class ReportBO {
+public class ReportBO extends HospitalManagementSystem {
     /* 1. Generated report for patient detail for given patient name/id,
        2. Displayed list of visit for given patientId
        3. Displayed out-patient details from patient map.
@@ -22,12 +23,13 @@ public class ReportBO {
      */
     public void generateHospitalReport(Map<Long, Patient> patientDetails, Map<Long, Appointment> appointmentDetails,
                                        Map<Long, VisitLogInformation> visitDetails, Map<Long, InPatient> inPatientDetails) {
+
         boolean valid;
         Scanner scanner = new Scanner(System.in);
 
         try {
             do {
-                System.out.println("Enter number between 1 - 8 ");
+                System.out.println("Enter number for to get patient report ( 1 to 8  ) ");
                 int number = scanner.nextInt();
                 if (number >= 1 && number < 9) {
                     valid = true;
@@ -83,7 +85,7 @@ public class ReportBO {
         String name = scanner.next();
         for (Long patientId : patientMap.keySet()) {
             patient = patientMap.get(patientId);
-            if (checkPatientName(name, patient.getPatientName())) {                 // input patient name "Mohan"
+            if (patient.getPatientName().equalsIgnoreCase(name)) {                 // input patient name "Mohan"
                 System.out.println(patient);
                 b = false;
             }
@@ -94,12 +96,6 @@ public class ReportBO {
         System.out.println();
     }
 
-    private boolean checkPatientName(String name, String patientName) {
-        if (name.equalsIgnoreCase(patientName)) {
-            return true;
-        }
-        return false;
-    }
 
     private void visitDetailForPatientId(Map<Long, VisitLogInformation> visitDetails) {
         boolean b = true;
@@ -262,5 +258,14 @@ public class ReportBO {
             System.out.println("Date format exception");
         }
         return date;
+    }
+
+    public static void main(String[] args) {
+        ReportBO reportBO = new ReportBO();
+        Map<Long, InPatient> inPatientMap = getInPatientDetails();
+        System.out.println(inPatientMap.entrySet());
+
+
+
     }
 }
