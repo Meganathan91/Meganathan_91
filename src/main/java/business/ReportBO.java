@@ -5,80 +5,71 @@ import entity.InPatient;
 import entity.Patient;
 import entity.VisitLogInformation;
 import hospitalmanagementsystem.HospitalManagementSystem;
+import utility.DateUtility;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class ReportBO extends HospitalManagementSystem {
+public class ReportBO {
 
     public void generateHospitalReport(Map<Long, Patient> patientDetails, Map<Long, Appointment> appointmentDetails,
                                        Map<Long, VisitLogInformation> visitDetails, Map<Long, InPatient> inPatientDetails) {
-        boolean valid;
+        boolean isValid = true;
+        int number = 0;
         Scanner scanner = new Scanner(System.in);
-
-        try {
-            displayReport();
-            do {
-                System.out.println("Enter number to get patient report, [ Number between ( 1 to 9 )] ");
-                int number = scanner.nextInt();
-                if (number >= 1 && number <= 9) {
-                    valid = true;
-                    if (number == 1) {
-                        displayPatientDetail(patientDetails);
-                        continue;
+                displayReport();
+                do {
+                    System.out.print("Enter Valid report number to get patient report, [ Number between ( 1 to 9 )] - [ Exit for 0 ] ... ");
+                    number = scanner.nextInt();
+                    if (number == 0) {
+                        isValid = false;
                     }
-                    if (number == 2) {
-                        visitDetailForPatientId(visitDetails);
-                        continue;
-                    }
-                    if (number == 3) {
-                        displayOutPatientDetail(patientDetails);
-                        continue;
-                    }
-                    if (number == 4) {
-                        displayInPatientDetail(inPatientDetails);
-                        continue;
-                    }
-                    if (number == 5) {
-                        followUpVisitPatientDetail(visitDetails);
-                        continue;
-                    }
-                    if (number == 6) {
-                        displayPatientByDoctorId(appointmentDetails);
-                        continue;
-                    }
-                    if (number == 7) {
-                        todayVisitedPatientDetail(visitDetails);
-                        continue;
-                    }
-                    if (number == 8) {
-                        visitDetailGivenDateRange(visitDetails);
-                        continue;
-                    }
-                    if (number == 9) {
+                    if (number >= 1 && number <= 9) {
+                        if (number == 1) {
+                            displayPatientDetail(patientDetails);
+                            continue;
+                        }
+                        if (number == 2) {
+                            visitDetailForPatientId(visitDetails);
+                            continue;
+                        }
+                        if (number == 3) {
+                            displayOutPatientDetail(patientDetails);
+                            continue;
+                        }
+                        if (number == 4) {
+                            displayInPatientDetail(inPatientDetails);
+                            continue;
+                        }
+                        if (number == 5) {
+                            followUpVisitPatientDetail(visitDetails);
+                            continue;
+                        }
+                        if (number == 6) {
+                            displayPatientByDoctorId(appointmentDetails);
+                            continue;
+                        }
+                        if (number == 7) {
+                            todayVisitedPatientDetail(visitDetails);
+                            continue;
+                        }
+                        if (number == 8) {
+                            visitDetailGivenDateRange(visitDetails);
+                            continue;
+                        }
                         displayPatientDetailForFollowUpVisitDate(visitDetails);
-                        continue;
                     }
-                } else
-                    System.out.println("Selected Invalid Option ");
-                valid = false;
-            } while (valid);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
+                } while (isValid);
+            }
     private void displayPatientDetailForFollowUpVisitDate(Map<Long, VisitLogInformation> visitDetails) {
         boolean isValid = true;
         Scanner scanner = new Scanner(System.in);
         VisitLogInformation visitLogInformation;
-
         System.out.println();
         System.out.print("Enter date to get follow up visit Patient Detail, Date format ( yyyy/MM/dd ) ... ");
-        String date = scanner.next();
+        String date = get(scanner.next());
         for (Long visitId : visitDetails.keySet()) {
             visitLogInformation = visitDetails.get(visitId);
             if (get(visitLogInformation.getAppointment().getDateOfVisit()).equals(date)) {                // input patient name "Mohan"
@@ -90,7 +81,6 @@ public class ReportBO extends HospitalManagementSystem {
             System.out.println("followup visit Patient Detail not exist given date ");
         }
         System.out.println();
-
     }
 
 
@@ -162,7 +152,7 @@ public class ReportBO extends HospitalManagementSystem {
             }
         }
         if (b) {
-            System.out.println("InPatient not Exist");
+            System.out.println("InPatient Detail not Exist");
         }
         System.out.println();
     }
@@ -202,16 +192,13 @@ public class ReportBO extends HospitalManagementSystem {
 
     private void todayVisitedPatientDetail(Map<Long, VisitLogInformation> visitDetails) {
         boolean b = true;
+        Date todayDate;
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter current date, to get today visited patient detail date format ( yyyy/MM/dd ) ... ");
-        String todayDate = scanner.next();
-        VisitLogInformation _visitLogInformation;
+        todayDate = DateUtility.getDate(scanner.next());
         for (Long visitId : visitDetails.keySet()) {
-            _visitLogInformation = visitDetails.get(visitId);
-            Date date = _visitLogInformation.getAppointment().getDateOfVisit();
-            String visitDate = get(date);
-            String dateTwo = get(Calendar.getInstance().getTime());
-            if (visitDate.equals(todayDate)) {
+            VisitLogInformation _visitLogInformation = visitDetails.get(visitId);
+            if (_visitLogInformation.getAppointment().getDateOfVisit().compareTo(todayDate) == 0) {
                 System.out.println(_visitLogInformation.getAppointment().getPatient());    // displayed today visited patient details
                 b = false;
             }
@@ -219,32 +206,23 @@ public class ReportBO extends HospitalManagementSystem {
         if (b) {
             System.out.println("Patient not visited for today ");
         }
-
+        System.out.println();
     }
 
-    private String get(Date date) {
-        String _date;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        _date = dateFormat.format(date);
-
-        return _date;
-    }
 
     private void visitDetailGivenDateRange(Map<Long, VisitLogInformation> visitDetails) {
         boolean b = true;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Start and End Date to get Visit details given date range ... ");
-        System.out.println("Enter Start Date .....");
-        String dateOne = scanner.next();
-        System.out.println("Enter End Date.....");
-        String dateTwo = scanner.next();
+        System.out.print("Enter Start Date ... ");
+        Date startDate = DateUtility.getDate(scanner.next());
+        System.out.print("Enter End Date ... ");
+        Date endDate = DateUtility.getDate(scanner.next());
         Iterator<Long> visitId = visitDetails.keySet().iterator();
         VisitLogInformation logInformation;
         while (visitId.hasNext()) {
             logInformation = visitDetails.get(visitId.next());
             Date visitDate = logInformation.getAppointment().getDateOfVisit();
-            Date startDate = getDate(dateOne);  // VisitLogInformation between 2021/1/1 to 2021/7/12
-            Date endDate = getDate(dateTwo);
             if (visitDate.after(startDate) && visitDate.before(endDate)) {
                 System.out.println(logInformation);
                 b = false;
@@ -254,22 +232,29 @@ public class ReportBO extends HospitalManagementSystem {
         if (b) {
             System.out.println("Patient detail not exist given date range");
         }
-
     }
 
-    public static Date getDate(String s) {
-        boolean isValid = false;
-        DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-        Date date = null;
-        do {
+    private String get(Date date) {
+    String _date;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        _date = dateFormat.format(date);
+        return _date;
+    }
+
+    private String get(String date) {
+        Scanner scanner = new Scanner(System.in);
+        boolean isValid = true;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        while (isValid) {
             try {
-                date = format.parse(s);
+                dateFormat.parse(date);
+                isValid = false;
             } catch (ParseException e) {
-                System.out.println("Enter valid Date format ( yyyy/MM/dd ) ");
+                System.out.print("Enter valid date, format ( yyyy/MM/dd ) ... ");
+                date = scanner.next();
                 isValid = true;
             }
-
-        } while (isValid);
+        }
         return date;
     }
 
@@ -289,5 +274,4 @@ public class ReportBO extends HospitalManagementSystem {
             System.out.println(report.getKey() + "  " + report.getValue());
         }
     }
-
 }
