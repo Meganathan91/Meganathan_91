@@ -481,60 +481,67 @@ public class HospitalManagementSystem {
 
     public static void createAppointmentUsingUserInput() {
         boolean isContinue = true;
+        String choice;
         System.out.println("Hospital details ");
         for (Long id : hospitalDetails.keySet()) {
             System.out.print(hospitalDetails.get(id).getHospitalName() + " " + hospitalDetails.get(id).getHospitalLocation());
         }
         System.out.println();
-        System.out.print("create appointment for Existing Patient select - 1 (OR) New Patient Select - 2 : ");
+        System.out.print("Welcome to Kauvery hospital, you are 'Exist' patient (OR) 'New' patient ... ");
         scanner = new Scanner(System.in);
-        int number = scanner.nextInt();
-        switch (number) {
-            case 1:
-                System.out.println("Existing Patient Details.....");
-                for (Long pid : patientDetails.keySet()) {
-                    Patient patient = patientDetails.get(pid);
-                    System.out.println(patient.getPatientId() + "  " + patient.getPatientName() + "  " + patient.getDob() + "  " + patient.getPhoneNumber() + "  " + patient.getPatientType());
-                }
-                System.out.println("select patient id");
-                patientId = scanner.nextInt();
-                if (!patientDetails.containsKey((long) patientId)) {
-                    System.out.print("Given patient is not exist, You want to create new Patient (yes - 1 / no - 2)  : ");
-                    int option = scanner.nextInt();
-                    switch (option) {
-                        case 1:
-                            createNewPatient();
-                            break;
-                        case 2:
-                            do {
-                                System.out.println("select patient id");
-                                patientId = scanner.nextInt();
-                                if (!patientDetails.containsKey((long) patientId)) {
-                                    System.out.println("In correct patient id, Please Enter valid patient id.....");
-                                    isContinue = true;
-                                } else
-                                    isContinue = false;
-                            } while (isContinue);
-                            break;
-                        default:
-                            System.out.println("selected option invalid, Please select valid option");
+        do {
+            choice = scanner.next();
+            switch (choice.trim().toLowerCase()) {
+                case "exist":
+                    System.out.println("Existing Patient Details ..... \n");
+                    for (Long pid : patientDetails.keySet()) {
+                        Patient patient = patientDetails.get(pid);
+                        System.out.println(patient.getPatientId() + "  " + patient.getPatientName() + "  " + patient.getDob() + "  " + patient.getPhoneNumber() + "  " + patient.getPatientType());
                     }
-                }
-                displayDoctorDetails();
-                doctorId = checkDoctorAvailability();
-                break;
-            case 2:
-                Patient patient = createNewPatient();
-                patientId = Math.toIntExact(patient.getPatientId());
+                    System.out.println("select patient id");
+                    String option;
+                    patientId = scanner.nextInt();
+                    if (!patientDetails.containsKey((long) patientId)) {
+                        System.out.print("Given patient id is not exist, You want to create new Patient ( yes / no ) ... ");
+                        do {
+                            option = scanner.next();
+                            switch (option.toLowerCase()) {
+                                case "yes":
+                                    createNewPatient();
+                                    isContinue = false;
+                                    break;
+                                case "no":
+                                    do {
+                                        System.out.println("select patient id");
+                                        patientId = scanner.nextInt();
+                                        if (!patientDetails.containsKey((long) patientId)) {
+                                            System.out.print("In correct patient id, Please Enter valid patient id ...");
+                                            isContinue = true;
+                                        } else
+                                            isContinue = false;
+                                    } while (isContinue);
+                                    break;
+                                default:
+                                    System.out.print("selected option invalid, Please select (Yes / No ) ... ");
+                            }
+                        }while (isContinue);
+                    }
+                    displayDoctorDetails();
+                    doctorId = checkDoctorAvailability();
+                    isContinue = false;
+                    break;
+                case "new":
+                    Patient patient = createNewPatient();
+                    patientId = Math.toIntExact(patient.getPatientId());
 
-                displayDoctorDetails();
-                doctorId = checkDoctorAvailability();
-                break;
-            default:
-                System.out.println("Selected invalid option, Please select valid option ... ");
-
-        }
-
+                    displayDoctorDetails();
+                    doctorId = checkDoctorAvailability();
+                    isContinue = false;
+                    break;
+                default:
+                    System.out.print("Selected invalid option, Please select valid option ( Exist / New ) ... ");
+            }
+        } while (isContinue);
 
         System.out.print("\n");
         System.out.print("Enter appointment date, format (yyyy/MM/dd) ...  ");
@@ -550,7 +557,7 @@ public class HospitalManagementSystem {
             isContinue = false;
             doctorId = scanner.nextInt();
             if (!doctorDetails.containsKey((long) doctorId)) {
-                System.out.println("In correct doctor id, Please Enter valid doctor id.....");
+                System.out.print ("In correct doctor id, Please Enter valid doctor id ...");
                 isContinue = true;
             }
         } while (isContinue);

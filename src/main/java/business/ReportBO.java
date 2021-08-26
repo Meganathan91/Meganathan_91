@@ -17,52 +17,55 @@ public class ReportBO {
     public void generateHospitalReport(Map<Long, Patient> patientDetails, Map<Long, Appointment> appointmentDetails,
                                        Map<Long, VisitLogInformation> visitDetails, Map<Long, InPatient> inPatientDetails) {
         boolean isValid = true;
-        int number = 0;
+        String choice;
         Scanner scanner = new Scanner(System.in);
-                displayReport();
-                do {
-                    System.out.print("Enter Valid report number to get patient report, [ Number between ( 1 to 9 )] - [ Exit for 0 ] ... ");
-                    number = scanner.nextInt();
-                    if (number == 0) {
-                        isValid = false;
-                    }
-                    if (number >= 1 && number <= 9) {
-                        if (number == 1) {
-                            displayPatientDetail(patientDetails);
-                            continue;
-                        }
-                        if (number == 2) {
-                            visitDetailForPatientId(visitDetails);
-                            continue;
-                        }
-                        if (number == 3) {
-                            displayOutPatientDetail(patientDetails);
-                            continue;
-                        }
-                        if (number == 4) {
-                            displayInPatientDetail(inPatientDetails);
-                            continue;
-                        }
-                        if (number == 5) {
-                            followUpVisitPatientDetail(visitDetails);
-                            continue;
-                        }
-                        if (number == 6) {
-                            displayPatientByDoctorId(appointmentDetails);
-                            continue;
-                        }
-                        if (number == 7) {
-                            todayVisitedPatientDetail(visitDetails);
-                            continue;
-                        }
-                        if (number == 8) {
-                            visitDetailGivenDateRange(visitDetails);
-                            continue;
-                        }
-                        displayPatientDetailForFollowUpVisitDate(visitDetails);
-                    }
-                } while (isValid);
+        displayReport();
+        do {
+            System.out.print("Enter Valid report number to get patient report, [ Number between ( 1 to 9 )] - [ Exit for 0 ] ... ");
+            choice = scanner.next();
+            if (choice.equals("0")) {
+                isValid = false;
             }
+            if (choice.equals("1")) {
+                displayPatientDetail(patientDetails);
+                continue;
+            }
+            if (choice.equals("2")) {
+                visitDetailForPatientId(visitDetails);
+                continue;
+            }
+            if (choice.equals("3")) {
+                displayOutPatientDetail(patientDetails);
+                continue;
+            }
+            if (choice.equals("4")) {
+                displayInPatientDetail(inPatientDetails);
+                continue;
+            }
+            if (choice.equals("5")) {
+                followUpVisitPatientDetail(visitDetails);
+                continue;
+            }
+            if (choice.equals("6")) {
+                displayPatientByDoctorId(appointmentDetails);
+                continue;
+            }
+            if (choice.equals("7")) {
+                todayVisitedPatientDetail(visitDetails);
+                continue;
+            }
+            if (choice.equals("8")) {
+                visitDetailGivenDateRange(visitDetails);
+                continue;
+            }
+            if (choice.equals("9")) {
+                displayPatientDetailForFollowUpVisitDate(visitDetails);
+                continue;
+            }
+
+    } while(isValid);
+}
+
     private void displayPatientDetailForFollowUpVisitDate(Map<Long, VisitLogInformation> visitDetails) {
         boolean isValid = true;
         Scanner scanner = new Scanner(System.in);
@@ -235,7 +238,7 @@ public class ReportBO {
     }
 
     private String get(Date date) {
-    String _date;
+        String _date;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         _date = dateFormat.format(date);
         return _date;
@@ -259,7 +262,7 @@ public class ReportBO {
     }
 
     private void displayReport() {
-        System.out.println("PATIENT REPORT \n");
+        System.out.println(" .... PATIENT REPORT \n");
         Map<Integer, String> reportMap = new HashMap<>();
         reportMap.put(1, "Display patient details for the patient name");
         reportMap.put(2, "Display the list of visit for the patient id");
