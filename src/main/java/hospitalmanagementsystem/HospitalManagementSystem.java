@@ -489,52 +489,51 @@ public class HospitalManagementSystem {
         System.out.print("create appointment for Existing Patient select - 1 (OR) New Patient Select - 2 : ");
         scanner = new Scanner(System.in);
         int number = scanner.nextInt();
-            switch (number) {
-                case 1:
-                    System.out.println("Existing Patient Details.....");
-                    for (Long pid : patientDetails.keySet()) {
-                        Patient patient = patientDetails.get(pid);
-                        System.out.println(patient.getPatientId() + "  " + patient.getPatientName() + "  " + patient.getDob() + "  " + patient.getPhoneNumber() + "  " + patient.getPatientType());
+        switch (number) {
+            case 1:
+                System.out.println("Existing Patient Details.....");
+                for (Long pid : patientDetails.keySet()) {
+                    Patient patient = patientDetails.get(pid);
+                    System.out.println(patient.getPatientId() + "  " + patient.getPatientName() + "  " + patient.getDob() + "  " + patient.getPhoneNumber() + "  " + patient.getPatientType());
+                }
+                System.out.println("select patient id");
+                patientId = scanner.nextInt();
+                if (!patientDetails.containsKey((long) patientId)) {
+                    System.out.print("Given patient is not exist, You want to create new Patient (yes - 1 / no - 2)  : ");
+                    int option = scanner.nextInt();
+                    switch (option) {
+                        case 1:
+                            createNewPatient();
+                            break;
+                        case 2:
+                            do {
+                                System.out.println("select patient id");
+                                patientId = scanner.nextInt();
+                                if (!patientDetails.containsKey((long) patientId)) {
+                                    System.out.println("In correct patient id, Please Enter valid patient id.....");
+                                    isContinue = true;
+                                } else
+                                    isContinue = false;
+                            } while (isContinue);
+                            break;
+                        default:
+                            System.out.println("selected option invalid, Please select valid option");
                     }
-                    System.out.println("select patient id");
-                    patientId = scanner.nextInt();
-                    if (!patientDetails.containsKey((long) patientId)) {
-                        System.out.print("Given patient is not exist, You want to create new Patient (yes - 1 / no - 2)  : ");
-                        int option = scanner.nextInt();
-                            switch (option) {
-                                case 1:
-                                    createNewPatient();
-                                    break;
-                                case 2:
-                                    do {
-                                        System.out.println("select patient id");
-                                        patientId = scanner.nextInt();
-                                        if (!patientDetails.containsKey((long) patientId)) {
-                                            System.out.println("In correct patient id, Please Enter valid patient id.....");
-                                            isContinue = true;
-                                        } else
-                                            isContinue = false;
-                                    } while (isContinue);
-                                    break;
-                                default:
-                                    System.out.println("selected option invalid, Please select valid option");
-                            }
-                    }
-                    displayDoctorDetails();
-                    doctorId = checkDoctorAvailability();
-                    break;
-                case 2:
-                    Patient patient = createNewPatient();
-                    patientId = Math.toIntExact(patient.getPatientId());
+                }
+                displayDoctorDetails();
+                doctorId = checkDoctorAvailability();
+                break;
+            case 2:
+                Patient patient = createNewPatient();
+                patientId = Math.toIntExact(patient.getPatientId());
 
-                    displayDoctorDetails();
-                    doctorId = checkDoctorAvailability();
-                    break;
-                default:
-                    System.out.println("Selected invalid option, Please select valid option ... ");
+                displayDoctorDetails();
+                doctorId = checkDoctorAvailability();
+                break;
+            default:
+                System.out.println("Selected invalid option, Please select valid option ... ");
 
-                    }
-
+        }
 
 
         System.out.print("\n");
