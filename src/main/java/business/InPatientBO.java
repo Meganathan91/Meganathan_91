@@ -21,7 +21,7 @@ public class InPatientBO {
 
             inPatientMap.put(inPatient.getIpIdentificationNumber(), inPatient);
 
-            System.out.println("In Patient Allocated successfully ....." + "\n" + inPatient + "\n");
+            System.out.println("In Patient, Bed Allocated successfully ....." + "\n" + inPatient + "\n");
         } catch (Exception e) {
             System.out.println(" In Patient Allocate Exception " + e.getMessage());
         }
