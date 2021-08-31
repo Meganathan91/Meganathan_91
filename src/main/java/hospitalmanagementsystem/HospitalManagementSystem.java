@@ -30,9 +30,6 @@ public class HospitalManagementSystem {
 
     static private List<Medicine> medicineList;
 
-    static int patientId;
-    static int doctorId;
-
     static {
 
         hospitalDetails = new HashMap<>();
@@ -154,7 +151,7 @@ public class HospitalManagementSystem {
         appointmentOne.setAppointmentId(1L);
         appointmentOne.setDoctor(doctorDetails.get(1L));
         appointmentOne.setPatient(patientDetails.get(3L));
-        appointmentOne.setDateOfVisit(getDate(2021, 1, 6));
+        appointmentOne.setDateOfVisit(getDate(2021, 3, 1));
         appointmentOne.setPurposeOfVisit("HeartPain");
         appointmentOne.setBp(120.5);
         appointmentOne.setTemperature(90.5);
@@ -244,7 +241,7 @@ public class HospitalManagementSystem {
         appointmentTen.setAppointmentId(10L);
         appointmentTen.setDoctor(doctorDetails.get(2L));
         appointmentTen.setPatient(patientDetails.get(2L));
-        appointmentTen.setDateOfVisit(getDate(2021, 7, 6));
+        appointmentTen.setDateOfVisit(getDate(2021, 6, 30));
         appointmentTen.setPurposeOfVisit("BonesPain");
         appointmentTen.setBp(120.5);
         appointmentTen.setTemperature(90.5);
@@ -264,7 +261,7 @@ public class HospitalManagementSystem {
         appointmentTwelve.setAppointmentId(12L);
         appointmentTwelve.setDoctor(doctorDetails.get(2L));
         appointmentTwelve.setPatient(patientDetails.get(2L));
-        appointmentTwelve.setDateOfVisit(getDate(2021, 5, 3));
+        appointmentTwelve.setDateOfVisit(getDate(2021, 2, 6));
         appointmentTwelve.setPurposeOfVisit("BonesPain");
         appointmentTwelve.setBp(140.7);
         appointmentTwelve.setTemperature(89.1);
@@ -274,7 +271,7 @@ public class HospitalManagementSystem {
         appointmentThirteen.setAppointmentId(13L);
         appointmentThirteen.setDoctor(doctorDetails.get(3L));
         appointmentThirteen.setPatient(patientDetails.get(5L));
-        appointmentThirteen.setDateOfVisit(getDate(2021, 1, 6));
+        appointmentThirteen.setDateOfVisit(getDate(2021, 1, 1));
         appointmentThirteen.setPurposeOfVisit("TeethPain");
         appointmentThirteen.setBp(135.3);
         appointmentThirteen.setTemperature(81.4);
@@ -284,7 +281,7 @@ public class HospitalManagementSystem {
         appointmentFourteen.setAppointmentId(14L);
         appointmentFourteen.setDoctor(doctorDetails.get(4L));
         appointmentFourteen.setPatient(patientDetails.get(5L));
-        appointmentFourteen.setDateOfVisit(getDate(2021, 7, 9));
+        appointmentFourteen.setDateOfVisit(getDate(2021, 1, 6));
         appointmentFourteen.setPurposeOfVisit("Headaches");
         appointmentFourteen.setBp(154.4);
         appointmentFourteen.setTemperature(79.5);
@@ -373,30 +370,12 @@ public class HospitalManagementSystem {
         bedFive.setBedType("Manual Bed");
         bedFive.setRoomName("E");
 
-        Bed bedSix = new Bed();
-        bedSix.setBedId(6L);
-        bedSix.setBedType("Manual Bed");
-        bedSix.setRoomName("F");
-
-        Bed bedSeven = new Bed();
-        bedSeven.setBedId(7L);
-        bedSeven.setBedType("Manual Bed");
-        bedSeven.setRoomName("G");
-
-        Bed bedEight = new Bed();
-        bedEight.setBedId(8L);
-        bedEight.setBedType("Manual Bed");
-        bedEight.setRoomName("H");
-
         bedDetails = new HashMap<>();
         bedDetails.put(bedOne.getBedId(), bedOne);
         bedDetails.put(bedTwo.getBedId(), bedTwo);
         bedDetails.put(bedThree.getBedId(), bedThree);
         bedDetails.put(bedFour.getBedId(), bedFour);
         bedDetails.put(bedFive.getBedId(), bedFive);
-        bedDetails.put(bedSix.getBedId(), bedSix);
-        bedDetails.put(bedSeven.getBedId(), bedSeven);
-        bedDetails.put(bedEight.getBedId(), bedEight);
 
         inPatientDetails = new HashMap<>();
     }
@@ -408,18 +387,17 @@ public class HospitalManagementSystem {
     }
 
     static public List<Medicine> getMedicine() {
-
-        medicineList = new ArrayList<>();
-
-        Random random = new Random();
         int randomNumber;
+        medicineList = new ArrayList<>();
+        Random random = new Random();
+
         for (int i = 1; i <= 3; i++) {
             randomNumber = random.nextInt(5);
             if (randomNumber == 0) {
                 randomNumber += 1;
             }
-            if (medicineDetails.containsKey(new Long(randomNumber))) ;
-            medicineList.add(medicineDetails.get(new Long(randomNumber)));
+            if (medicineDetails.containsKey((long) randomNumber)) ;
+            medicineList.add(medicineDetails.get((long) randomNumber));
         }
 
         return medicineList;

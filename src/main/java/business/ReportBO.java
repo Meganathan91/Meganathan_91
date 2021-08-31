@@ -27,13 +27,13 @@ public class ReportBO {
                                        Map<Long, VisitLogInformation> visitDetails, Map<Long, InPatient> inPatientDetails) {
 
         try {
-            displayPatientDetail(patientDetails);
+           /* displayPatientDetail(patientDetails);
             visitDetailForPatientId(visitDetails);
             displayOutPatientDetail(patientDetails);
             displayInPatientDetail(inPatientDetails);
             followUpVisitPatientDetail(visitDetails);
             displayPatientByDoctorId(appointmentDetails);
-            todayVisitedPatientDetail(visitDetails);
+            todayVisitedPatientDetail(visitDetails);*/
             visitDetailGivenDateRange(visitDetails);
 
         } catch (Exception e) {
@@ -55,7 +55,7 @@ public class ReportBO {
         System.out.println("Patient detail for given patient name .....");
         for (Long patientId : patientMap.keySet()) {
             patient = patientMap.get(patientId);
-            if (patient.getPatientName().equals("Mohan")) {                 // input patient name "Mohan"
+            if (patient.getPatientName().equalsIgnoreCase("Mohan")) {                 // input patient name "Mohan"
                 System.out.println(patient);
             }
         }
@@ -67,7 +67,7 @@ public class ReportBO {
         VisitLogInformation visitLogInformation;
         for (Long visitId : visitDetails.keySet()) {
             visitLogInformation = visitDetails.get(visitId);
-            if (visitLogInformation.getAppointment().getPatient().getPatientId().equals(5L)) {    // input patientId 5L
+            if (visitLogInformation.getAppointment().getPatient().getPatientId() == 5) {    // input patientId 5L
                 System.out.println(visitLogInformation);
             }
         }
@@ -78,7 +78,7 @@ public class ReportBO {
         System.out.println("OutPatient Details .....");
         for (Long patientId : patientDetails.keySet()) {
             Patient patient = patientDetails.get(patientId);
-            if (patient.getPatientType().equals("OP")) {                 // input patientType "OP"
+            if (patient.getPatientType().equalsIgnoreCase("OP")) {                 // input patientType "OP"
                 System.out.println(patient);
             }
         }
@@ -111,7 +111,7 @@ public class ReportBO {
         System.out.println("List of patient by doctor id .....");
         for (Long appointmentId : appointmentDetails.keySet()) {
             Appointment appointment = appointmentDetails.get(appointmentId);
-            if (appointment.getDoctor().getDoctorId().equals(5L)) {    // display patient details by doctorId 2L
+            if (appointment.getDoctor().getDoctorId() == 5L) {    // display patient details by doctorId 2L
                 System.out.println(appointment.getPatient());
             }
         }
@@ -140,9 +140,9 @@ public class ReportBO {
         while (visitId.hasNext()) {
             logInformation = visitDetails.get(visitId.next());
             Date visitDate = logInformation.getAppointment().getDateOfVisit();
-            Date startDate = getDate("2021/3/1");  // VisitLogInformation between 2021/1/1 to 2021/7/12
-            Date endDate = getDate("2021/8/12");
-            if (visitDate.after(startDate) && visitDate.before(endDate)) {
+            Date startDate = getDate("2021/02/01");  // VisitLogInformation between 2021/1/1 to 2021/7/12
+            Date endDate = getDate("2021/03/06");
+            if (visitDate.compareTo(startDate) == 0 || visitDate.compareTo(endDate) == 0 && (visitDate.after(startDate) && visitDate.before(endDate))) {
                 System.out.println(logInformation);
             }
         }

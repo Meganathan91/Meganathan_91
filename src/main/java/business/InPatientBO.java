@@ -11,10 +11,10 @@ import java.util.Map;
 public class InPatientBO {
 
     public void patientConvertAsInPatient(Patient patient, Map<Long, Bed> bedDetails, Map<Long, InPatient> inPatientMap) {
+        InPatient inPatient;
         try {
             validateInPatientFields(patient);
-
-            InPatient inPatient = new InPatient();
+            inPatient = new InPatient();
             inPatient.setIpIdentificationNumber(HMSUtility.getId(new ArrayList<>(inPatientMap.keySet())));
             inPatient.setPatient(patient);
             inPatient.setBed(getBed(bedDetails, 1L));
@@ -33,10 +33,11 @@ public class InPatientBO {
     }
 
     private Bed getBed(Map<Long, Bed> bedDetails, Long bedId) throws Exception {
+        Bed bed = null;
+
         if (bedDetails.isEmpty() || bedId == null || bedId == 0)
             throw new Exception("bed is not available ");
 
-        Bed bed = null;
         if (bedDetails.containsKey(bedId)) {
             bed = bedDetails.get(bedId);
         }
